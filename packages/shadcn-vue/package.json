@@ -1,20 +1,7 @@
 {
   "name": "@repo/shadcn-vue",
-  "version": "1.0.0",
-  "packageManager": "pnpm@10.24.0",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
-  "exports": {
-    ".": "./index.js",
-    "./lib/*": "./lib/*.ts",
-    "./components/ui/*": "./components/ui/*/index.ts"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.0",
+  "private": true,
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
     "class-variance-authority": "^0.7.1",

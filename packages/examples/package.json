@@ -1,17 +1,9 @@
 {
   "name": "@repo/examples",
-  "version": "1.0.0",
-  "packageManager": "pnpm@10.24.0",
-  "description": "",
-  "author": "",
-  "license": "ISC",
-  "keywords": [],
+  "version": "0.0.0",
+  "private": true,
   "exports": {
     ".": "./src/index.ts"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@repo/elements": "workspace:*",
