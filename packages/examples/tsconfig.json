@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM"],
+    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@repo/*": ["../*"],
+      "@/components/*": ["../shadcn-vue/components/*"],
+      "@/lib/*": ["../shadcn-vue/lib/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.vue"],
+  "exclude": ["node_modules"]
+}

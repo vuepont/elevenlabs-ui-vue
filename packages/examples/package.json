@@ -1,0 +1,20 @@
+{
+  "name": "@repo/examples",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.24.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@repo/elements": "workspace:*",
+    "vue": "^3.5.25"
+  }
+}

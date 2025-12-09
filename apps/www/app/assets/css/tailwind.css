@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+/* Scan monorepo packages for Tailwind classes */
+@source "../../../../../packages/elements/src";
+@source "../../../../../packages/shadcn-vue/components";
+@source "../../../../../packages/examples/src";

@@ -1,0 +1,20 @@
+{
+  "name": "@repo/elements",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.24.0",
+  "description": "Vue elements library",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "exports": {
+    "./*": "./src/*/index.ts"
+  },
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@repo/shadcn-vue": "workspace:*",
+    "vue": "^3.5.25"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.2"
+  }
+}

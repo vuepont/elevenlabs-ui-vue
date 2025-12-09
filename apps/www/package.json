@@ -1,0 +1,21 @@
+{
+  "name": "www",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@repo/elements": "workspace:*",
+    "@repo/examples": "workspace:*",
+    "@tailwindcss/vite": "^4.1.17",
+    "nuxt": "^4.2.1",
+    "tailwindcss": "^4.1.17",
+    "vue": "^3.5.25",
+    "vue-router": "^4.6.3"
+  }
+}

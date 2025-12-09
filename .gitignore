@@ -7,6 +7,8 @@ node_modules
 
 # Local env files
 .env
+.env.*
+!.env.example
 .env.local
 .env.development.local
 .env.test.local
@@ -14,6 +16,9 @@ node_modules
 
 # Testing
 coverage
+**/__screenshots__
+
+.code-group.md
 
 # Turbo
 .turbo
@@ -26,13 +31,30 @@ coverage
 out/
 build
 dist
+dist-ssr
+*.local
 
 
 # Debug
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Misc
 .DS_Store
 *.pem
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
