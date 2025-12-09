@@ -1,1 +1,1 @@
-# elevenlabs-ui-vue
+# Elevenlabs UI Vue
