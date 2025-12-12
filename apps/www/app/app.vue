@@ -7,10 +7,10 @@ import { AudioPlayer } from '@repo/examples'
     <!-- <NuxtRouteAnnouncer /> -->
     <!-- <NuxtWelcome /> -->
     <AudioPlayer />
-    <div>
+    <!-- <div>
       <h1 class="text-5xl text-center">
         Hello World!
       </h1>
-    </div>
+    </div> -->
   </div>
 </template>
