@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { AudioPlayerButton, AudioPlayerDuration, AudioPlayerProgress, AudioPlayerSpeed, AudioPlayerTime, useAudioPlayer } from '@repo/elements/audio-player'
 
-const player = useAudioPlayer<{ name: string }>()
+interface Track {
+  id: string
+  name: string
+  url: string
+}
+
+const player = useAudioPlayer<Track>()
 </script>
 
 <template>
@@ -9,7 +15,7 @@ const player = useAudioPlayer<{ name: string }>()
     <div class="mx-auto w-full max-w-2xl">
       <div class="mb-4">
         <h3 class="text-base font-semibold sm:text-lg">
-          {{ (player.activeItem.value?.data as { name: string } | undefined)?.name ?? "No track selected" }}
+          {{ player.activeItem.value?.data?.name ?? "No track selected" }}
         </h3>
       </div>
 
@@ -18,7 +24,7 @@ const player = useAudioPlayer<{ name: string }>()
           variant="outline"
           size="default"
           class="h-12 w-12 shrink-0 sm:h-10 sm:w-10"
-          :disabled="!player.activeItem"
+          :disabled="!player.activeItem.value"
         />
 
         <div class="flex flex-1 items-center gap-2 sm:gap-3">

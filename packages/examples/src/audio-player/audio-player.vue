@@ -4,9 +4,7 @@ import AudioPlayerDemo from './audio-player-demo.vue'
 </script>
 
 <template>
-  <div class="w-1/2 mx-auto mt-20">
-    <AudioPlayerProvider>
-      <AudioPlayerDemo />
-    </AudioPlayerProvider>
-  </div>
+  <AudioPlayerProvider>
+    <AudioPlayerDemo />
+  </AudioPlayerProvider>
 </template>
