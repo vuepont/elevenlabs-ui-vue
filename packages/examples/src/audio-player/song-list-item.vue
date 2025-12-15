@@ -19,7 +19,7 @@ const props = defineProps<{
 const player = useAudioPlayer()
 
 const isActive = computed(() => player.isItemActive(props.song.id))
-const isCurrentlyPlaying = computed(() => isActive.value && player.isPlaying)
+const isCurrentlyPlaying = computed(() => isActive.value && player.isPlaying.value)
 
 function handleClick() {
   if (isCurrentlyPlaying.value) {
