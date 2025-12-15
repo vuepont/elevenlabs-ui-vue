@@ -22,12 +22,7 @@ const player = useAudioPlayer()
 const wasPlaying = ref(false)
 
 const maxDuration = computed(() => player.duration.value ?? 0)
-const currentTimeArray = computed({
-  get: () => [player.currentTime.value],
-  set: () => {
-    // Only used by Slider internal, real logic is in onValueChange
-  },
-})
+const currentTimeArray = computed(() => [player.currentTime.value])
 
 const isDisabled = computed(() =>
   player.duration.value === undefined
@@ -35,8 +30,11 @@ const isDisabled = computed(() =>
   || Number.isNaN(player.duration.value),
 )
 
-function handleValueChange(vals: number[]) {
-  player.seek(vals[0])
+function handleValueChange(vals?: number[] | null) {
+  const next = vals?.[0]
+  if (typeof next !== 'number')
+    return
+  player.seek(next)
 }
 
 function handlePointerDown() {
@@ -65,16 +63,17 @@ function handleKeyDown(e: KeyboardEvent) {
 
 <template>
   <SliderRoot
-    v-model="currentTimeArray"
+    :model-value="currentTimeArray"
     :min="0"
     :max="maxDuration"
     :step="step"
     :disabled="isDisabled"
     v-bind="otherProps"
     :class="cn(
-      'group/player relative flex h-4 touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
+      'group/player relative flex h-4 touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
       props.class,
     )"
+    @update:model-value="handleValueChange"
     @value-commit="handleValueChange"
     @pointerdown="handlePointerDown"
     @pointerup="handlePointerUp"
