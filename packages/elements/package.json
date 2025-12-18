@@ -9,6 +9,7 @@
   "dependencies": {
     "@repo/shadcn-vue": "workspace:*",
     "@vueuse/core": "^14.1.0",
+    "class-variance-authority": "^0.7.1",
     "lucide-vue-next": "^0.556.0",
     "motion-v": "^1.7.4",
     "reka-ui": "^2.6.1",
