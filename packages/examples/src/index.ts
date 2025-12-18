@@ -1,4 +1,5 @@
 export { default as AudioPlayer } from './audio-player/audio-player.vue'
 export { default as BarVisualizer } from './bar-visualizer.vue'
+export { default as Response } from './response.vue'
 export { default as ScrubBar } from './scrub-bar.vue'
 export { default as ShimmeringText } from './shimmering-text.vue'
