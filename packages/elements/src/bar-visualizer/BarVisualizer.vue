@@ -8,7 +8,7 @@ import { computed, ref, toRef, watch } from 'vue'
 import Bar from './Bar.vue'
 import { useBarAnimator, useMultibandVolume } from './useAudioVisualizer'
 
-interface Props extends HTMLAttributes {
+interface Props extends /* @vue-ignore */ HTMLAttributes {
   state?: AgentState
   barCount?: number
   mediaStream?: MediaStream | null
