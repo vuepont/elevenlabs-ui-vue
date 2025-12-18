@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import { AudioPlayer, BarVisualizer, ScrubBar, ShimmeringText } from '@repo/examples'
+import { AudioPlayer, BarVisualizer, LiveWaveform, ScrubBar, ShimmeringText } from '@repo/examples'
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 w-1/2 mx-auto mt-20">
+  <div class="flex flex-col gap-6 w-1/2 mx-auto my-20">
     <AudioPlayer />
     <BarVisualizer />
     <ShimmeringText />
     <ScrubBar />
+    <LiveWaveform />
   </div>
 </template>
