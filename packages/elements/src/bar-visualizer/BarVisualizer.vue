@@ -1,5 +1,6 @@
 <!-- eslint-disable unicorn/no-new-array -->
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { AgentState } from './useAudioVisualizer'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { useRafFn } from '@vueuse/core'
@@ -7,7 +8,7 @@ import { computed, ref, toRef, watch } from 'vue'
 import Bar from './Bar.vue'
 import { useBarAnimator, useMultibandVolume } from './useAudioVisualizer'
 
-const props = withDefaults(defineProps<{
+interface Props extends HTMLAttributes {
   state?: AgentState
   barCount?: number
   mediaStream?: MediaStream | null
@@ -15,8 +16,10 @@ const props = withDefaults(defineProps<{
   maxHeight?: number
   demo?: boolean
   centerAlign?: boolean
-  class?: string
-}>(), {
+  class?: HTMLAttributes['class']
+}
+
+const props = withDefaults(defineProps<Props>(), {
   barCount: 15,
   minHeight: 20,
   maxHeight: 100,
@@ -24,7 +27,7 @@ const props = withDefaults(defineProps<{
   centerAlign: false,
 })
 
-// --- Audio Processing (Real) ---
+// Audio Processing (Real)
 const mediaStreamRef = toRef(props, 'mediaStream')
 const realVolumeBands = useMultibandVolume(mediaStreamRef, {
   bands: props.barCount,
@@ -32,7 +35,7 @@ const realVolumeBands = useMultibandVolume(mediaStreamRef, {
   hiPass: 200,
 })
 
-// --- Audio Processing (Fake/Demo) ---
+// Audio Processing (Fake/Demo)
 const fakeVolumeBands = ref<number[]>(new Array(props.barCount).fill(0.2))
 
 let lastFakeUpdate = 0
@@ -88,12 +91,12 @@ watch(
   { immediate: true },
 )
 
-// --- Merge Data Sources ---
+// Merge Data Sources
 const volumeBands = computed(() =>
   props.demo ? fakeVolumeBands.value : realVolumeBands.value,
 )
 
-// --- Animation Sequencing ---
+// Animation Sequencing
 const animationInterval = computed(() => {
   if (props.state === 'connecting')
     return 2000 / props.barCount

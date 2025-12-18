@@ -69,6 +69,9 @@ function normalizeDb(value: number) {
   return Math.sqrt(db)
 }
 
+/**
+ * Composable for tracking volume across multiple frequency bands
+ */
 export function useMultibandVolume(
   mediaStream: Ref<MediaStream | null | undefined>,
   options: MultiBandVolumeOptions = {},
@@ -76,7 +79,7 @@ export function useMultibandVolume(
   const bands = options.bands ?? 5
   const frequencyBands = ref<number[]>(new Array(bands).fill(0))
   let cleanupAudio: (() => void) | undefined
-  let activeContext: { analyser: AnalyserNode, dataArray: Float32Array } | null = null
+  let activeContext: { analyser: AnalyserNode, dataArray: Float32Array<ArrayBuffer> } | null = null
   let lastUpdate = 0
 
   const multibandDefaults: MultiBandVolumeOptions = {
@@ -152,7 +155,7 @@ export function useMultibandVolume(
 
       cleanupAudio = audioSetup.cleanup
       const bufferLength = audioSetup.analyser.frequencyBinCount
-      const dataArray = new Float32Array(bufferLength)
+      const dataArray = new Float32Array(bufferLength) as Float32Array<ArrayBuffer>
       activeContext = { analyser: audioSetup.analyser, dataArray }
       resumeLoop()
     },
@@ -167,6 +170,9 @@ export function useMultibandVolume(
   return frequencyBands
 }
 
+/**
+ * Composable for orchestrating the visual animations
+ */
 export function useBarAnimator(
   state: Ref<AgentState>,
   columns: number,
@@ -175,7 +181,7 @@ export function useBarAnimator(
   const currentFrame = ref<number[]>([])
   const indexRef = ref(0)
 
-  // We track startTime manually to handle resets
+  // track startTime manually to handle resets
   let startTime = performance.now()
 
   const generateConnectingSequenceBar = (cols: number): number[][] => {
@@ -206,7 +212,7 @@ export function useBarAnimator(
     }
   })
 
-  // IMPORTANT: Reset index and timer when sequence changes (like React's useEffect dependency)
+  // Reset index and timer when sequence changes
   watch(sequence, (newSeq) => {
     indexRef.value = 0
     currentFrame.value = newSeq[0] || []
@@ -229,69 +235,3 @@ export function useBarAnimator(
 
   return currentFrame
 }
-
-/**
- * Composable for orchestrating the visual animations
- */
-// export function useBarAnimator(
-//   state: Ref<AgentState>,
-//   columns: number,
-//   interval: MaybeRef<number>,
-// ) {
-//   const currentFrame = ref<number[]>([])
-//   const indexRef = ref(0)
-
-//   const generateConnectingSequenceBar = (cols: number): number[][] => {
-//     const seq = []
-//     for (let x = 0; x < cols; x++)
-//       seq.push([x, cols - 1 - x])
-
-//     return seq
-//   }
-
-//   const generateListeningSequenceBar = (cols: number): number[][] => {
-//     const center = Math.floor(cols / 2)
-//     return [[center], [-1]]
-//   }
-
-//   const sequence = computed(() => {
-//     switch (state.value) {
-//       case 'thinking':
-//       case 'listening':
-//         return generateListeningSequenceBar(columns)
-//       case 'connecting':
-//       case 'initializing':
-//         return generateConnectingSequenceBar(columns)
-//       case 'speaking':
-//         return [Array.from({ length: columns }, (_, idx) => idx)]
-//       default:
-//         return [[]]
-//     }
-//   })
-
-//   let lastUpdate = 0
-//   const { pause, resume } = useRafFn(({ timestamp }) => {
-//     if (timestamp - lastUpdate < interval.value)
-//       return
-
-//     indexRef.value = (indexRef.value + 1) % (sequence.value.length || 1)
-//     currentFrame.value = sequence.value[indexRef.value] || []
-//     lastUpdate = timestamp
-//   }, { immediate: false })
-
-//   watch(state, (newState) => {
-//     if (newState) {
-//       indexRef.value = 0
-//       currentFrame.value = sequence.value[0] || []
-//       lastUpdate = performance.now()
-//       resume()
-//     }
-//     else {
-//       pause()
-//     }
-//   }, { immediate: true })
-
-//   onUnmounted(pause)
-
-//   return currentFrame
-// }
