@@ -7,6 +7,8 @@
 @source "../../../../../packages/elements/src";
 @source "../../../../../packages/shadcn-vue/components";
 @source "../../../../../packages/examples/src";
+@source "../../node_modules/@repo/elements/node_modules/streamdown-vue/dist/*.js";
+
 
 
 @theme inline {
