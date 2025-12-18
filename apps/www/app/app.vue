@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { AudioPlayer, BarVisualizer, ShimmeringText } from '@repo/examples'
+import { AudioPlayer, BarVisualizer, ScrubBar, ShimmeringText } from '@repo/examples'
 </script>
 
 <template>
@@ -7,5 +7,6 @@ import { AudioPlayer, BarVisualizer, ShimmeringText } from '@repo/examples'
     <AudioPlayer />
     <BarVisualizer />
     <ShimmeringText />
+    <ScrubBar />
   </div>
 </template>
