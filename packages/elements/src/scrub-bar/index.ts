@@ -1,0 +1,5 @@
+export { default as ScrubBarContainer } from './ScrubBarContainer.vue'
+export { default as ScrubBarProgress } from './ScrubBarProgress.vue'
+export { default as ScrubBarThumb } from './ScrubBarThumb.vue'
+export { default as ScrubBarTimeLabel } from './ScrubBarTimeLabel.vue'
+export { default as ScrubBarTrack } from './ScrubBarTrack.vue'
