@@ -213,7 +213,7 @@ watch(() => [props.processing, props.active, props.mode], () => {
       fadeToIdle()
     }
   }
-})
+}, { immediate: true })
 
 // Microphone Setup
 function cleanupAudio() {
