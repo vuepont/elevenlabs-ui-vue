@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { buttonVariants } from '@repo/shadcn-vue/components/ui/button'
+import { FieldDescription } from '@repo/shadcn-vue/components/ui/field'
 import UserAuthForm from '@/components/examples/authentication/components/UserAuthForm.vue'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/registry/new-york-v4/ui/button'
-import { FieldDescription } from '@/registry/new-york-v4/ui/field'
 
 useSeoMeta({
   title: 'Authentication',

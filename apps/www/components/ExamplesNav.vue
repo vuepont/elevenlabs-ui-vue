@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+import { ScrollArea, ScrollBar } from '@repo/shadcn-vue/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
-import { ScrollArea, ScrollBar } from '@/registry/new-york-v4/ui/scroll-area'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']

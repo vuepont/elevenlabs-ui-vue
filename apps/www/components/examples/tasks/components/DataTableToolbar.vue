@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { Table } from '@tanstack/vue-table'
 import type { Task } from '../data/schema'
-import { X } from 'lucide-vue-next'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 
+import { Input } from '@repo/shadcn-vue/components/ui/input'
+import { X } from 'lucide-vue-next'
 import { computed } from 'vue'
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { Input } from '@/registry/new-york-v4/ui/input'
 
 import { priorities, statuses } from '../data/data'
 import DataTableFacetedFilter from './DataTableFacetedFilter.vue'

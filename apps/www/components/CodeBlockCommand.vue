@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { TerminalIcon } from 'lucide-vue-next'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@/registry/new-york-v4/ui/tabs'
+} from '@repo/shadcn-vue/components/ui/tabs'
+import { TerminalIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   code: string

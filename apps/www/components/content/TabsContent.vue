@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+import { TabsContent } from '@repo/shadcn-vue/components/ui/tabs'
 import { cn } from '@/lib/utils'
-import { TabsContent } from '@/registry/new-york-v4/ui/tabs'
 
 const props = defineProps<{
   value: string | number

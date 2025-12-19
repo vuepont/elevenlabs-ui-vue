@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { GalleryHorizontalIcon } from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']

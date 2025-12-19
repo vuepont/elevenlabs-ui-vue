@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import type { FileTree } from '@/lib/registry'
 import {
-  ChevronRight,
-  File,
-  Folder,
-} from 'lucide-vue-next'
-import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/registry/new-york-v4/ui/collapsible'
+} from '@repo/shadcn-vue/components/ui/collapsible'
 import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-} from '@/registry/new-york-v4/ui/sidebar'
+} from '@repo/shadcn-vue/components/ui/sidebar'
+import {
+  ChevronRight,
+  File,
+  Folder,
+} from 'lucide-vue-next'
 
 import { useBlockViewer } from './BlockViewer.vue'
 

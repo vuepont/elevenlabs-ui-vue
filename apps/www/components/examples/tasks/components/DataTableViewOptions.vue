@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import type { Table } from '@tanstack/vue-table'
 import type { Task } from '../data/schema'
-import { Settings2 } from 'lucide-vue-next'
-import { computed } from 'vue'
-
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,7 +9,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+
+import { Settings2 } from 'lucide-vue-next'
+import { computed } from 'vue'
 
 interface DataTableViewOptionsProps {
   table: Table<Task>

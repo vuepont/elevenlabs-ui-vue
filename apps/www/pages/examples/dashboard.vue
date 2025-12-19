@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import {
+  SidebarInset,
+  SidebarProvider,
+} from '@repo/shadcn-vue/components/ui/sidebar'
 import AppSidebar from '@/components/examples/dashboard/components/AppSidebar.vue'
 import ChartAreaInteractive from '@/components/examples/dashboard/components/ChartAreaInteractive.vue'
 import DataTable from '@/components/examples/dashboard/components/DataTable.vue'
 import SectionCards from '@/components/examples/dashboard/components/SectionCards.vue'
 import SiteHeader from '@/components/examples/dashboard/components/SiteHeader.vue'
-import data from '@/components/examples/dashboard/data.json'
 
-import {
-  SidebarInset,
-  SidebarProvider,
-} from '@/registry/new-york-v4/ui/sidebar'
+import data from '@/components/examples/dashboard/data.json'
 </script>
 
 <template>

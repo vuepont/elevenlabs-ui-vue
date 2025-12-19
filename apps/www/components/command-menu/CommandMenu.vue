@@ -1,6 +1,24 @@
 <script setup lang="ts">
 import type { NavigationItem } from '@/composables/useNavigation'
 import type { Color, ColorPalette } from '@/lib/colors'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandList,
+} from '@repo/shadcn-vue/components/ui/command'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@repo/shadcn-vue/components/ui/dialog'
+import { Kbd, KbdGroup } from '@repo/shadcn-vue/components/ui/kbd'
+import { Separator } from '@repo/shadcn-vue/components/ui/separator'
 import { IconArrowRight } from '@tabler/icons-vue'
 import { useClipboard } from '@vueuse/core'
 import { CornerDownLeft, Square } from 'lucide-vue-next'
@@ -9,24 +27,6 @@ import { useRouter } from 'vue-router'
 import { useIsMac } from '@/composables/useIsMac'
 import { useConfig } from '@/composables/useUserConfig'
 import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandList,
-} from '@/registry/new-york-v4/ui/command'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/registry/new-york-v4/ui/dialog'
-import { Kbd, KbdGroup } from '@/registry/new-york-v4/ui/kbd'
-import { Separator } from '@/registry/new-york-v4/ui/separator'
 import CommandMenuItem from './CommandItem.vue'
 import CommandMenuKbd from './CommandMenuKbd.vue'
 

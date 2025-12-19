@@ -1,30 +1,30 @@
 <script setup lang="ts">
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@repo/shadcn-vue/components/ui/hover-card'
+import { Label } from '@repo/shadcn-vue/components/ui/label'
+import { Separator } from '@repo/shadcn-vue/components/ui/separator'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@repo/shadcn-vue/components/ui/tabs'
+import { Textarea } from '@repo/shadcn-vue/components/ui/textarea'
 import { RotateCcw } from 'lucide-vue-next'
 import CodeViewer from '@/components/examples/playground/components/CodeViewer.vue'
+
 import MaxLengthSelector from '@/components/examples/playground/components/MaxLengthSelector.vue'
 import ModelSelector from '@/components/examples/playground/components/ModelSelector.vue'
 import PresetActions from '@/components/examples/playground/components/PresetActions.vue'
 import PresetSave from '@/components/examples/playground/components/PresetSave.vue'
 import PresetSelector from '@/components/examples/playground/components/PresetSelector.vue'
 import PresetShare from '@/components/examples/playground/components/PresetShare.vue'
-
 import TemperatureSelector from '@/components/examples/playground/components/TemperatureSelector.vue'
 import TopPSelector from '@/components/examples/playground/components/TopPSelector.vue'
-import { Button } from '@/registry/new-york-v4/ui/button'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/registry/new-york-v4/ui/hover-card'
-import { Label } from '@/registry/new-york-v4/ui/label'
-import { Separator } from '@/registry/new-york-v4/ui/separator'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/registry/new-york-v4/ui/tabs'
-import { Textarea } from '@/registry/new-york-v4/ui/textarea'
 
 useSeoMeta({
   title: 'Playground',

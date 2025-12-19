@@ -1,9 +1,7 @@
 <script setup lang="ts">
+import type { ButtonVariants } from '@repo/shadcn-vue/components/ui/button'
 import type { HTMLAttributes } from 'vue'
-import type { ButtonVariants } from '@/registry/new-york-v4/ui/button'
-import { IconCopy } from '@tabler/icons-vue'
-import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -11,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/registry/new-york-v4/ui/dialog'
+} from '@repo/shadcn-vue/components/ui/dialog'
 import {
   Drawer,
   DrawerContent,
@@ -19,7 +17,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/registry/new-york-v4/ui/drawer'
+} from '@repo/shadcn-vue/components/ui/drawer'
+import { IconCopy } from '@tabler/icons-vue'
+import { cn } from '@/lib/utils'
 
 defineOptions({
   inheritAttrs: false,

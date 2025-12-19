@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { ArrowUpIcon } from 'lucide-vue-next'
-import { Button } from '@/registry/new-york-v4/ui/button'
 </script>
 
 <template>

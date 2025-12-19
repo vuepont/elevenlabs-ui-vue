@@ -2,12 +2,12 @@
 import type { Row } from '@tanstack/vue-table'
 import type { z } from 'zod'
 import type { schema } from './DataTable.vue'
-import { FlexRender } from '@tanstack/vue-table'
-import { useSortable } from 'dnd-kit-vue'
 import {
   TableCell,
   TableRow,
-} from '@/registry/new-york-v4/ui/table'
+} from '@repo/shadcn-vue/components/ui/table'
+import { FlexRender } from '@tanstack/vue-table'
+import { useSortable } from 'dnd-kit-vue'
 
 const props = defineProps<{ row: Row<z.infer<typeof schema>>, index: number }>()
 

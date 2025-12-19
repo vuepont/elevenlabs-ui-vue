@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import type { ContentCollectionItem } from '@nuxt/content'
 
-import { IconCheck, IconChevronDown, IconCopy } from '@tabler/icons-vue'
-import { isClient, useClipboard } from '@vueuse/core'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
-} from '@/registry/new-york-v4/ui/popover'
-import { Separator } from '@/registry/new-york-v4/ui/separator'
+} from '@repo/shadcn-vue/components/ui/popover'
+import { Separator } from '@repo/shadcn-vue/components/ui/separator'
+import { IconCheck, IconChevronDown, IconCopy } from '@tabler/icons-vue'
+import { isClient, useClipboard } from '@vueuse/core'
 
 const props = defineProps<{
   page: ContentCollectionItem

@@ -12,12 +12,6 @@ export default defineNuxtConfig({
     { path: '~/components', ignore: ['examples/*', 'examples/**/*'] },
     { path: '~/components/demo', pathPrefix: false },
     { path: '~/components/content', global: true, pathPrefix: false },
-    {
-      path: '~/registry/new-york-v4/ui/accordion',
-      global: true,
-      pathPrefix: false,
-      ignore: ['*.ts'],
-    },
   ],
 
   fonts: {

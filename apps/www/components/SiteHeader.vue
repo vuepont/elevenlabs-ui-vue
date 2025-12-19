@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { getColors } from '@/lib/colors'
-import { siteConfig } from '@/lib/config'
 // import { GitHubLink } from "@/components/github-link"
 // import { Icons } from "@/components/icons"
 // import { MainNav } from "@/components/main-nav"
@@ -8,8 +6,10 @@ import { siteConfig } from '@/lib/config'
 // import { ModeSwitcher } from "@/components/mode-switcher"
 // import { SiteConfig } from "@/components/site-config"
 // import blocks from "@/registry/__blocks__.json"
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { Separator } from '@/registry/new-york-v4/ui/separator'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+import { Separator } from '@repo/shadcn-vue/components/ui/separator'
+import { getColors } from '@/lib/colors'
+import { siteConfig } from '@/lib/config'
 import { Icons } from './Icons'
 
 const { data } = await useNavigation()

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { siteConfig } from '@/lib/config'
-import { Button } from '@/registry/new-york-v4/ui/button'
 import { Icons } from './Icons'
-// import { Skeleton } from '@/registry/new-york-v4/ui/skeleton'
+// import { Skeleton } from '@repo/shadcn-vue/components/ui/skeleton'
 
 // const { data, pending } = useLazyFetch('https://ungh.cc/repos/xxx/xxx')
 

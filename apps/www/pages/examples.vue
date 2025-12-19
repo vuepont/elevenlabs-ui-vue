@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 
 const title = 'Build your Component Library'
 const description

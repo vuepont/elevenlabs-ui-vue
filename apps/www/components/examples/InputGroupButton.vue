@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { IconInfoCircle, IconStar } from '@tabler/icons-vue'
-
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from '@/registry/new-york-v4/ui/input-group'
-import { Label } from '@/registry/new-york-v4/ui/label'
+} from '@repo/shadcn-vue/components/ui/input-group'
+
+import { Label } from '@repo/shadcn-vue/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/registry/new-york-v4/ui/popover'
+} from '@repo/shadcn-vue/components/ui/popover'
+import { IconInfoCircle, IconStar } from '@tabler/icons-vue'
 
 const isFavorite = ref(false)
 </script>

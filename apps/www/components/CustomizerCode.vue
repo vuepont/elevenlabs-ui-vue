@@ -2,16 +2,16 @@
 import type {
   BaseColor,
 } from '@/registry/registry-base-colors'
-import { IconCopy } from '@tabler/icons-vue'
-import { useClipboard } from '@vueuse/core'
-import { CheckIcon } from 'lucide-vue-next'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@/registry/new-york-v4/ui/tabs'
+} from '@repo/shadcn-vue/components/ui/tabs'
+import { IconCopy } from '@tabler/icons-vue'
+import { useClipboard } from '@vueuse/core'
+import { CheckIcon } from 'lucide-vue-next'
 import {
   baseColors,
   baseColorsOKLCH,

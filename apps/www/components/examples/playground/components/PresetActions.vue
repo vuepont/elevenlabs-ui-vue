@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { MoreHorizontal } from 'lucide-vue-next'
-import { ref } from 'vue'
-
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -10,8 +7,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/registry/new-york-v4/ui/alert-dialog'
-import { Button } from '@/registry/new-york-v4/ui/button'
+} from '@repo/shadcn-vue/components/ui/alert-dialog'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+
 import {
   Dialog,
   DialogContent,
@@ -19,18 +17,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/registry/new-york-v4/ui/dialog'
+} from '@repo/shadcn-vue/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
-import { Label } from '@/registry/new-york-v4/ui/label'
-import { Switch } from '@/registry/new-york-v4/ui/switch'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+import { Label } from '@repo/shadcn-vue/components/ui/label'
+import { Switch } from '@repo/shadcn-vue/components/ui/switch'
+import { MoreHorizontal } from 'lucide-vue-next'
+import { ref } from 'vue'
 
-// import { toast } from "@/registry/new-york-v4/ui/use-toast"
+// import { toast } from "@repo/shadcn-vue/components/ui/use-toast"
 
 const open = ref(false)
 const showDeleteDialog = ref(false)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Toaster } from '@repo/shadcn-vue/components/ui/sonner'
 import { ConfigProvider, TooltipProvider } from 'reka-ui'
-import { Toaster } from '@/registry/new-york-v4/ui/sonner'
 
 const { config, isLayoutFull } = useConfig()
 const activeTheme = computed(() => config.value.activeTheme)

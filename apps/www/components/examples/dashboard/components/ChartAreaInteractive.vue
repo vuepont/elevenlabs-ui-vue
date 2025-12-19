@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import type { ChartConfig } from '@/registry/new-york-v4/ui/chart'
-import { VisArea, VisAxis, VisLine, VisXYContainer } from '@unovis/vue'
-
-import { computed, ref } from 'vue'
+import type { ChartConfig } from '@repo/shadcn-vue/components/ui/chart'
 import {
   Card,
   CardAction,
@@ -10,25 +7,28 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/registry/new-york-v4/ui/card'
+} from '@repo/shadcn-vue/components/ui/card'
+
 import {
   ChartContainer,
   ChartCrosshair,
   ChartTooltip,
   ChartTooltipContent,
   componentToString,
-} from '@/registry/new-york-v4/ui/chart'
+} from '@repo/shadcn-vue/components/ui/chart'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/registry/new-york-v4/ui/select'
+} from '@repo/shadcn-vue/components/ui/select'
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from '@/registry/new-york-v4/ui/toggle-group'
+} from '@repo/shadcn-vue/components/ui/toggle-group'
+import { VisArea, VisAxis, VisLine, VisXYContainer } from '@unovis/vue'
+import { computed, ref } from 'vue'
 
 const description = 'An interactive area chart'
 

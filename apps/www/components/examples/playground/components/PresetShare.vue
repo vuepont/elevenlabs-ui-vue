@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { Copy } from 'lucide-vue-next'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { Input } from '@/registry/new-york-v4/ui/input'
-import { Label } from '@/registry/new-york-v4/ui/label'
+import { Input } from '@repo/shadcn-vue/components/ui/input'
+import { Label } from '@repo/shadcn-vue/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/registry/new-york-v4/ui/popover'
+} from '@repo/shadcn-vue/components/ui/popover'
+import { Copy } from 'lucide-vue-next'
 </script>
 
 <template>

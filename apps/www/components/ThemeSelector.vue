@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-import { Label } from '@/registry/new-york-v4/ui/label'
+import { Label } from '@repo/shadcn-vue/components/ui/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/registry/new-york-v4/ui/select'
+} from '@repo/shadcn-vue/components/ui/select'
+import { cn } from '@/lib/utils'
 import { baseColors } from '@/registry/registry-base-colors'
 
 const props = defineProps<{

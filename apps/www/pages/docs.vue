@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SidebarProvider } from '@/registry/new-york-v4/ui/sidebar'
+import { SidebarProvider } from '@repo/shadcn-vue/components/ui/sidebar'
 
 const { data } = await useNavigation()
 const docData = computed(() => data.value!.find(i => i.stem === 'docs')!)

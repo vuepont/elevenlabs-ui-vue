@@ -1,19 +1,19 @@
 <script setup lang="ts">
+import type { ButtonVariants } from '@repo/shadcn-vue/components/ui/button'
 import type { HTMLAttributes } from 'vue'
-import type { ButtonVariants } from '@/registry/new-york-v4/ui/button'
-import { IconCheck, IconCopy } from '@tabler/icons-vue'
-import { useClipboard } from '@vueuse/core'
-
-import { toRefs } from 'vue'
-
-import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/registry/new-york-v4/ui/tooltip'
+} from '@repo/shadcn-vue/components/ui/tooltip'
+
+import { IconCheck, IconCopy } from '@tabler/icons-vue'
+
+import { useClipboard } from '@vueuse/core'
+import { toRefs } from 'vue'
+import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<{
   value?: string

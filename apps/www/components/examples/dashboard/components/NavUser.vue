@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from '@tabler/icons-vue'
-
-import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/registry/new-york-v4/ui/avatar'
+} from '@repo/shadcn-vue/components/ui/avatar'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,13 +13,20 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@/registry/new-york-v4/ui/sidebar'
+} from '@repo/shadcn-vue/components/ui/sidebar'
+import {
+  IconCreditCard,
+  IconDotsVertical,
+  IconLogout,
+  IconNotification,
+  IconUserCircle,
+} from '@tabler/icons-vue'
 
 interface User {
   name: string

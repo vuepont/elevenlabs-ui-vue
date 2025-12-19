@@ -3,8 +3,8 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/registry/new-york-v4/ui/avatar'
-import { Button } from '@/registry/new-york-v4/ui/button'
+} from '@repo/shadcn-vue/components/ui/avatar'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
 </script>
 
 <template>

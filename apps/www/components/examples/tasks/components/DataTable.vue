@@ -8,6 +8,15 @@ import type {
 import type { Task } from '../data/schema'
 
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@repo/shadcn-vue/components/ui/table'
+import { valueUpdater } from '@repo/shadcn-vue/components/ui/table/utils'
+import {
   FlexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -18,15 +27,6 @@ import {
   useVueTable,
 } from '@tanstack/vue-table'
 import { ref } from 'vue'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/registry/new-york-v4/ui/table'
-import { valueUpdater } from '@/registry/new-york-v4/ui/table/utils'
 import DataTablePagination from './DataTablePagination.vue'
 import DataTableToolbar from './DataTableToolbar.vue'
 

@@ -6,7 +6,7 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarProvider,
-} from '@/registry/new-york-v4/ui/sidebar'
+} from '@repo/shadcn-vue/components/ui/sidebar'
 import { useBlockViewer } from './BlockViewer.vue'
 
 const { tree } = useBlockViewer()

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-vue'
+import { Badge } from '@repo/shadcn-vue/components/ui/badge'
 
-import { Badge } from '@/registry/new-york-v4/ui/badge'
 import {
   Card,
   CardAction,
@@ -9,11 +8,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/registry/new-york-v4/ui/card'
+} from '@repo/shadcn-vue/components/ui/card'
+import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-vue'
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
+  <div class="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
     <Card class="@container/card">
       <CardHeader>
         <CardDescription>Total Revenue</CardDescription>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -8,9 +8,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/registry/new-york-v4/ui/dialog'
-import { Input } from '@/registry/new-york-v4/ui/input'
-import { Label } from '@/registry/new-york-v4/ui/label'
+} from '@repo/shadcn-vue/components/ui/dialog'
+import { Input } from '@repo/shadcn-vue/components/ui/input'
+import { Label } from '@repo/shadcn-vue/components/ui/label'
 </script>
 
 <template>

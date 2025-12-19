@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ScrollArea, ScrollBar } from '@/registry/new-york-v4/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@repo/shadcn-vue/components/ui/scroll-area'
 import { registryCategories } from '@/registry/registry-categories'
 
 const { path } = toRefs(useRoute())

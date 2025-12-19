@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import ExamplesRoot from '@/components/examples/ExamplesRoot.vue'
-import { Button } from '@/registry/new-york-v4/ui/button'
 
 const title = 'ElevenLabs UI'
 const description = 'A collection of Open Source agent and audio components that you can customize and extend.'
@@ -40,22 +40,6 @@ useSeoMeta({
     </PageNav>
     <div class="container-wrapper section-soft flex-1 pb-6">
       <div class="container overflow-hidden">
-        <section class="border-border/50 -mx-4 w-[160vw] overflow-hidden rounded-lg border md:hidden md:w-[150vw]">
-          <NuxtImg
-            src="/r/styles/new-york-v4/dashboard-01-light.png"
-            width="1400"
-            height="875"
-            alt="Dashboard"
-            class="block dark:hidden"
-          />
-          <NuxtImg
-            src="/r/styles/new-york-v4/dashboard-01-dark.png"
-            width="1400"
-            height="875"
-            alt="Dashboard"
-            class="hidden dark:block"
-          />
-        </section>
         <section class="theme-container hidden md:block">
           <ExamplesRoot />
         </section>

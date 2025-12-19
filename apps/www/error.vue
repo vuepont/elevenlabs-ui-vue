@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NuxtError } from 'nuxt/app'
+import Button from '@repo/shadcn-vue/components/ui/button/Button.vue'
 import { ConfigProvider } from 'reka-ui'
-import Button from './registry/new-york-v4/ui/button/Button.vue'
 
 defineProps<{
   error: NuxtError

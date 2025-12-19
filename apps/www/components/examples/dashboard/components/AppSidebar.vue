@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@repo/shadcn-vue/components/ui/sidebar'
+
+import {
   IconCamera,
   IconChartBar,
   IconDashboard,
@@ -17,16 +27,6 @@ import {
   IconSettings,
   IconUsers,
 } from '@tabler/icons-vue'
-
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from '@/registry/new-york-v4/ui/sidebar'
 import NavDocuments from './NavDocuments.vue'
 import NavMain from './NavMain.vue'
 import NavSecondary from './NavSecondary.vue'

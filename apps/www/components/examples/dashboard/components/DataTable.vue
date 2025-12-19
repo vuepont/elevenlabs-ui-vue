@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Input } from '@repo/shadcn-vue/components/ui/input'
 import { toast } from 'vue-sonner'
 import { z } from 'zod'
-import { Input } from '~/registry/new-york-v4/ui/input'
 import DraggableRow from './DraggableRow.vue'
 import DragHandle from './DragHandle.vue'
 
@@ -24,6 +24,41 @@ import type {
   VisibilityState,
 } from '@tanstack/vue-table'
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers'
+import { Badge } from '@repo/shadcn-vue/components/ui/badge'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+import { Checkbox } from '@repo/shadcn-vue/components/ui/checkbox'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+
+import { Label } from '@repo/shadcn-vue/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@repo/shadcn-vue/components/ui/select'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@repo/shadcn-vue/components/ui/table'
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@repo/shadcn-vue/components/ui/tabs'
 import {
   IconChevronDown,
   IconChevronLeft,
@@ -44,43 +79,8 @@ import {
   getSortedRowModel,
   useVueTable,
 } from '@tanstack/vue-table'
+
 import { DragDropProvider } from 'dnd-kit-vue'
-import { Badge } from '@/registry/new-york-v4/ui/badge'
-
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { Checkbox } from '@/registry/new-york-v4/ui/checkbox'
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
-
-import { Label } from '@/registry/new-york-v4/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/registry/new-york-v4/ui/select'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/registry/new-york-v4/ui/table'
-
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/registry/new-york-v4/ui/tabs'
 
 const props = defineProps<{
   data: TableData[]

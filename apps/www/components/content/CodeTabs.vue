@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Tabs } from '@/registry/new-york-v4/ui/tabs'
+import { Tabs } from '@repo/shadcn-vue/components/ui/tabs'
 
 const { config } = useConfig()
 </script>

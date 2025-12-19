@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import {
-  IconDots,
-  IconFolder,
-  IconShare3,
-  IconTrash,
-} from '@tabler/icons-vue'
-
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -22,7 +16,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@/registry/new-york-v4/ui/sidebar'
+} from '@repo/shadcn-vue/components/ui/sidebar'
+import {
+  IconDots,
+  IconFolder,
+  IconShare3,
+  IconTrash,
+} from '@tabler/icons-vue'
 
 interface DocumentItem {
   name: string

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { Icons } from '@/components/Icons'
-import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Field,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
-} from '@/registry/new-york-v4/ui/field'
-import { Input } from '@/registry/new-york-v4/ui/input'
-import { Spinner } from '@/registry/new-york-v4/ui/spinner'
+} from '@repo/shadcn-vue/components/ui/field'
+import { Input } from '@repo/shadcn-vue/components/ui/input'
+import { Spinner } from '@repo/shadcn-vue/components/ui/spinner'
+import { Icons } from '@/components/Icons'
+import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']

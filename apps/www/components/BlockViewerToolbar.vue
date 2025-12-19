@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { Button } from '@repo/shadcn-vue/components/ui/button'
+import { Separator } from '@repo/shadcn-vue/components/ui/separator'
+import { Tabs, TabsList, TabsTrigger } from '@repo/shadcn-vue/components/ui/tabs'
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from '@repo/shadcn-vue/components/ui/toggle-group'
 import { useClipboard } from '@vueuse/core'
+
 import {
   Check,
   Fullscreen,
@@ -9,14 +17,6 @@ import {
   Tablet,
   Terminal,
 } from 'lucide-vue-next'
-import { Button } from '@/registry/new-york-v4/ui/button'
-import { Separator } from '@/registry/new-york-v4/ui/separator'
-import { Tabs, TabsList, TabsTrigger } from '@/registry/new-york-v4/ui/tabs'
-
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from '@/registry/new-york-v4/ui/toggle-group'
 import { useBlockViewer } from './BlockViewer.vue'
 
 const { view, item, iframeKey, resizablePanelRef }

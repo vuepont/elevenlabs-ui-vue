@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { Toc } from '@nuxt/content'
 import type { HTMLAttributes } from 'vue'
-import { IconMenu3 } from '@tabler/icons-vue'
-import { useIntersectionObserver } from '@vueuse/core'
-import { cn } from '@/lib/utils'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+import { IconMenu3 } from '@tabler/icons-vue'
+import { useIntersectionObserver } from '@vueuse/core'
+import { cn } from '@/lib/utils'
 
 const props = withDefaults(defineProps<{
   toc: Toc

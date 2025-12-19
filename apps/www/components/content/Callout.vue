@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import type { AlertVariants } from '@repo/shadcn-vue/components/ui/alert'
 import type { HTMLAttributes } from 'vue'
-import type { AlertVariants } from '@/registry/new-york-v4/ui/alert'
-import { InfoIcon } from 'lucide-vue-next'
-import { cn } from '@/lib/utils'
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from '@/registry/new-york-v4/ui/alert'
+} from '@repo/shadcn-vue/components/ui/alert'
+import { InfoIcon } from 'lucide-vue-next'
+import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   icon?: boolean

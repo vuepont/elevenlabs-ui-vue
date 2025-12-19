@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NuxtLinkProps } from 'nuxt/app'
-import Button from '@/registry/new-york-v4/ui/button/Button.vue'
+import Button from '@repo/shadcn-vue/components/ui/button/Button.vue'
 
 const props = defineProps<NuxtLinkProps>()
 </script>

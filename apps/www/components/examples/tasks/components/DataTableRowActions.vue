@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { Row } from '@tanstack/vue-table'
 import type { Task } from '../data/schema'
-import { MoreHorizontal } from 'lucide-vue-next'
-import { computed } from 'vue'
-import { Button } from '@/registry/new-york-v4/ui/button'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +14,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/registry/new-york-v4/ui/dropdown-menu'
+} from '@repo/shadcn-vue/components/ui/dropdown-menu'
+import { MoreHorizontal } from 'lucide-vue-next'
+import { computed } from 'vue'
 
 import { labels } from '../data/data'
 import { taskSchema } from '../data/schema'

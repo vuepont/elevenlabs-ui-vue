@@ -1,11 +1,11 @@
 <script lang="ts" setup>
+import { Badge } from '@repo/shadcn-vue/components/ui/badge'
+import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   IconArrowLeft,
   IconArrowRight,
   IconArrowUpRight,
 } from '@tabler/icons-vue'
-import { Badge } from '@/registry/new-york-v4/ui/badge'
-import { Button } from '@/registry/new-york-v4/ui/button'
 
 const route = useRoute()
 

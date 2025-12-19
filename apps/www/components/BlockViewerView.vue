@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { ResizableHandle, ResizablePanelGroup } from '@repo/shadcn-vue/components/ui/resizable'
 import { SplitterPanel as ResizablePanel } from 'reka-ui'
-import { ResizableHandle, ResizablePanelGroup } from '@/registry/new-york-v4/ui/resizable'
 import { useBlockViewer } from './BlockViewer.vue'
 
 const { resizablePanelRef } = useBlockViewer()

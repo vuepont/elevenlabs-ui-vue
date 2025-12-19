@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { ListboxItemProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { CommandItem, useCommand } from '@repo/shadcn-vue/components/ui/command'
 import { reactiveOmit, useMutationObserver } from '@vueuse/core'
 import { useForwardPropsEmits } from 'reka-ui'
 import { cn } from '@/lib/utils'
-import { CommandItem, useCommand } from '@/registry/new-york-v4/ui/command'
 
 const props = defineProps<ListboxItemProps & { class?: HTMLAttributes['class'] }>()
 
