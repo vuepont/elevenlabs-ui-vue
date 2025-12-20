@@ -1,5 +1,6 @@
 export * from './audio-player'
 export * from './bar-visualizer'
 export * from './conversation-bar'
+export * from './matrix'
 export * from './scrub-bar'
 export * from './shimmering-text'
