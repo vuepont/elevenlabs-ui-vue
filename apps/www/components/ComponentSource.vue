@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { fixImport } from '@/lib/registry-utils'
 import { cn } from '@/lib/utils'
 import { getIconForLanguageExtension } from './Icons'
 
@@ -16,6 +15,35 @@ const props = withDefaults(defineProps<{
   language: 'vue',
   collapsible: true,
 })
+
+function fixImport(content: string) {
+  // eslint-disable-next-line regexp/no-super-linear-backtracking
+  const regex = /@\/(.+?)\/((?:.*?\/)?(?:components|ui|composables|lib))\/([\w-]+)/g
+
+  const replacement = (
+    match: string,
+    path: string,
+    type: string,
+    component: string,
+  ) => {
+    if (type.endsWith('components')) {
+      return `@/components/${component}`
+    }
+    else if (type.endsWith('ui')) {
+      return `@/components/ui/${component}`
+    }
+    else if (type.endsWith('composables')) {
+      return `@/composables/${component}`
+    }
+    else if (type.endsWith('lib')) {
+      return `@/lib/${component}`
+    }
+
+    return match
+  }
+
+  return content.replace(regex, replacement)
+}
 
 const code = fixImport((await import(`@/components/demo/${props.name}.${props.language}?raw`)).default)
 </script>

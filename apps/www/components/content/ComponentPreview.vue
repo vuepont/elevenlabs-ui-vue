@@ -11,13 +11,9 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
 }>()
 
-const Component = props.type === 'block'
-  ? defineAsyncComponent({
-      loader: () => import(`@/registry/new-york-v4/blocks/${props.name}/page.vue`),
-    })
-  : defineAsyncComponent({
-      loader: () => import(`@/components/demo/${props.name}.vue`),
-    })
+const Component = defineAsyncComponent({
+  loader: () => import(`@/components/demo/${props.name}.vue`),
+})
 </script>
 
 <template>
@@ -26,28 +22,8 @@ const Component = props.type === 'block'
     <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">
       {{ name }}
     </code>
-    not found in registry.
+    not found.
   </p>
-
-  <div v-else-if="type === 'block'" class="relative aspect-[4/2.5] w-full overflow-hidden rounded-md border md:-mx-1">
-    <img
-      :src="`/r/styles/new-york-v4/${name}-light.png`"
-      :alt="name"
-      width="1440"
-      height="900"
-      class="bg-background absolute top-0 left-0 z-20 w-[970px] max-w-none sm:w-[1280px] md:hidden dark:hidden md:dark:hidden"
-    >
-    <img
-      :src="`/r/styles/new-york-v4/${name}-dark.png`"
-      :alt="name"
-      :width="1440"
-      :height="900"
-      class="bg-background absolute top-0 left-0 z-20 hidden w-[970px] max-w-none sm:w-[1280px] md:hidden dark:block md:dark:hidden"
-    >
-    <div class="bg-background absolute inset-0 hidden w-[1600px] md:block">
-      <iframe :src="`/view/${name}`" class="size-full" />
-    </div>
-  </div>
 
   <ComponentPreviewTabs
     v-else

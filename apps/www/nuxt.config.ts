@@ -1,5 +1,4 @@
 import tailwindcss from '@tailwindcss/vite'
-import { siteConfig } from './lib/config'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -9,7 +8,7 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/color-mode', '@nuxt/fonts', '@nuxt/content', 'nuxt-shiki', 'nuxt-og-image', '@nuxt/image'],
   components: [
-    { path: '~/components', ignore: ['examples/*', 'examples/**/*'] },
+    { path: '~/components' },
     { path: '~/components/demo', pathPrefix: false },
     { path: '~/components/content', global: true, pathPrefix: false },
   ],
@@ -37,7 +36,7 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vee-validate', 'vue-sonner'],
+    transpile: ['vue-sonner'],
   },
 
   vite: {
@@ -74,21 +73,8 @@ export default defineNuxtConfig({
       deployConfig: true,
       nodeCompat: true,
     },
-    serverAssets: [
-      { baseName: 'blocks', dir: '../registry/new-york-v4/blocks' },
-    ],
   },
 
-  app: {
-    head: {
-      link: [
-        { rel: 'manifest', href: `${siteConfig.url}/site.webmanifest` },
-        { rel: 'shortcut icon', href: '/favicon-16x16.png' },
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-      ],
-      meta: [{ name: 'keywords', content: 'Nuxt,Vue,Tailwind CSS,Components,shadcn' }],
-    },
-  },
   ogImage: {
     fonts: [
       'Geist:400',

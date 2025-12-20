@@ -1,9 +1,15 @@
 import { createSharedComposable, isClient, watchImmediate } from '@vueuse/core'
-import { baseColors } from '@/registry/registry-base-colors'
 
-const THEMES = baseColors.filter(
-  theme => !['slate', 'stone', 'gray', 'zinc'].includes(theme.name),
-).map(theme => theme.name)
+const THEMES = [
+  'neutral',
+  'red',
+  'rose',
+  'orange',
+  'green',
+  'blue',
+  'yellow',
+  'violet',
+]
 
 const COOKIE_NAME = 'user_config'
 export type Layout = 'fixed' | 'full'
@@ -15,7 +21,7 @@ export const useConfig = createSharedComposable(() => {
     layout: Layout
     packageManager: PackageManager
     installationType: InstallationType
-    activeTheme: typeof THEMES[number]
+    activeTheme: string
   }>(
     COOKIE_NAME,
     {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { NavigationItem } from '@/composables/useNavigation'
-import type { Color, ColorPalette } from '@/lib/colors'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Command,
@@ -21,14 +20,13 @@ import { Kbd, KbdGroup } from '@repo/shadcn-vue/components/ui/kbd'
 import { Separator } from '@repo/shadcn-vue/components/ui/separator'
 import { IconArrowRight } from '@tabler/icons-vue'
 import { useClipboard } from '@vueuse/core'
-import { CornerDownLeft, Square } from 'lucide-vue-next'
+import { CornerDownLeft } from 'lucide-vue-next'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useIsMac } from '@/composables/useIsMac'
 import { useConfig } from '@/composables/useUserConfig'
 import { cn } from '@/lib/utils'
 import CommandMenuItem from './CommandItem.vue'
-import CommandMenuKbd from './CommandMenuKbd.vue'
 
 interface Props {
   tree?: {
@@ -37,13 +35,10 @@ interface Props {
     path: string
     stem?: string
   }
-  colors: ColorPalette[]
-  blocks?: { name: string, description: string, categories: string[] }[]
   navItems?: { href: string, label: string }[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  blocks: undefined,
   navItems: undefined,
 })
 
@@ -51,7 +46,7 @@ const router = useRouter()
 const isMac = useIsMac()
 const config = useConfig()
 const open = ref(false)
-const selectedType = ref<'color' | 'page' | 'component' | 'block' | null>(null)
+const selectedType = ref<'page' | 'component' | null>(null)
 const copyPayload = ref('')
 
 const pmToDlxCommand: Record<string, string> = {
@@ -73,16 +68,6 @@ function handlePageHighlight(isComponent: boolean, item: { path: string, title?:
     selectedType.value = 'page'
     copyPayload.value = ''
   }
-}
-
-function handleColorHighlight(color: Color) {
-  selectedType.value = 'color'
-  copyPayload.value = color.className
-}
-
-function handleBlockHighlight(block: { name: string, description: string, categories: string[] }) {
-  selectedType.value = 'block'
-  copyPayload.value = `${pmToDlxCommand[packageManager]} shadcn-vue@latest add ${block.name}`
 }
 
 function runCommand(command: () => unknown) {
@@ -199,64 +184,17 @@ onMounted(() => {
               </CommandMenuItem>
             </template>
           </CommandGroup>
-          <CommandGroup
-            v-for="colorPalette in colors"
-            :key="colorPalette.name"
-            :heading="colorPalette.name.charAt(0).toUpperCase() + colorPalette.name.slice(1)"
-            class="p-0! **:data-[slot=command-group-heading]:p-3!"
-          >
-            <CommandMenuItem
-              v-for="color in colorPalette.colors"
-              :key="color.hex"
-              :value="color.className"
-              :keywords="['color', color.name, color.className]"
-              @highlight="() => handleColorHighlight(color)"
-              @select="() => runCommand(() => copy(color.oklch))"
-            >
-              <div
-                class="border-ghost aspect-square size-4 rounded-sm bg-(--color) after:rounded-sm"
-                :style="{ '--color': color.oklch }"
-              />
-              {{ color.className }}
-              <span class="text-muted-foreground ml-auto font-mono text-xs font-normal tabular-nums">
-                {{ color.oklch }}
-              </span>
-            </CommandMenuItem>
-          </CommandGroup>
-          <CommandGroup
-            v-if="blocks?.length"
-            heading="Blocks"
-            class="p-0! **:data-[slot=command-group-heading]:p-3!"
-          >
-            <CommandMenuItem
-              v-for="block in blocks"
-              :key="block.name"
-              :value="block.name"
-              :keywords="['block', block.name, block.description, ...block.categories]"
-              @highlight="() => handleBlockHighlight(block)"
-              @select="() => runCommand(() => router.push(`/blocks/${block.categories[0]}#${block.name}`))"
-            >
-              <Square />
-              {{ block.description }}
-              <span class="text-muted-foreground ml-auto font-mono text-xs font-normal tabular-nums">
-                {{ block.name }}
-              </span>
-            </CommandMenuItem>
-          </CommandGroup>
         </CommandList>
       </Command>
       <div class="text-muted-foreground absolute inset-x-0 bottom-0 z-20 flex h-10 items-center gap-2 rounded-b-xl border-t border-t-neutral-100 bg-neutral-50 px-4 text-xs font-medium dark:border-t-neutral-700 dark:bg-neutral-800">
         <div class="flex items-center gap-2">
-          <CommandMenuKbd>
-            <CornerDownLeft />
-          </CommandMenuKbd>
+          <CornerDownLeft class="size-3.5 opacity-50" />
           <span v-if="selectedType === 'page' || selectedType === 'component'">Go to Page</span>
-          <span v-if="selectedType === 'color'">Copy OKLCH</span>
         </div>
         <Separator v-if="copyPayload" orientation="vertical" class="h-4!" />
         <div v-if="copyPayload" class="flex items-center gap-1">
-          <CommandMenuKbd>{{ isMac ? '⌘' : 'Ctrl' }}</CommandMenuKbd>
-          <CommandMenuKbd>C</CommandMenuKbd>
+          <Kbd class="border">{{ isMac ? '⌘' : 'Ctrl' }}</Kbd>
+          <Kbd class="border">C</Kbd>
           {{ copyPayload }}
         </div>
       </div>

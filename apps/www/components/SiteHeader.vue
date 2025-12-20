@@ -1,14 +1,6 @@
 <script setup lang="ts">
-// import { GitHubLink } from "@/components/github-link"
-// import { Icons } from "@/components/icons"
-// import { MainNav } from "@/components/main-nav"
-// import { MobileNav } from "@/components/mobile-nav"
-// import { ModeSwitcher } from "@/components/mode-switcher"
-// import { SiteConfig } from "@/components/site-config"
-// import blocks from "@/registry/__blocks__.json"
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { Separator } from '@repo/shadcn-vue/components/ui/separator'
-import { getColors } from '@/lib/colors'
 import { siteConfig } from '@/lib/config'
 import { Icons } from './Icons'
 
@@ -39,7 +31,7 @@ const docData = computed(() => data.value!.find(i => i.stem === 'docs')!)
         <MainNav :items="siteConfig.navItems" class="hidden lg:flex" />
         <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
           <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
-            <CommandMenu :tree="docData" :colors="getColors()" :nav-items="siteConfig.navItems" />
+            <CommandMenu :tree="docData" :nav-items="siteConfig.navItems" />
           </div>
           <Separator
             orientation="vertical"

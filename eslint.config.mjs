@@ -6,9 +6,6 @@ export default antfu(
     typescript: true,
     pnpm: false,
     ignores: [
-      '**/__registry__/index.ts',
-      '**/__registry__/index.ts',
-      '**/registry/__index__.ts',
       '**/*.md',
     ],
   },
@@ -18,25 +15,6 @@ export default antfu(
       'vue/one-component-per-file': 0,
       'vue/no-reserved-component-names': 0,
       'vue/no-useless-v-bind': 0,
-    },
-  },
-  {
-    files: ['**/registry/**/*.ts', '**/registry/**/*.vue'],
-    rules: {
-      'style/quotes': ['error', 'double'],
-    },
-  },
-  {
-    files: ['**/__registry__/**/*.ts'],
-    rules: {
-      'ts/ban-ts-comment': 0,
-    },
-  },
-  {
-    files: ['**/registry/default/examples/*.vue', '**/registry/new-york/examples/*.vue', '**/registry/new-york-v4/examples/*.vue'],
-    rules: {
-      'no-alert': 0,
-      'no-console': 0,
     },
   },
   {

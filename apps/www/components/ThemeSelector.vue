@@ -9,7 +9,6 @@ import {
   SelectValue,
 } from '@repo/shadcn-vue/components/ui/select'
 import { cn } from '@/lib/utils'
-import { baseColors } from '@/registry/registry-base-colors'
 
 const props = defineProps<{
   class?: HTMLAttributes['class']
@@ -17,9 +16,16 @@ const props = defineProps<{
 
 const { config } = useConfig()
 
-const COLOR_THEMES = baseColors.filter(
-  theme => !['slate', 'stone', 'gray', 'zinc'].includes(theme.name),
-)
+const COLOR_THEMES = [
+  { name: 'neutral', label: 'Default' },
+  { name: 'red', label: 'Red' },
+  { name: 'rose', label: 'Rose' },
+  { name: 'orange', label: 'Orange' },
+  { name: 'green', label: 'Green' },
+  { name: 'blue', label: 'Blue' },
+  { name: 'yellow', label: 'Yellow' },
+  { name: 'violet', label: 'Violet' },
+]
 </script>
 
 <template>
@@ -43,10 +49,9 @@ const COLOR_THEMES = baseColors.filter(
           :value="theme.name"
           class="data-[state=checked]:opacity-50"
         >
-          {{ theme.label === "Neutral" ? "Default" : theme.label }}
+          {{ theme.label }}
         </SelectItem>
       </SelectContent>
     </Select>
-    <!-- <CopyCodeButton variant="secondary" size="icon-sm" /> -->
   </div>
 </template>
