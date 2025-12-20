@@ -13,7 +13,7 @@ const handleError = (err: any) => console.error('Error:', err)
 </script>
 
 <template>
-  <div class="flex min-h-[200px] w-full items-center justify-center">
+  <div class="flex w-full items-center justify-center">
     <div class="w-full max-w-md">
       <ConversationBar
         :agent-id="agentId"

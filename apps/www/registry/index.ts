@@ -5,8 +5,6 @@ import { z } from "zod"
 import { blocks } from "@/registry/registry-blocks"
 import { charts } from "@/registry/registry-charts"
 import { composables } from "@/registry/registry-composables"
-import { examples } from "@/registry/registry-examples"
-import { internal } from "@/registry/registry-internal"
 import { lib } from "@/registry/registry-lib"
 import { themes } from "@/registry/registry-themes"
 import { ui } from "@/registry/registry-ui"
@@ -49,8 +47,6 @@ export const registry = {
       ...lib,
       ...composables,
       ...themes,
-      ...examples,
-      ...internal,
     ]
       .filter((item) => {
         return !DEPRECATED_ITEMS.includes(item.name)

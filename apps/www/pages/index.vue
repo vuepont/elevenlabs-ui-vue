@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button } from '@repo/shadcn-vue/components/ui/button'
-import ExamplesRoot from '@/components/examples/ExamplesRoot.vue'
+import ExamplesRoot from '@/components/ExamplesRoot.vue'
 
 const title = 'ElevenLabs UI'
 const description = 'A collection of Open Source agent and audio components that you can customize and extend.'
@@ -35,8 +35,7 @@ useSeoMeta({
       </PageActions>
     </PageHeader>
     <PageNav class="hidden md:flex">
-      <!-- <ExamplesNav class="[&>a:first-child]:text-primary flex-1 overflow-hidden" /> -->
-      <!-- <ThemeSelector class="ml-auto mr-4 hidden md:flex" /> -->
+      <ThemeSelector class="ml-auto mr-4 hidden md:flex" />
     </PageNav>
     <div class="container-wrapper section-soft flex-1 pb-6">
       <div class="container overflow-hidden">
