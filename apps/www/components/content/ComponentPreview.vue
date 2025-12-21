@@ -11,8 +11,30 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
 }>()
 
-const Component = defineAsyncComponent({
-  loader: () => import(`@/components/demo/${props.name}.vue`),
+const modules = import.meta.glob(
+  '../../../../packages/examples/src/**/*.vue',
+)
+
+const moduleMap = Object.create(null) as Record<string, () => Promise<any>>
+
+for (const path in modules) {
+  // case 1：src/foo.vue
+  let match = path.match(/\/src\/([^/]+)\.vue$/)
+  if (match && match[1] && modules[path]) {
+    moduleMap[match[1]] = modules[path]
+    continue
+  }
+
+  // case 2：src/foo/foo.vue
+  match = path.match(/\/src\/([^/]+)\/\1\.vue$/)
+  if (match && match[1] && modules[path]) {
+    moduleMap[match[1]] = modules[path]
+  }
+}
+
+const Component = computed(() => {
+  const loader = props.name ? moduleMap[props.name] : null
+  return loader ? defineAsyncComponent(loader) : null
 })
 </script>
 
@@ -22,7 +44,7 @@ const Component = defineAsyncComponent({
     <code class="bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm">
       {{ name }}
     </code>
-    not found.
+    not found in examples.
   </p>
 
   <ComponentPreviewTabs

@@ -45,7 +45,23 @@ function fixImport(content: string) {
   return content.replace(regex, replacement)
 }
 
-const code = fixImport((await import(`@/components/demo/${props.name}.${props.language}?raw`)).default)
+const modules = import.meta.glob(
+  '../../../packages/examples/src/**/*.{vue,ts}',
+  { query: '?raw', import: 'default' },
+)
+
+const keys = Object.keys(modules)
+
+function resolveKey(name?: string) {
+  return name
+    ? keys.find(k => k.endsWith(`/${name}.vue`)) ?? null
+    : null
+}
+
+const key = resolveKey(props.name)
+const code = key
+  ? fixImport(await (modules[key]!() as Promise<string>))
+  : ''
 </script>
 
 <template>

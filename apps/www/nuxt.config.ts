@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/color-mode', '@nuxt/fonts', '@nuxt/content', 'nuxt-shiki', 'nuxt-og-image', '@nuxt/image'],
   components: [
     { path: '~/components' },
-    { path: '~/components/demo', pathPrefix: false },
     { path: '~/components/content', global: true, pathPrefix: false },
   ],
 
