@@ -1,0 +1,176 @@
+.theme-default .theme-container,
+.theme-default [data-reka-popper-content-wrapper] {
+  --chart-1: var(--color-blue-300);
+  --chart-2: var(--color-blue-500);
+  --chart-3: var(--color-blue-600);
+  --chart-4: var(--color-blue-700);
+  --chart-5: var(--color-blue-800);
+}
+
+.theme-blue .theme-container,
+.theme-blue [data-reka-popper-content-wrapper] {
+  --primary: var(--color-blue-700);
+  --primary-foreground: var(--color-blue-50);
+  /* --ring: var(--color-blue-100); */
+  --sidebar-primary: var(--color-blue-600);
+  --sidebar-primary-foreground: var(--color-blue-50);
+  /* --sidebar-ring: var(--color-blue-400); */
+  --chart-1: var(--color-blue-300);
+  --chart-2: var(--color-blue-500);
+  --chart-3: var(--color-blue-600);
+  --chart-4: var(--color-blue-700);
+  --chart-5: var(--color-blue-800);
+
+  @variant dark {
+    --primary: var(--color-blue-700);
+    --primary-foreground: var(--color-blue-50);
+    /* --ring: var(--color-blue-900); */
+    --sidebar-primary: var(--color-blue-500);
+    --sidebar-primary-foreground: var(--color-blue-50);
+    /* --sidebar-ring: var(--color-blue-900); */
+  }
+}
+
+.theme-green .theme-container,
+.theme-green [data-reka-popper-content-wrapper] {
+  --primary: var(--color-lime-600);
+  --primary-foreground: var(--color-lime-50);
+  --ring: var(--color-lime-400);
+  --chart-1: var(--color-green-300);
+  --chart-2: var(--color-green-500);
+  --chart-3: var(--color-green-600);
+  --chart-4: var(--color-green-700);
+  --chart-5: var(--color-green-800);
+  --sidebar-primary: var(--color-lime-600);
+  --sidebar-primary-foreground: var(--color-lime-50);
+  --sidebar-ring: var(--color-lime-400);
+
+  @variant dark {
+    --primary: var(--color-lime-600);
+    --primary-foreground: var(--color-lime-50);
+    --ring: var(--color-lime-900);
+    --sidebar-primary: var(--color-lime-500);
+    --sidebar-primary-foreground: var(--color-lime-50);
+    --sidebar-ring: var(--color-lime-900);
+  }
+}
+
+.theme-rose .theme-container,
+.theme-rose [data-reka-popper-content-wrapper] {
+  --primary: var(--color-rose-600);
+  --primary-foreground: var(--color-rose-50);
+  --ring: var(--color-rose-400);
+  --chart-1: var(--color-rose-300);
+  --chart-2: var(--color-rose-500);
+  --chart-3: var(--color-rose-600);
+  --chart-4: var(--color-rose-700);
+  --chart-5: var(--color-rose-800);
+  --sidebar-primary: var(--color-rose-600);
+  --sidebar-primary-foreground: var(--color-rose-50);
+  --sidebar-ring: var(--color-rose-400);
+
+  @variant dark {
+    --primary: var(--color-rose-500);
+    --primary-foreground: var(--color-rose-50);
+    --ring: var(--color-rose-900);
+    --sidebar-primary: var(--color-rose-500);
+    --sidebar-primary-foreground: var(--color-rose-50);
+    --sidebar-ring: var(--color-rose-900);
+  }
+}
+
+.theme-orange .theme-container,
+.theme-orange [data-reka-popper-content-wrapper] {
+  --primary: var(--color-orange-600);
+  --primary-foreground: var(--color-orange-50);
+  --ring: var(--color-orange-400);
+  --chart-1: var(--color-orange-300);
+  --chart-2: var(--color-orange-500);
+  --chart-3: var(--color-orange-600);
+  --chart-4: var(--color-orange-700);
+  --chart-5: var(--color-orange-800);
+  --sidebar-primary: var(--color-orange-600);
+  --sidebar-primary-foreground: var(--color-orange-50);
+  --sidebar-ring: var(--color-orange-400);
+
+  @variant dark {
+    --primary: var(--color-orange-500);
+    --primary-foreground: var(--color-orange-50);
+    --ring: var(--color-orange-900);
+    --sidebar-primary: var(--color-orange-500);
+    --sidebar-primary-foreground: var(--color-orange-50);
+    --sidebar-ring: var(--color-orange-900);
+  }
+}
+
+.theme-red .theme-container,
+.theme-red [data-reka-popper-content-wrapper] {
+  --primary: var(--color-red-600);
+  --primary-foreground: var(--color-red-50);
+  --ring: var(--color-red-400);
+  --chart-1: var(--color-red-300);
+  --chart-2: var(--color-red-500);
+  --chart-3: var(--color-red-600);
+  --chart-4: var(--color-red-700);
+  --chart-5: var(--color-red-800);
+  --sidebar-primary: var(--color-red-600);
+  --sidebar-primary-foreground: var(--color-red-50);
+  --sidebar-ring: var(--color-red-400);
+
+  @variant dark {
+    --primary: var(--color-red-500);
+    --primary-foreground: var(--color-red-50);
+    --ring: var(--color-red-900);
+    --sidebar-primary: var(--color-red-500);
+    --sidebar-primary-foreground: var(--color-red-50);
+    --sidebar-ring: var(--color-red-900);
+  }
+}
+
+.theme-yellow .theme-container,
+.theme-yellow [data-reka-popper-content-wrapper] {
+  --primary: var(--color-yellow-400);
+  --primary-foreground: var(--color-yellow-900);
+  --ring: var(--color-yellow-400);
+  --chart-1: var(--color-yellow-300);
+  --chart-2: var(--color-yellow-500);
+  --chart-3: var(--color-yellow-600);
+  --chart-4: var(--color-yellow-700);
+  --chart-5: var(--color-yellow-800);
+  --sidebar-primary: var(--color-yellow-600);
+  --sidebar-primary-foreground: var(--color-yellow-50);
+  --sidebar-ring: var(--color-yellow-400);
+
+  @variant dark {
+    --primary: var(--color-yellow-500);
+    --primary-foreground: var(--color-yellow-900);
+    --ring: var(--color-yellow-900);
+    --sidebar-primary: var(--color-yellow-500);
+    --sidebar-primary-foreground: var(--color-yellow-50);
+    --sidebar-ring: var(--color-yellow-900);
+  }
+}
+
+.theme-violet .theme-container,
+.theme-violet [data-reka-popper-content-wrapper] {
+  --primary: var(--color-violet-600);
+  --primary-foreground: var(--color-violet-50);
+  --ring: var(--color-violet-400);
+  --chart-1: var(--color-violet-300);
+  --chart-2: var(--color-violet-500);
+  --chart-3: var(--color-violet-600);
+  --chart-4: var(--color-violet-700);
+  --chart-5: var(--color-violet-800);
+  --sidebar-primary: var(--color-violet-600);
+  --sidebar-primary-foreground: var(--color-violet-50);
+  --sidebar-ring: var(--color-violet-400);
+
+  @variant dark {
+    --primary: var(--color-violet-500);
+    --primary-foreground: var(--color-violet-50);
+    --ring: var(--color-violet-900);
+    --sidebar-primary: var(--color-violet-500);
+    --sidebar-primary-foreground: var(--color-violet-50);
+    --sidebar-ring: var(--color-violet-900);
+  }
+}
