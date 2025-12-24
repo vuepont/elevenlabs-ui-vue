@@ -11,7 +11,6 @@ export interface AudioPlayerApi<TData = unknown> {
   audioRef: Ref<HTMLAudioElement | null>
   activeItem: Ref<AudioPlayerItem<TData> | null>
   duration: Ref<number | undefined>
-  currentTime: Ref<number>
   error: Ref<MediaError | null>
   isPlaying: Ref<boolean>
   isBuffering: Ref<boolean>
@@ -32,4 +31,16 @@ export function useAudioPlayer<TData = unknown>(): AudioPlayerApi<TData> {
     throw new Error('useAudioPlayer must be used within an AudioPlayerProvider')
   }
   return api!
+}
+
+export const AudioPlayerTimeKey = Symbol('AudioPlayerTime')
+
+export function useAudioPlayerTime(): Ref<number> {
+  const time = inject<Ref<number> | null>(AudioPlayerTimeKey)
+  if (!time) {
+    throw new Error(
+      'useAudioPlayerTime cannot be called outside of AudioPlayerProvider',
+    )
+  }
+  return time
 }

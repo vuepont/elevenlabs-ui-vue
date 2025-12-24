@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from 'reka-ui'
 import { computed, ref } from 'vue'
-import { useAudioPlayer } from './useAudioPlayer'
+import { useAudioPlayer, useAudioPlayerTime } from './context'
 
 type AudioPlayerProgressProps = InstanceType<typeof SliderRoot>['$props']
 
@@ -18,44 +18,45 @@ const props = withDefaults(defineProps<Props>(), {
 
 const { step, disabled, class: _, modelValue: __, ...otherProps } = props
 
-const player = useAudioPlayer()
+const { duration, seek, pause, play, isPlaying } = useAudioPlayer()
+const time = useAudioPlayerTime()
 const wasPlaying = ref(false)
 
-const maxDuration = computed(() => player.duration.value ?? 0)
-const currentTimeArray = computed(() => [player.currentTime.value])
+const maxDuration = computed(() => duration.value ?? 0)
+const currentTimeArray = computed(() => [time.value])
 
 const isDisabled = computed(() =>
-  player.duration.value === undefined
-  || !Number.isFinite(player.duration.value)
-  || Number.isNaN(player.duration.value),
+  duration.value === undefined
+  || !Number.isFinite(duration.value)
+  || Number.isNaN(duration.value),
 )
 
 function handleValueChange(vals?: number[] | null) {
   const next = vals?.[0]
   if (typeof next !== 'number')
     return
-  player.seek(next)
+  seek(next)
 }
 
 function handlePointerDown() {
-  wasPlaying.value = player.isPlaying.value
-  player.pause()
+  wasPlaying.value = isPlaying.value
+  pause()
 }
 
 function handlePointerUp() {
   if (wasPlaying.value) {
-    player.play()
+    play()
   }
 }
 
 function handleKeyDown(e: KeyboardEvent) {
   if (e.key === ' ') {
     e.preventDefault()
-    if (!player.isPlaying.value) {
-      player.play()
+    if (!isPlaying.value) {
+      play()
     }
     else {
-      player.pause()
+      pause()
     }
   }
 }

@@ -10,7 +10,7 @@ import {
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { Check, Settings } from 'lucide-vue-next'
 import { computed } from 'vue'
-import { useAudioPlayer } from './useAudioPlayer'
+import { useAudioPlayer } from './context'
 
 type AudioPlayerSpeedProps = InstanceType<typeof Button>['$props']
 

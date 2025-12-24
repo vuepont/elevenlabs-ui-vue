@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from '@repo/shadcn-vue/components/ui/tooltip'
 
-import { IconCheck, IconCopy } from '@tabler/icons-vue'
+import { IconCheck, IconClipboard } from '@tabler/icons-vue'
 
 import { useClipboard } from '@vueuse/core'
 import { toRefs } from 'vue'
@@ -46,7 +46,7 @@ const { copy, copied } = useClipboard({ source: value })
           @click="copy()"
         >
           <span class="sr-only">Copy</span>
-          <IconCheck v-if="copied" /><IconCopy v-else />
+          <IconCheck v-if="copied" /><IconClipboard v-else />
         </Button>
       </TooltipTrigger>
       <TooltipContent>
