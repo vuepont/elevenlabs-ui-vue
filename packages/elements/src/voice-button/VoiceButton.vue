@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { CheckIcon, XIcon } from 'lucide-vue-next'
@@ -19,8 +20,8 @@ interface Props {
   icon?: any
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
   size?: 'default' | 'sm' | 'lg' | 'icon'
-  className?: string
-  waveformClassName?: string
+  class?: HTMLAttributes['class']
+  waveformClass?: string
   feedbackDuration?: number
   disabled?: boolean
 }
@@ -88,7 +89,7 @@ const shouldShowTrailing = computed(() => !shouldShowWaveform.value && !!props.t
     :class="cn(
       'gap-2 transition-all duration-200',
       size === 'icon' && 'relative',
-      className,
+      props.class,
     )"
     aria-label="Voice Button"
     @click="handleClick"
@@ -111,7 +112,7 @@ const shouldShowTrailing = computed(() => !shouldShowWaveform.value && !!props.t
           : size === 'icon'
             ? 'bg-muted/50 border-0'
             : 'border-border bg-muted/50',
-        waveformClassName,
+        props.waveformClass,
       )"
     >
       <transition
