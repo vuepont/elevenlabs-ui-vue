@@ -17,7 +17,7 @@ interface Props {
   modelValue?: string
   muted?: boolean
   disabled?: boolean
-  className?: string
+  class?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -89,7 +89,7 @@ const isPreviewActive = computed(() => isDropdownOpen.value && !isMuted.value)
         size="sm"
         :class="cn(
           'hover:bg-accent flex w-48 cursor-pointer items-center gap-1.5',
-          className,
+          props.class,
         )"
         :disabled="loading || disabled"
       >
