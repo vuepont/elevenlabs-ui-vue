@@ -28,7 +28,7 @@ export type AgentConnectionState
 interface Props {
   agentId: string
   class?: HTMLAttributes['class']
-  waveformClassName?: string
+  waveformClass?: string
 }
 
 const props = defineProps<Props>()
@@ -159,7 +159,7 @@ function toggleKeyboard() {
             <div class="h-8 w-[120px] md:h-10">
               <div :class="cn('flex h-full items-center gap-2 rounded-md py-1', 'bg-foreground/5 text-foreground/70')">
                 <div class="h-full flex-1">
-                  <div :class="cn('relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-sm', props.waveformClassName)">
+                  <div :class="cn('relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-sm', props.waveformClass)">
                     <LiveWaveform
                       :key="isDisconnected ? 'idle' : 'active'"
                       :active="isConnected && !isMuted"
