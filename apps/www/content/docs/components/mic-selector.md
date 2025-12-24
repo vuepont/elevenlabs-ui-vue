@@ -12,7 +12,6 @@ description: A microphone selector with live audio preview
 ---
 ::
 
-
 ## Installation
 
 ::code-tabs
