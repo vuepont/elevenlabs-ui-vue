@@ -234,3 +234,80 @@ export function useBarAnimator(
 
   return currentFrame
 }
+
+/**
+ * Composable for tracking the volume of an audio stream.
+ */
+export function useAudioVolume(
+  mediaStream: Ref<MediaStream | null | undefined>,
+  options: AudioAnalyserOptions = {},
+) {
+  const volume = ref(0)
+  let cleanupAudio: (() => void) | undefined
+  let activeContext: { analyser: AnalyserNode, dataArray: Uint8Array<ArrayBuffer> } | null = null
+  let lastUpdate = 0
+
+  const audioAnalyserOptions: AudioAnalyserOptions = {
+    fftSize: 32,
+    smoothingTimeConstant: 0,
+    ...options,
+  }
+
+  const updateInterval = 1000 / 30 // 30 FPS
+
+  const { pause: pauseLoop, resume: resumeLoop } = useRafFn(({ timestamp }) => {
+    if (!activeContext)
+      return
+
+    const { analyser, dataArray } = activeContext
+
+    if (timestamp - lastUpdate >= updateInterval) {
+      analyser.getByteFrequencyData(dataArray)
+      let sum = 0
+      for (let i = 0; i < dataArray.length; i++) {
+        const a = dataArray[i]
+        sum += a * a
+      }
+      const newVolume = Math.sqrt(sum / dataArray.length) / 255
+
+      // Only update state if volume changed significantly
+      if (Math.abs(newVolume - volume.value) > 0.01) {
+        volume.value = newVolume
+      }
+      lastUpdate = timestamp
+    }
+  }, { immediate: false })
+
+  watch(
+    () => mediaStream.value,
+    (stream) => {
+      pauseLoop()
+      if (cleanupAudio)
+        cleanupAudio()
+      activeContext = null
+
+      if (!stream) {
+        volume.value = 0
+        return
+      }
+
+      const audioSetup = createAudioAnalyser(stream, audioAnalyserOptions)
+      if (!audioSetup)
+        return
+
+      cleanupAudio = audioSetup.cleanup
+      const bufferLength = audioSetup.analyser.frequencyBinCount
+      const dataArray = new Uint8Array(bufferLength)
+      activeContext = { analyser: audioSetup.analyser, dataArray }
+      resumeLoop()
+    },
+    { immediate: true },
+  )
+
+  onUnmounted(() => {
+    if (cleanupAudio)
+      cleanupAudio()
+  })
+
+  return volume
+}

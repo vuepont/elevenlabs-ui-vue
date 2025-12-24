@@ -26,7 +26,7 @@ hideCode: true
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest components add audio-player
+    npx @elevenlabs/cli@latest add audio-player
     ```
   ::
 
