@@ -40,7 +40,7 @@ description: Real-time microphone input visualization with audio reactivity.
       ```
 
       ::step
-        Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/live-waveform-bar) into your project.
+        Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/live-waveform) into your project.
       ::
 
       ::step
