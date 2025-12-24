@@ -1,3 +1,12 @@
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+  - maplibre-gl
+  - sharp
+  - simple-git-hooks
+  - vue-demi
+  - workerd

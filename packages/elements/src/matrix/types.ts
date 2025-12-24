@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-new-array */
 export type Frame = number[][]
 export type MatrixMode = 'default' | 'vu'
 

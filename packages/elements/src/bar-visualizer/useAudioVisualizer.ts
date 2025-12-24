@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-new-array */
 import type { MaybeRef, Ref } from 'vue'
 import { useRafFn } from '@vueuse/core'
 import { computed, onUnmounted, ref, toValue, watch } from 'vue'
