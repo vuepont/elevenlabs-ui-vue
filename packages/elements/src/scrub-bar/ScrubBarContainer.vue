@@ -22,7 +22,12 @@ const emit = defineEmits<{
 const { duration, value } = toRefs(props)
 
 const progress = computed(() => {
-  return duration.value > 0 ? (value.value / duration.value) * 100 : 0
+  if (duration.value <= 0)
+    return 0
+  // Clamp progress to [0, 100] to prevent values > 100
+  // This can happen when value slightly exceeds duration due to timing precision
+  const calculated = (value.value / duration.value) * 100
+  return Math.min(Math.max(calculated, 0), 100)
 })
 
 const contextValue: ScrubBarContextValue = {

@@ -6,6 +6,7 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.28.0",
     "@repo/elements": "workspace:*",
     "vue": "^3.5.25"
   }
