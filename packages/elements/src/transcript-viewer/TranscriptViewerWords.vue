@@ -1,16 +1,26 @@
 <script setup lang="ts">
 import type { HTMLAttributes, PropType, VNodeChild } from 'vue'
-import type {
-  TranscriptGap,
-  TranscriptSegment,
-  TranscriptWord,
-} from './useTranscriptViewer'
+import type { TranscriptGap, TranscriptSegment, TranscriptWord } from './useTranscriptViewer'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed, defineComponent, useSlots } from 'vue'
 import TranscriptViewerWord from './TranscriptViewerWord.vue'
 import { useTranscriptViewerContext } from './useTranscriptViewer'
 
 type TranscriptViewerWordStatus = 'spoken' | 'unspoken' | 'current'
+
+interface Props {
+  renderWord?: (props: {
+    word: TranscriptWord
+    status: TranscriptViewerWordStatus
+  }) => VNodeChild
+  renderGap?: (props: {
+    segment: TranscriptGap
+    status: TranscriptViewerWordStatus
+  }) => VNodeChild
+  wordClassNames?: string
+  gapClassNames?: string
+  class?: HTMLAttributes['class']
+}
 
 const props = defineProps<Props>()
 
@@ -26,20 +36,6 @@ const RenderContent = defineComponent({
     return () => props.node
   },
 })
-
-interface Props {
-  renderWord?: (props: {
-    word: TranscriptWord
-    status: TranscriptViewerWordStatus
-  }) => VNodeChild
-  renderGap?: (props: {
-    segment: TranscriptGap
-    status: TranscriptViewerWordStatus
-  }) => VNodeChild
-  wordClassNames?: string
-  gapClassNames?: string
-  class?: HTMLAttributes['class']
-}
 
 const slots = useSlots()
 const context = useTranscriptViewerContext()

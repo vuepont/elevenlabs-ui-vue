@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { CharacterAlignmentResponseModel } from '@elevenlabs/elevenlabs-js/api/types/CharacterAlignmentResponseModel'
 import type { HTMLAttributes } from 'vue'
-import type { SegmentComposer, TranscriptViewerAudioProps, TranscriptViewerAudioType, TranscriptViewerContextValue } from './useTranscriptViewer'
+import type {
+  SegmentComposer,
+  TranscriptViewerAudioProps,
+  TranscriptViewerAudioType,
+  TranscriptViewerContextValue,
+} from './useTranscriptViewer'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { reactive, toRef, watch } from 'vue'
-import {
-  provideTranscriptViewerContext,
-
-  useTranscriptViewer,
-} from './useTranscriptViewer'
+import { provideTranscriptViewerContext, useTranscriptViewer } from './useTranscriptViewer'
 
 interface Props {
   audioSrc: string

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
-import ScrubBarContainer from '../scrub-bar/ScrubBarContainer.vue'
-import ScrubBarProgress from '../scrub-bar/ScrubBarProgress.vue'
-import ScrubBarThumb from '../scrub-bar/ScrubBarThumb.vue'
-import ScrubBarTimeLabel from '../scrub-bar/ScrubBarTimeLabel.vue'
-import ScrubBarTrack from '../scrub-bar/ScrubBarTrack.vue'
+import {
+  ScrubBarContainer,
+  ScrubBarProgress,
+  ScrubBarThumb,
+  ScrubBarTimeLabel,
+  ScrubBarTrack,
+} from '../scrub-bar'
 import { useTranscriptViewerContext } from './useTranscriptViewer'
 
 interface Props {
