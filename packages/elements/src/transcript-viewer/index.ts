@@ -1,5 +1,5 @@
-export { default as TranscriptViewer } from './TranscriptViewer.vue'
 export { default as TranscriptViewerAudio } from './TranscriptViewerAudio.vue'
+export { default as TranscriptViewerContainer } from './TranscriptViewerContainer.vue'
 export { default as TranscriptViewerPlayPauseButton } from './TranscriptViewerPlayPauseButton.vue'
 export { default as TranscriptViewerScrubBar } from './TranscriptViewerScrubBar.vue'
 export { default as TranscriptViewerWord } from './TranscriptViewerWord.vue'

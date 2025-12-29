@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { CharacterAlignmentResponseModel } from '@elevenlabs/elevenlabs-js/api/types/CharacterAlignmentResponseModel'
 import {
-  TranscriptViewer,
   TranscriptViewerAudio,
+  TranscriptViewerContainer,
   TranscriptViewerPlayPauseButton,
   TranscriptViewerScrubBar,
   TranscriptViewerWords,
@@ -25,7 +25,7 @@ onMounted(() => {
 
 <template>
   <div class="flex w-full flex-col gap-4">
-    <TranscriptViewer
+    <TranscriptViewerContainer
       :key="audioSrc"
       class="bg-card w-full rounded-xl border p-4"
       :audio-src="audioSrc"
@@ -67,6 +67,6 @@ onMounted(() => {
           <span>{{ isPlaying ? 'Pause' : 'Play' }}</span>
         </template>
       </TranscriptViewerPlayPauseButton>
-    </TranscriptViewer>
+    </TranscriptViewerContainer>
   </div>
 </template>
