@@ -18,11 +18,6 @@ interface Props {
   segmentComposer?: SegmentComposer
   hideAudioTags?: boolean
   class?: HTMLAttributes['class']
-  onPlay?: () => void
-  onPause?: () => void
-  onTimeUpdate?: (time: number) => void
-  onEnded?: () => void
-  onDurationChange?: (duration: number) => void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -30,17 +25,25 @@ const props = withDefaults(defineProps<Props>(), {
   hideAudioTags: true,
 })
 
+const emit = defineEmits<{
+  (e: 'play'): void
+  (e: 'pause'): void
+  (e: 'timeUpdate', time: number): void
+  (e: 'ended'): void
+  (e: 'durationChange', duration: number): void
+}>()
+
 const alignmentRef = toRef(props, 'alignment')
 
 const viewerState = useTranscriptViewer({
   alignment: alignmentRef,
   hideAudioTags: props.hideAudioTags,
   segmentComposer: props.segmentComposer,
-  onPlay: props.onPlay,
-  onPause: props.onPause,
-  onTimeUpdate: props.onTimeUpdate,
-  onEnded: props.onEnded,
-  onDurationChange: props.onDurationChange,
+  onPlay: () => emit('play'),
+  onPause: () => emit('pause'),
+  onTimeUpdate: time => emit('timeUpdate', time),
+  onEnded: () => emit('ended'),
+  onDurationChange: duration => emit('durationChange', duration),
 })
 
 const audioProps = reactive<TranscriptViewerAudioProps>({

@@ -99,12 +99,17 @@ The main container for the transcript viewer components. It manages the state an
 | `alignment`        | `CharacterAlignmentResponseModel` | **Required.** The alignment data for the transcript.                                                        |
 | `segmentComposer`  | `SegmentComposer`                 | Optional. A function to compose transcript segments.                                                        |
 | `hideAudioTags`    | `boolean`                         | Optional. If `true`, ElevenLabs tags (e.g. `[Excited]`) are hidden from the transcript. Defaults to `true`. |
-| `onPlay`           | `() => void`                      | Optional. Callback when audio playback starts.                                                              |
-| `onPause`          | `() => void`                      | Optional. Callback when audio playback is paused.                                                           |
-| `onTimeUpdate`     | `(time: number) => void`          | Optional. Callback when the current time of the audio updates.                                              |
-| `onEnded`          | `() => void`                      | Optional. Callback when the audio playback ends.                                                            |
-| `onDurationChange` | `(duration: number) => void`      | Optional. Callback when the audio duration is available.                                                    |
 | `class`            | `string`                          | Optional. Additional CSS classes.                                                                            |
+
+#### Emits
+
+| Emit              | Type                               | Description                                    |
+| ----------------- | ---------------------------------- | ---------------------------------------------- |
+| `play`          | `() => void`                       | Optional. Callback when audio playback starts. |
+| `pause`         | `() => void`                       | Optional. Callback when audio playback is paused. |
+| `timeUpdate`    | `(time: number) => void`           | Optional. Callback when the current time of the audio updates. |
+| `ended`         | `() => void`                       | Optional. Callback when the audio playback ends. |
+| `durationChange`| `(duration: number) => void`       | Optional. Callback when the audio duration is available. |
 
 ### TranscriptViewerWords
 
