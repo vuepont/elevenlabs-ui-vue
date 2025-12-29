@@ -12,10 +12,10 @@ import { useTranscriptViewerContext } from './useTranscriptViewer'
 
 interface Props {
   showTimeLabels?: boolean
-  labelsClassName?: string
-  trackClassName?: string
-  progressClassName?: string
-  thumbClassName?: string
+  labelsClass?: string
+  trackClass?: string
+  progressClass?: string
+  thumbClass?: string
   class?: HTMLAttributes['class']
 }
 
@@ -55,15 +55,15 @@ function handleScrubEnd() {
     @scrub-end="handleScrubEnd"
   >
     <div class="flex flex-1 flex-col gap-1">
-      <ScrubBarTrack :class="props.trackClassName">
-        <ScrubBarProgress :class="props.progressClassName" />
-        <ScrubBarThumb :class="props.thumbClassName" />
+      <ScrubBarTrack :class="props.trackClass">
+        <ScrubBarProgress :class="props.progressClass" />
+        <ScrubBarThumb :class="props.thumbClass" />
       </ScrubBarTrack>
       <div
         v-if="showTimeLabels"
         :class="cn(
           'text-muted-foreground flex items-center justify-between text-xs',
-          props.labelsClassName,
+          props.labelsClass,
         )"
       >
         <ScrubBarTimeLabel :time="currentTime" />

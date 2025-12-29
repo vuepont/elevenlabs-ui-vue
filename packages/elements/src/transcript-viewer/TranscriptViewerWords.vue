@@ -17,8 +17,8 @@ interface Props {
     segment: TranscriptGap
     status: TranscriptViewerWordStatus
   }) => VNodeChild
-  wordClassNames?: string
-  gapClassNames?: string
+  wordClass?: string
+  gapClass?: string
   class?: HTMLAttributes['class']
 }
 
@@ -91,7 +91,7 @@ const hasGapSlot = computed(() => Boolean(slots.gap))
         v-if="segment.kind === 'gap'"
         data-kind="gap"
         :data-status="status"
-        :class="cn(props.gapClassNames)"
+        :class="cn(props.gapClass)"
       >
         <slot
           v-if="hasGapSlot"
@@ -111,7 +111,7 @@ const hasGapSlot = computed(() => Boolean(slots.gap))
         v-else-if="hasWordSlot || props.renderWord"
         data-kind="word"
         :data-status="status"
-        :class="cn(props.wordClassNames)"
+        :class="cn(props.wordClass)"
       >
         <slot
           v-if="hasWordSlot"
@@ -128,7 +128,7 @@ const hasGapSlot = computed(() => Boolean(slots.gap))
         v-else
         :word="segment"
         :status="status"
-        :class="props.wordClassNames"
+        :class="props.wordClass"
       />
     </template>
   </div>

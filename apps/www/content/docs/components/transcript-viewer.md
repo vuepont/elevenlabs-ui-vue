@@ -103,8 +103,8 @@ The main container for the transcript viewer components. It manages the state an
 
 #### Emits
 
-| Emit              | Type                               | Description                                    |
-| ----------------- | ---------------------------------- | ---------------------------------------------- |
+| Emit            | Type                               | Description                                    |
+| --------------- | ---------------------------------- | ---------------------------------------------- |
 | `play`          | `() => void`                       | Optional. Callback when audio playback starts. |
 | `pause`         | `() => void`                       | Optional. Callback when audio playback is paused. |
 | `timeUpdate`    | `(time: number) => void`           | Optional. Callback when the current time of the audio updates. |
@@ -121,8 +121,8 @@ Displays the transcript words. It uses the context from `TranscriptViewerContain
 | ---------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | `renderWord`     | `(props: { word: TranscriptWord, status: "spoken" \| "unspoken" \| "current" }) => VNode`     | Optional. Custom render function for each word.          |
 | `renderGap`      | `(props: { segment: TranscriptGap, status: "spoken" \| "unspoken" \| "current" }) => VNode`    | Optional. Custom render function for gaps between words. |
-| `wordClassNames` | `string`                                                                                        | Optional. Additional class names for each word `<span>`. |
-| `gapClassNames`  | `string`                                                                                        | Optional. Additional class names for each gap `<span>`.  |
+| `wordClass`      | `string`                                                                                        | Optional. Additional class names for each word `<span>`. |
+| `gapClass`       | `string`                                                                                        | Optional. Additional class names for each gap `<span>`.  |
 | `class`          | `string`                                                                                        | Optional. Additional CSS classes.                         |
 
 ### TranscriptViewerAudio
@@ -144,10 +144,10 @@ A scrub bar for seeking through the audio timeline. It's a context-aware impleme
 | Prop                | Type      | Description                                                                               |
 | ------------------- | --------- | ----------------------------------------------------------------------------------------- |
 | `showTimeLabels`    | `boolean` | Optional. If `true`, displays current time and remaining time labels. Defaults to `true`. |
-| `labelsClassName`   | `string`  | Optional. Class names for the time labels container.                                      |
-| `trackClassName`    | `string`  | Optional. Class names for the scrub bar track.                                            |
-| `progressClassName` | `string`  | Optional. Class names for the scrub bar progress indicator.                               |
-| `thumbClassName`    | `string`  | Optional. Class names for the scrub bar thumb.                                            |
+| `labelsClass`       | `string`  | Optional. Class names for the time labels container.                                      |
+| `trackClass`        | `string`  | Optional. Class names for the scrub bar track.                                            |
+| `progressClass`     | `string`  | Optional. Class names for the scrub bar progress indicator.                               |
+| `thumbClass`        | `string`  | Optional. Class names for the scrub bar thumb.                                            |
 | `class`             | `string`  | Optional. Additional CSS classes.                                                        |
 
 ### useTranscriptViewerContext
