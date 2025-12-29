@@ -157,17 +157,17 @@ A composable to access the transcript viewer's state and controls. Must be used 
 Returns an object with the following properties:
 
 - `audioRef`: Ref to the audio element.
-- `segments`: All transcript segments (Ref).
-- `words`: All word segments (Ref).
-- `spokenSegments`: Segments that have been spoken (Ref).
-- `unspokenSegments`: Segments that have not been spoken (Ref).
-- `currentWord`: The currently spoken word segment (Ref).
-- `currentSegmentIndex`: The index of the current segment (Ref).
-- `currentWordIndex`: The index of the current word (Ref).
-- `duration`: The total duration of the audio (Ref).
-- `currentTime`: The current playback time (Ref).
-- `isPlaying`: `true` if audio is playing (Ref).
-- `isScrubbing`: `true` if the user is scrubbing (Ref).
+- `segments`: All transcript segments.
+- `words`: All word segments.
+- `spokenSegments`: Segments that have been spoken.
+- `unspokenSegments`: Segments that have not been spoken.
+- `currentWord`: The currently spoken word segment.
+- `currentSegmentIndex`: The index of the current segment.
+- `currentWordIndex`: The index of the current word.
+- `duration`: The total duration of the audio.
+- `currentTime`: The current playback time.
+- `isPlaying`: `true` if audio is playing.
+- `isScrubbing`: `true` if the user is scrubbing.
 - `play()`: Function to start playback.
 - `pause()`: Function to pause playback.
 - `seekToTime(time)`: Function to seek to a specific time.
@@ -196,17 +196,17 @@ Accepts an object with the following properties:
 Returns an object with the following properties:
 
 - `audioRef`: Ref to the audio element.
-- `segments`: All transcript segments (Ref).
-- `words`: All word segments (Ref).
-- `spokenSegments`: Segments that have been spoken (Ref).
-- `unspokenSegments`: Segments that have not been spoken (Ref).
-- `currentWord`: The currently spoken word segment (Ref).
-- `currentSegmentIndex`: The index of the current segment (Ref).
-- `currentWordIndex`: The index of the current word (Ref).
-- `duration`: The total duration of the audio (Ref).
-- `currentTime`: The current playback time (Ref).
-- `isPlaying`: `true` if audio is playing (Ref).
-- `isScrubbing`: `true` if the user is scrubbing (Ref).
+- `segments`: All transcript segments.
+- `words`: All word segments.
+- `spokenSegments`: Segments that have been spoken.
+- `unspokenSegments`: Segments that have not been spoken.
+- `currentWord`: The currently spoken word segment.
+- `currentSegmentIndex`: The index of the current segment.
+- `currentWordIndex`: The index of the current word.
+- `duration`: The total duration of the audio.
+- `currentTime`: The current playback time.
+- `isPlaying`: `true` if audio is playing.
+- `isScrubbing`: `true` if the user is scrubbing.
 - `play()`: Function to start playback.
 - `pause()`: Function to pause playback.
 - `seekToTime(time)`: Function to seek to a specific time.
