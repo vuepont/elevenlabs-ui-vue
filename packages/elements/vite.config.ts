@@ -9,18 +9,18 @@ export default defineConfig({
       ...templateCompilerOptions,
     }),
   ],
-  resolve: {
-    alias: {
-      // This solves the "Directory import" error by pointing to the specific file
-      'three-custom-shader-material/vanilla': 'three-custom-shader-material/vanilla/dist/three-custom-shader-material-vanilla.cjs.js',
-    },
-  },
-  optimizeDeps: {
-    include: [
-      'three',
-      'three-custom-shader-material/vanilla',
-      '@tresjs/cientos',
-      '@tresjs/core',
-    ],
-  },
+  // resolve: {
+  //   alias: {
+  //     // This solves the "Directory import" error by pointing to the specific file
+  //     'three-custom-shader-material/vanilla': 'three-custom-shader-material/vanilla/dist/three-custom-shader-material-vanilla.cjs.js',
+  //   },
+  // },
+  // optimizeDeps: {
+  //   include: [
+  //     'three',
+  //     'three-custom-shader-material/vanilla',
+  //     '@tresjs/cientos',
+  //     '@tresjs/core',
+  //   ],
+  // },
 })

@@ -65,12 +65,12 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.21.3
         version: 8.21.3(vue@3.5.25(typescript@5.9.3))
-      '@tresjs/cientos':
-        specifier: ^5.2.1
-        version: 5.2.1(@tresjs/core@5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3)))(@types/three@0.182.0)(three@0.182.0)(vue@3.5.25(typescript@5.9.3))
       '@tresjs/core':
         specifier: ^5.2.1
         version: 5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3))
+      '@vitejs/plugin-vue':
+        specifier: ^6.0.2
+        version: 6.0.2(vite@7.2.7(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(stylus@0.57.0)(terser@5.44.1)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.25(typescript@5.9.3))
@@ -101,12 +101,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.17
         version: 4.1.17
-      three:
-        specifier: ^0.182.0
-        version: 0.182.0
-      three-custom-shader-material:
-        specifier: ^6.4.0
-        version: 6.4.0(three@0.182.0)
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -156,9 +150,6 @@ importers:
       '@repo/shadcn-vue':
         specifier: workspace:*
         version: link:../shadcn-vue
-      '@tresjs/cientos':
-        specifier: ^5.2.1
-        version: 5.2.1(@tresjs/core@5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3)))(@types/three@0.182.0)(three@0.182.0)(vue@3.5.25(typescript@5.9.3))
       '@tresjs/core':
         specifier: ^5.2.1
         version: 5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3))
@@ -177,9 +168,6 @@ importers:
       three:
         specifier: ^0.182.0
         version: 0.182.0
-      three-custom-shader-material:
-        specifier: ^6.4.0
-        version: 6.4.0(three@0.182.0)
       vue:
         specifier: ^3.5.25
         version: 3.5.25(typescript@5.9.3)
@@ -187,6 +175,9 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2(katex@0.16.27)(shiki@3.20.0)(vue@3.5.25(typescript@5.9.3))
     devDependencies:
+      '@types/three':
+        specifier: ^0.182.0
+        version: 0.182.0
       '@vitejs/plugin-vue':
         specifier: ^6.0.2
         version: 6.0.2(vite@7.2.7(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(stylus@0.57.0)(terser@5.44.1)(yaml@2.8.2))(vue@3.5.25(typescript@5.9.3))
@@ -2338,13 +2329,6 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
 
-  '@tresjs/cientos@5.2.1':
-    resolution: {integrity: sha512-HBXniDTN1c7rIT3jD7IC2cA+acyYpbghN03LoeauAJxpfaZpoHTFfKroAHwaPVaAFJXfXTYkuAQ2kjpbRrF8GQ==}
-    peerDependencies:
-      '@tresjs/core': 5.2.1
-      three: '>=0.133'
-      vue: '>=3.5.17'
-
   '@tresjs/core@5.2.1':
     resolution: {integrity: sha512-4oVR5RvqGYzZQMPSSlCSppmddDrkyexACJES35+lQInsQzjp8rDDPo8IVW1tDHX/tiep+z/cpRAysz3UyzVuyw==}
     peerDependencies:
@@ -2369,9 +2353,6 @@ packages:
   '@types/dom-mediacapture-record@1.0.22':
     resolution: {integrity: sha512-mUMZLK3NvwRLcAAT9qmcK+9p7tpU2FHdDsntR3YI4+GY88XrgG4XiE7u1Q2LAN2/FZOz/tdMDC3GQCR4T8nFuw==}
 
-  '@types/draco3d@1.4.10':
-    resolution: {integrity: sha512-AX22jp8Y7wwaBgAixaSvkoG4M/+PlAcm3Qs4OW8yT9DM4xUpWKeFhLueTAyZF39pviAdcDdeJoACapiAceqNcw==}
-
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
@@ -2392,9 +2373,6 @@ packages:
 
   '@types/node@24.10.1':
     resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
-
-  '@types/offscreencanvas@2019.7.3':
-    resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
 
   '@types/parse-path@7.1.0':
     resolution: {integrity: sha512-EULJ8LApcVEPbrfND0cRQqutIOdiIgJ1Mgrhpy755r14xMohPTEpkV/k28SJvuOs9bHRFW8x+KeDAEPiGQPB9Q==}
@@ -3002,11 +2980,6 @@ packages:
   camelize@1.0.1:
     resolution: {integrity: sha512-dU+Tx2fsypxTgtLoE36npi3UqcjSSMNYfkqgmoEhtZrraP5VWq0K7FkWVTYa8eMPtnU/G2txVsfdCJTn9uzpuQ==}
 
-  camera-controls@2.10.1:
-    resolution: {integrity: sha512-KnaKdcvkBJ1Irbrzl8XD6WtZltkRjp869Jx8c0ujs9K+9WD+1D7ryBsCiVqJYUqt6i/HR5FxT7RLASieUD+Q5w==}
-    peerDependencies:
-      three: '>=0.126.1'
-
   caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
 
@@ -3529,9 +3502,6 @@ packages:
     resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
 
-  draco3d@1.5.7:
-    resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
-
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -3961,9 +3931,6 @@ packages:
       picomatch:
         optional: true
 
-  fflate@0.6.10:
-    resolution: {integrity: sha512-IQrh3lEPM93wVCEczc9SaAOvkmcoQn/G8Bo1e8ZPlY3X3bnAxWaBdvTdvM1hP62iZp0BXWDy4vTAy4fF0+Dlpg==}
-
   fflate@0.7.4:
     resolution: {integrity: sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==}
 
@@ -4198,15 +4165,6 @@ packages:
 
   globrex@0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-
-  glsl-token-functions@1.0.1:
-    resolution: {integrity: sha512-EigGhp1g+aUVeUNY7H1o5tL/bnwIB3/FcRREPr2E7Du+/UDXN24hDkaZ3e4aWHDjHr9lJ6YHXMISkwhUYg9UOg==}
-
-  glsl-token-string@1.0.1:
-    resolution: {integrity: sha512-1mtQ47Uxd47wrovl+T6RshKGkRRCYWhnELmkEcUAPALWGTFe2XZpH3r45XAwL2B6v+l0KNsCnoaZCSnhzKEksg==}
-
-  glsl-tokenizer@2.1.5:
-    resolution: {integrity: sha512-XSZEJ/i4dmz3Pmbnpsy3cKh7cotvFlBiZnDOwnj/05EwNp2XrhQ4XKJxT7/pDt4kp4YcpRSKz8eTV7S+mwV6MA==}
 
   gonzales-pe@4.3.0:
     resolution: {integrity: sha512-otgSPpUmdWJ43VXyiNgEYE4luzHCL2pz4wQ0OnDluC6Eg4Ko3Vexy/SrSynglw/eR+OhkzmqFCZa/OFa/RgAOQ==}
@@ -4584,9 +4542,6 @@ packages:
   is64bit@2.0.0:
     resolution: {integrity: sha512-jv+8jaWCl0g2lSBkNSVXdzfBA0npK1HGC2KtWM9FumFRoGS94g3NbCCLVnCYHLjp4GrW2KZeeSTMo5ddtznmGw==}
     engines: {node: '>=18'}
-
-  isarray@0.0.1:
-    resolution: {integrity: sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -5358,10 +5313,6 @@ packages:
   object-deep-merge@2.0.0:
     resolution: {integrity: sha512-3DC3UMpeffLTHiuXSy/UG4NOIYTLlY9u3V82+djSCLYClWobZiS4ivYzpIUWrRY/nfsJ8cWsKyG3QfyLePmhvg==}
 
-  object-hash@3.0.0:
-    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
-    engines: {node: '>= 6'}
-
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
@@ -5817,9 +5768,6 @@ packages:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  potpack@1.0.2:
-    resolution: {integrity: sha512-choctRBIV9EMT9WGAZHn3V7t0Z2pMQyl0EZE6pFc/6ml3ssw7Dlf/oAOvFwjm1HVsqfQN8GfeFyJ+d8tRzqueQ==}
-
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -5892,9 +5840,6 @@ packages:
 
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
-
-  readable-stream@1.0.34:
-    resolution: {integrity: sha512-ok1qVCJuRkNmvebYikljxJA/UEsKwLl2nI1OmaqAu4/UE+h0wKCHok4XkL/gvi39OacXvw59RJUOFUkDib2rHg==}
 
   readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
@@ -6301,15 +6246,6 @@ packages:
   standard-as-callback@2.1.0:
     resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
 
-  stats-gl@2.4.2:
-    resolution: {integrity: sha512-g5O9B0hm9CvnM36+v7SFl39T7hmAlv541tU81ME8YeSb3i1CIP5/QdDeSB3A0la0bKNHpxpwxOVRo2wFTYEosQ==}
-    peerDependencies:
-      '@types/three': '*'
-      three: '*'
-
-  stats.js@0.17.0:
-    resolution: {integrity: sha512-hNKz8phvYLPEcRkeG1rsGmV5ChMjKDAWU7/OJJdDErPBNChQXxCo3WZurGpnWc6gZhAzEPFad1aVgyOANH1sMw==}
-
   statuses@2.0.2:
     resolution: {integrity: sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==}
     engines: {node: '>= 0.8'}
@@ -6350,9 +6286,6 @@ packages:
 
   string.prototype.codepointat@0.2.1:
     resolution: {integrity: sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==}
-
-  string_decoder@0.10.31:
-    resolution: {integrity: sha512-ev2QzSzWPYmy9GuqfIVildA4OdcGLeFZQrq5ys6RtiuF+RQQiZWr8TZNyAcuVXyQRYfEO+MsoB/1BuQVhOJuoQ==}
 
   string_decoder@1.1.1:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
@@ -6481,40 +6414,8 @@ packages:
     resolution: {integrity: sha512-te/NtwBwfiNRLf9Ijqx3T0nlqZiQ2XrrtBvu+cLL8ZRrGkO0NHTug8MYFKyoSrv/sHTaSKfilUkizV6XhxMJ3g==}
     engines: {node: '>=8'}
 
-  three-custom-shader-material@5.4.0:
-    resolution: {integrity: sha512-Yn1lFlKOk3Vul3npEGAmbbFUZ5S2+yjPgM2XqJEZEYRSUUH2vk+WVYrtTB6Bcq15wa7hLUXAKoctAvbRmBmbYA==}
-    peerDependencies:
-      '@react-three/fiber': '>=8.0'
-      react: '>=18.0'
-      three: '>=0.154'
-    peerDependenciesMeta:
-      '@react-three/fiber':
-        optional: true
-      react:
-        optional: true
-
-  three-custom-shader-material@6.4.0:
-    resolution: {integrity: sha512-dIbkwX1P4DcHMOZrywW+/TDp5qJhlyU6NP/2kmHw91UqC+TrK4JSBtAV3qGc6UnkqSOmR1i0O+Yz5EnTp2aQ1g==}
-    peerDependencies:
-      '@react-three/fiber': '>=8.0'
-      react: '>=18.0'
-      three: '>=0.159'
-    peerDependenciesMeta:
-      '@react-three/fiber':
-        optional: true
-      react:
-        optional: true
-
-  three-stdlib@2.36.1:
-    resolution: {integrity: sha512-XyGQrFmNQ5O/IoKm556ftwKsBg11TIb301MB5dWNicziQBEs2g3gtOYIf7pFiLa0zI2gUwhtCjv9fmjnxKZ1Cg==}
-    peerDependencies:
-      three: '>=0.128.0'
-
   three@0.182.0:
     resolution: {integrity: sha512-GbHabT+Irv+ihI1/f5kIIsZ+Ef9Sl5A1Y7imvS5RQjWgtTPfPnZ43JmlYI7NtCRDK9zir20lQpfg8/9Yd02OvQ==}
-
-  through2@0.6.5:
-    resolution: {integrity: sha512-RkK/CCESdTKQZHdmKICijdKKsCRVHs5KsLZ6pACAmF/1GPUQhonHSXWNERctxEp7RmvjdNbZTL5z9V7nSCXKcg==}
 
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
@@ -7193,10 +7094,6 @@ packages:
     resolution: {integrity: sha512-FVdlVVC67WOIPvfOwhoMETV72f6GbW7aOabBC3WxN/oUdoEMDyLz4OgRv5/gck2ZeNqEQu+Tb0kloovXOfpYVg==}
     engines: {node: '>= 0.10.0'}
     hasBin: true
-
-  xtend@4.0.2:
-    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
-    engines: {node: '>=0.4'}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -9572,22 +9469,6 @@ snapshots:
       '@tanstack/virtual-core': 3.13.13
       vue: 3.5.25(typescript@5.9.3)
 
-  '@tresjs/cientos@5.2.1(@tresjs/core@5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3)))(@types/three@0.182.0)(three@0.182.0)(vue@3.5.25(typescript@5.9.3))':
-    dependencies:
-      '@tresjs/core': 5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3))
-      '@vueuse/core': 13.9.0(vue@3.5.25(typescript@5.9.3))
-      camera-controls: 2.10.1(three@0.182.0)
-      stats-gl: 2.4.2(@types/three@0.182.0)(three@0.182.0)
-      stats.js: 0.17.0
-      three: 0.182.0
-      three-custom-shader-material: 5.4.0(three@0.182.0)
-      three-stdlib: 2.36.1(three@0.182.0)
-      vue: 3.5.25(typescript@5.9.3)
-    transitivePeerDependencies:
-      - '@react-three/fiber'
-      - '@types/three'
-      - react
-
   '@tresjs/core@5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@pmndrs/pointer-events': 6.6.28
@@ -9620,8 +9501,6 @@ snapshots:
 
   '@types/dom-mediacapture-record@1.0.22': {}
 
-  '@types/draco3d@1.4.10': {}
-
   '@types/estree@1.0.8': {}
 
   '@types/hast@3.0.4':
@@ -9641,8 +9520,6 @@ snapshots:
   '@types/node@24.10.1':
     dependencies:
       undici-types: 7.16.0
-
-  '@types/offscreencanvas@2019.7.3': {}
 
   '@types/parse-path@7.1.0':
     dependencies:
@@ -10427,10 +10304,6 @@ snapshots:
 
   camelize@1.0.1: {}
 
-  camera-controls@2.10.1(three@0.182.0):
-    dependencies:
-      three: 0.182.0
-
   caniuse-api@3.0.0:
     dependencies:
       browserslist: 4.28.1
@@ -10881,8 +10754,6 @@ snapshots:
   dotenv@16.6.1: {}
 
   dotenv@17.2.3: {}
-
-  draco3d@1.5.7: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -11458,8 +11329,6 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.3
 
-  fflate@0.6.10: {}
-
   fflate@0.7.4: {}
 
   fflate@0.8.2: {}
@@ -11737,14 +11606,6 @@ snapshots:
       unicorn-magic: 0.3.0
 
   globrex@0.1.2: {}
-
-  glsl-token-functions@1.0.1: {}
-
-  glsl-token-string@1.0.1: {}
-
-  glsl-tokenizer@2.1.5:
-    dependencies:
-      through2: 0.6.5
 
   gonzales-pe@4.3.0:
     dependencies:
@@ -12191,8 +12052,6 @@ snapshots:
   is64bit@2.0.0:
     dependencies:
       system-architecture: 0.1.0
-
-  isarray@0.0.1: {}
 
   isarray@1.0.0: {}
 
@@ -13516,8 +13375,6 @@ snapshots:
 
   object-deep-merge@2.0.0: {}
 
-  object-hash@3.0.0: {}
-
   object-inspect@1.13.4: {}
 
   object-treeify@1.1.33: {}
@@ -13999,8 +13856,6 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  potpack@1.0.2: {}
-
   prelude-ls@1.2.1: {}
 
   prettier@3.7.4: {}
@@ -14060,13 +13915,6 @@ snapshots:
     dependencies:
       defu: 6.1.4
       destr: 2.0.5
-
-  readable-stream@1.0.34:
-    dependencies:
-      core-util-is: 1.0.3
-      inherits: 2.0.4
-      isarray: 0.0.1
-      string_decoder: 0.10.31
 
   readable-stream@2.3.8:
     dependencies:
@@ -14706,13 +14554,6 @@ snapshots:
 
   standard-as-callback@2.1.0: {}
 
-  stats-gl@2.4.2(@types/three@0.182.0)(three@0.182.0):
-    dependencies:
-      '@types/three': 0.182.0
-      three: 0.182.0
-
-  stats.js@0.17.0: {}
-
   statuses@2.0.2: {}
 
   std-env@3.10.0: {}
@@ -14756,8 +14597,6 @@ snapshots:
       strip-ansi: 7.1.2
 
   string.prototype.codepointat@0.2.1: {}
-
-  string_decoder@0.10.31: {}
 
   string_decoder@1.1.1:
     dependencies:
@@ -14902,34 +14741,7 @@ snapshots:
 
   text-extensions@2.4.0: {}
 
-  three-custom-shader-material@5.4.0(three@0.182.0):
-    dependencies:
-      glsl-token-functions: 1.0.1
-      glsl-token-string: 1.0.1
-      glsl-tokenizer: 2.1.5
-      object-hash: 3.0.0
-      three: 0.182.0
-
-  three-custom-shader-material@6.4.0(three@0.182.0):
-    dependencies:
-      three: 0.182.0
-
-  three-stdlib@2.36.1(three@0.182.0):
-    dependencies:
-      '@types/draco3d': 1.4.10
-      '@types/offscreencanvas': 2019.7.3
-      '@types/webxr': 0.5.24
-      draco3d: 1.5.7
-      fflate: 0.6.10
-      potpack: 1.0.2
-      three: 0.182.0
-
   three@0.182.0: {}
-
-  through2@0.6.5:
-    dependencies:
-      readable-stream: 1.0.34
-      xtend: 4.0.2
 
   through@2.3.8: {}
 
@@ -15603,8 +15415,6 @@ snapshots:
       commander: 2.20.3
       cssfilter: 0.0.10
     optional: true
-
-  xtend@4.0.2: {}
 
   y18n@5.0.8: {}
 

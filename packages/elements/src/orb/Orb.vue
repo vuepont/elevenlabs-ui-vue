@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core'
-import OrbScene from './OrbScene.vue'
+import OrbbScene from './OrbScene.vue'
 
 export type AgentState = null | 'thinking' | 'listening' | 'talking'
 
-interface Props {
+interface OrbProps {
   colors?: [string, string]
   colorsRef?: { value: [string, string] }
   resizeDebounce?: number
@@ -17,10 +17,10 @@ interface Props {
   outputVolumeRef?: { value: number }
   getInputVolume?: () => number
   getOutputVolume?: () => number
-  classes?: string
+  className?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<OrbProps>(), {
   colors: () => ['#CADCFC', '#A0B9D1'],
   resizeDebounce: 100,
   volumeMode: 'auto',
@@ -29,29 +29,32 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div :class="classes ?? 'relative h-full w-full'">
+  <div :class="className ?? 'relative h-full w-full'">
     <TresCanvas
-      :alpha="true"
-      :antialias="true"
-      :premultiplied-alpha="true"
-      window-size
+      alpha
+      antialias
+      premultiplied-alpha
       :resize="{ debounce: resizeDebounce }"
     >
-      <Suspense>
-        <OrbScene
-          :colors="colors"
-          :colors-ref="colorsRef"
-          :seed="seed"
-          :agent-state="agentState"
-          :volume-mode="volumeMode"
-          :manual-input="manualInput"
-          :manual-output="manualOutput"
-          :input-volume-ref="inputVolumeRef"
-          :output-volume-ref="outputVolumeRef"
-          :get-input-volume="getInputVolume"
-          :get-output-volume="getOutputVolume"
-        />
-      </Suspense>
+      <!-- :gl="{
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: true,
+      }" -->
+      <TresPerspectiveCamera :position="[0, 0, 5]" :fov="75" />
+      <OrbbScene
+        :colors="colors"
+        :colors-ref="colorsRef"
+        :seed="seed"
+        :agent-state="agentState"
+        :volume-mode="volumeMode"
+        :manual-input="manualInput"
+        :manual-output="manualOutput"
+        :input-volume-ref="inputVolumeRef"
+        :output-volume-ref="outputVolumeRef"
+        :get-input-volume="getInputVolume"
+        :get-output-volume="getOutputVolume"
+      />
     </TresCanvas>
   </div>
 </template>

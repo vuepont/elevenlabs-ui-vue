@@ -1,4 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
+// import { templateCompilerOptions } from '@tresjs/core'
+// import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -35,20 +37,14 @@ export default defineNuxtConfig({
   },
 
   build: {
-    // transpile: ['vue-sonner'],
-    transpile: ['vue-sonner', 'three', '@tresjs/core', '@tresjs/cientos', 'three-custom-shader-material'],
+    transpile: ['vue-sonner'],
   },
 
   vite: {
-    plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        'three-custom-shader-material/vanilla': 'three-custom-shader-material/vanilla/dist/three-custom-shader-material-vanilla.cjs.js',
-      },
-    },
-    ssr: {
-      noExternal: ['three', '@tresjs/core', '@tresjs/cientos', 'three-custom-shader-material'],
-    },
+    plugins: [
+      // vue({ ...templateCompilerOptions }),
+      tailwindcss(),
+    ],
   },
 
   shiki: {

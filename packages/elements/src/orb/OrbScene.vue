@@ -1,189 +1,38 @@
 <!-- eslint-disable style/max-statements-per-line -->
 <script setup lang="ts">
-import type { AgentState } from './Orb.vue'
-import { useTexture } from '@tresjs/cientos'
 import { useLoop } from '@tresjs/core'
-// import { RepeatWrapping, TextureLoader } from 'three'
 import * as THREE from 'three'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 
-const props = defineProps<{
-  colors: [string, string]
+/**
+ * Types & Props
+ */
+export type AgentState = null | 'thinking' | 'listening' | 'talking'
+
+interface OrbProps {
+  colors?: [string, string]
   colorsRef?: { value: [string, string] }
   seed?: number
-  agentState: AgentState
-  volumeMode: 'auto' | 'manual'
+  agentState?: AgentState
+  volumeMode?: 'auto' | 'manual'
   manualInput?: number
   manualOutput?: number
   inputVolumeRef?: { value: number }
   outputVolumeRef?: { value: number }
   getInputVolume?: () => number
   getOutputVolume?: () => number
-}>()
-
-const circleRef = ref()
-const curIn = ref(0)
-const curOut = ref(0)
-const animSpeed = ref(0.1)
-
-const targetColor1 = ref(new THREE.Color(props.colors[0]))
-const targetColor2 = ref(new THREE.Color(props.colors[1]))
-
-// Load texture using TresJS composable
-const perlinTexture = await useTexture('https://storage.googleapis.com/eleven-public-cdn/images/perlin-noise.png')
-
-if (perlinTexture instanceof THREE.Texture) {
-  perlinTexture.wrapS = THREE.RepeatWrapping
-  perlinTexture.wrapT = THREE.RepeatWrapping
-  // perlinTexture.needsUpdate = true // Ensure Three.js notices the change
 }
 
-const random = splitmix32(props.seed ?? Math.floor(Math.random() * 2 ** 32))
-const offsets = new Float32Array(Array.from({ length: 7 }, () => random() * Math.PI * 2))
-
-// const dummyTexture = new THREE.Texture()
-
-const uniforms = {
-  uColor1: { value: new THREE.Color(props.colors[0]) },
-  uColor2: { value: new THREE.Color(props.colors[1]) },
-  uOffsets: { value: offsets },
-  uPerlinTexture: { value: perlinTexture },
-  // uPerlinTexture: { value: dummyTexture },
-  uTime: { value: 0 },
-  uAnimation: { value: 0.1 },
-  uInverted: { value: 0 },
-  uInputVolume: { value: 0 },
-  uOutputVolume: { value: 0 },
-  uOpacity: { value: 0 },
-}
-
-const perlin = ref<THREE.Texture | null>(null)
-
-// onMounted(() => {
-//   const loader = new TextureLoader()
-//   loader.load(
-//     'https://storage.googleapis.com/eleven-public-cdn/images/perlin-noise.png',
-//     (texture) => {
-//       texture.wrapS = RepeatWrapping
-//       texture.wrapT = RepeatWrapping
-//       perlin.value = texture
-//       uniforms.uPerlinTexture.value = texture
-
-//       const mesh = circleRef.value
-//       if (mesh?.material) {
-//         mesh.material.needsUpdate = true
-//       }
-//     },
-//   )
-// })
-
-// Dark mode observer
-onMounted(() => {
-  const apply = () => {
-    const isDark = document.documentElement.classList.contains('dark')
-    uniforms.uInverted.value = isDark ? 1 : 0
-  }
-  apply()
-  const observer = new MutationObserver(apply)
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-  onUnmounted(() => observer.disconnect())
+const props = withDefaults(defineProps<OrbProps>(), {
+  colors: () => ['#CADCFC', '#A0B9D1'],
+  volumeMode: 'auto',
+  manualInput: 0,
+  manualOutput: 0,
 })
 
-// Animation Loop
-const { onBeforeRender } = useLoop()
-
-onBeforeRender(({ delta }) => {
-  if (!circleRef.value)
-    return
-
-  // Update live colors
-  if (props.colorsRef?.value) {
-    targetColor1.value.set(props.colorsRef.value[0])
-    targetColor2.value.set(props.colorsRef.value[1])
-  }
-  else {
-    targetColor1.value.set(props.colors[0])
-    targetColor2.value.set(props.colors[1])
-  }
-
-  uniforms.uTime.value += delta * 0.5
-  if (uniforms.uOpacity.value < 1) {
-    uniforms.uOpacity.value = Math.min(1, uniforms.uOpacity.value + delta * 2)
-  }
-
-  let targetIn = 0
-  let targetOut = 0.3
-
-  if (props.volumeMode === 'manual') {
-    targetIn = clamp01(props.manualInput ?? props.inputVolumeRef?.value ?? props.getInputVolume?.() ?? 0)
-    targetOut = clamp01(props.manualOutput ?? props.outputVolumeRef?.value ?? props.getOutputVolume?.() ?? 0)
-  }
-  else {
-    const t = uniforms.uTime.value * 2
-    if (props.agentState === null) {
-      targetIn = 0; targetOut = 0.3
-    }
-    else if (props.agentState === 'listening') {
-      targetIn = clamp01(0.55 + Math.sin(t * 3.2) * 0.35)
-      targetOut = 0.45
-    }
-    else if (props.agentState === 'talking') {
-      targetIn = clamp01(0.65 + Math.sin(t * 4.8) * 0.22)
-      targetOut = clamp01(0.75 + Math.sin(t * 3.6) * 0.22)
-    }
-    else {
-      const base = 0.38 + 0.07 * Math.sin(t * 0.7)
-      const wander = 0.05 * Math.sin(t * 2.1) * Math.sin(t * 0.37 + 1.2)
-      targetIn = clamp01(base + wander)
-      targetOut = clamp01(0.48 + 0.12 * Math.sin(t * 1.05 + 0.6))
-    }
-  }
-
-  curIn.value += (targetIn - curIn.value) * 0.2
-  curOut.value += (targetOut - curOut.value) * 0.2
-
-  // Speed calculation logic
-  const targetSpeed = 0.1 + (1 - (curOut.value - 1) ** 2) * 0.9
-  animSpeed.value += (targetSpeed - animSpeed.value) * 0.12
-
-  // Update uniforms
-  uniforms.uAnimation.value += delta * animSpeed.value
-  uniforms.uInputVolume.value = curIn.value
-  uniforms.uOutputVolume.value = curOut.value
-  uniforms.uColor1.value.lerp(targetColor1.value, 0.08)
-  uniforms.uColor2.value.lerp(targetColor2.value, 0.08)
-
-  // curIn.value += (targetIn - curIn.value) * 0.2
-  // curOut.value += (targetOut - curOut.value) * 0.2
-
-  // const targetSpeed = 0.1 + (1 - (curOut.value - 1) ** 2) * 0.9
-  // animSpeed.value += (targetSpeed - animSpeed.value) * 0.12
-
-  // uniforms.uAnimation.value += delta * animSpeed.value
-  // uniforms.uInputVolume.value = curIn.value
-  // uniforms.uOutputVolume.value = curOut.value
-  // uniforms.uColor1.value.lerp(targetColor1.value, 0.08)
-  // uniforms.uColor2.value.lerp(targetColor2.value, 0.08)
-})
-
-function splitmix32(a: number) {
-  return function () {
-    a |= 0
-    a = (a + 0x9E3779B9) | 0
-    let t = a ^ (a >>> 16)
-    t = Math.imul(t, 0x21F0AAAD)
-    t ^= t >>> 15
-    t = Math.imul(t, 0x735A2D97)
-    return ((t ^= t >>> 15) >>> 0) / 4294967296
-  }
-}
-
-function clamp01(n: number) {
-  if (!Number.isFinite(n))
-    return 0
-  return Math.min(1, Math.max(0, n))
-}
-
+/**
+ * Shader GLSL - EXACT COPY FROM REACT
+ */
 const vertexShader = /* glsl */ `
 uniform float uTime;
 uniform sampler2D uPerlinTexture;
@@ -401,16 +250,193 @@ void main() {
     gl_FragColor = color;
 }
 `
+
+/**
+ * Utils
+ */
+function splitmix32(a: number) {
+  return function () {
+    a |= 0
+    a = (a + 0x9E3779B9) | 0
+    let t = a ^ (a >>> 16)
+    t = Math.imul(t, 0x21F0AAAD)
+    t = t ^ (t >>> 15)
+    t = Math.imul(t, 0x735A2D97)
+    return ((t = t ^ (t >>> 15)) >>> 0) / 4294967296
+  }
+}
+function clamp01(n: number) {
+  return Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : 0
+}
+
+/**
+ * Main Logic
+ */
+// const circleRef = shallowRef<THREE.Mesh | null>(null)
+const circleRef = shallowRef<THREE.Mesh<THREE.CircleGeometry, THREE.ShaderMaterial> | null>(null)
+
+const curIn = ref(0)
+const curOut = ref(0)
+const animSpeed = ref(0.1)
+
+const targetColor1 = ref(new THREE.Color(props.colors[0]))
+const targetColor2 = ref(new THREE.Color(props.colors[1]))
+
+// Load Texture
+const perlinNoiseTexture = ref<THREE.Texture>(new THREE.Texture())
+
+const loader = new THREE.TextureLoader()
+
+// Random Seed Offsets
+const random = splitmix32(props.seed ?? Math.floor(Math.random() * 2 ** 32))
+const offsets = new Float32Array(
+  Array.from({ length: 7 }, () => random() * Math.PI * 2),
+)
+
+// Uniforms initialization
+const uniforms = {
+  uColor1: { value: new THREE.Color(props.colors[0]) },
+  uColor2: { value: new THREE.Color(props.colors[1]) },
+  uOffsets: { value: offsets },
+  uPerlinTexture: { value: perlinNoiseTexture.value },
+  uTime: { value: 0 },
+  uAnimation: { value: 0.1 },
+  uInverted: { value: getInitialInverted() },
+  uInputVolume: { value: 0 },
+  uOutputVolume: { value: 0 },
+  uOpacity: { value: 0 },
+}
+
+loader.setCrossOrigin('anonymous')
+loader.load(
+  'https://storage.googleapis.com/eleven-public-cdn/images/perlin-noise.png',
+  (texture) => {
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    perlinNoiseTexture.value = texture
+    uniforms.uPerlinTexture.value = texture
+  },
+  undefined,
+  (err) => {
+    console.warn('Orb texture failed to load', err)
+  },
+)
+
+// Immediate dark mode detection (matching React useMemo)
+function getInitialInverted() {
+  if (typeof document === 'undefined')
+    return 0
+  return document.documentElement.classList.contains('dark') ? 1 : 0
+}
+
+// Watch props for immediate color updates (matching React effects)
+watch(() => props.colors, (newCols) => {
+  targetColor1.value.set(newCols[0])
+  targetColor2.value.set(newCols[1])
+}, { deep: true })
+
+// Dark mode tracking observer
+function updateInverted() {
+  const isDark = document.documentElement.classList.contains('dark')
+  uniforms.uInverted.value = isDark ? 1 : 0
+}
+
+onMounted(() => {
+  updateInverted()
+  const observer = new MutationObserver(updateInverted)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  })
+  onUnmounted(() => observer.disconnect())
+})
+
+// Animation Loop
+const { onBeforeRender } = useLoop()
+
+onBeforeRender(({ delta }: any) => {
+  if (!circleRef.value)
+    return
+
+  // Update live colors from Ref if available
+  const live = props.colorsRef?.value
+  if (live) {
+    if (live[0])
+      targetColor1.value.set(live[0])
+    if (live[1])
+      targetColor2.value.set(live[1])
+  }
+
+  const u = uniforms
+  u.uTime.value += delta * 0.5
+
+  if (u.uOpacity.value < 1) {
+    u.uOpacity.value = Math.min(1, u.uOpacity.value + delta * 2)
+  }
+
+  let targetIn = 0
+  let targetOut = 0.3
+
+  if (props.volumeMode === 'manual') {
+    targetIn = clamp01(
+      props.manualInput
+      ?? props.inputVolumeRef?.value
+      ?? props.getInputVolume?.()
+      ?? 0,
+    )
+    targetOut = clamp01(
+      props.manualOutput
+      ?? props.outputVolumeRef?.value
+      ?? props.getOutputVolume?.()
+      ?? 0,
+    )
+  }
+  else {
+    const t = u.uTime.value * 2
+    if (!props.agentState) {
+      targetIn = 0
+      targetOut = 0.3
+    }
+    else if (props.agentState === 'listening') {
+      targetIn = clamp01(0.55 + Math.sin(t * 3.2) * 0.35)
+      targetOut = 0.45
+    }
+    else if (props.agentState === 'talking') {
+      targetIn = clamp01(0.65 + Math.sin(t * 4.8) * 0.22)
+      targetOut = clamp01(0.75 + Math.sin(t * 3.6) * 0.22)
+    }
+    else {
+      const base = 0.38 + 0.07 * Math.sin(t * 0.7)
+      const wander = 0.05 * Math.sin(t * 2.1) * Math.sin(t * 0.37 + 1.2)
+      targetIn = clamp01(base + wander)
+      targetOut = clamp01(0.48 + 0.12 * Math.sin(t * 1.05 + 0.6))
+    }
+  }
+
+  curIn.value += (targetIn - curIn.value) * 0.2
+  curOut.value += (targetOut - curOut.value) * 0.2
+
+  const targetSpeed = 0.1 + (1 - (curOut.value - 1) ** 2) * 0.9
+  animSpeed.value += (targetSpeed - animSpeed.value) * 0.12
+
+  u.uAnimation.value += delta * animSpeed.value
+  u.uInputVolume.value = curIn.value
+  u.uOutputVolume.value = curOut.value
+
+  // Lerp colors from props (or refs)
+  u.uColor1.value.lerp(targetColor1.value, 0.08)
+  u.uColor2.value.lerp(targetColor2.value, 0.08)
+})
 </script>
 
 <template>
   <TresMesh ref="circleRef">
-    <CircleGeometry :args="[3.5, 64]" />
-    <ShaderMaterial
+    <TresCircleGeometry :args="[3.5, 64]" />
+    <TresShaderMaterial
+      :uniforms="uniforms"
       :vertex-shader="vertexShader"
       :fragment-shader="fragmentShader"
-      :uniforms="uniforms"
-      :transparent="true"
+      transparent
     />
   </TresMesh>
 </template>
