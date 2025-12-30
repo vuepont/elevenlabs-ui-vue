@@ -35,11 +35,20 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vue-sonner'],
+    // transpile: ['vue-sonner'],
+    transpile: ['vue-sonner', 'three', '@tresjs/core', '@tresjs/cientos', 'three-custom-shader-material'],
   },
 
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        'three-custom-shader-material/vanilla': 'three-custom-shader-material/vanilla/dist/three-custom-shader-material-vanilla.cjs.js',
+      },
+    },
+    ssr: {
+      noExternal: ['three', '@tresjs/core', '@tresjs/cientos', 'three-custom-shader-material'],
+    },
   },
 
   shiki: {
