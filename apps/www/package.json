@@ -21,6 +21,8 @@
     "@tabler/icons-vue": "^3.36.0",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/vue-table": "^8.21.3",
+    "@tresjs/core": "^5.2.1",
+    "@vitejs/plugin-vue": "^6.0.2",
     "@vueuse/core": "^14.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

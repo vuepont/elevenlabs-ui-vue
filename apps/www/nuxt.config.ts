@@ -1,4 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
+// import { templateCompilerOptions } from '@tresjs/core'
+// import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -39,7 +41,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      // vue({ ...templateCompilerOptions }),
+      tailwindcss(),
+    ],
   },
 
   shiki: {
