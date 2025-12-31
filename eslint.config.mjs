@@ -1,8 +1,34 @@
 import antfu from '@antfu/eslint-config'
 
-export default antfu({
-  vue: true,
-  typescript: true,
-  pnpm: false,
-  // ignores: ["**/.nitro/**", "apps/registry/server/assets/**"],
-})
+export default antfu(
+  {
+    vue: true,
+    typescript: true,
+    pnpm: false,
+    ignores: [
+      '**/*.md',
+    ],
+  },
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'vue/one-component-per-file': 0,
+      'vue/no-reserved-component-names': 0,
+      'vue/no-useless-v-bind': 0,
+    },
+  },
+  {
+    // Without `files`, they are general rules for all files
+    rules: {
+      'symbol-description': 0,
+      'no-console': 1,
+      'no-tabs': 0,
+      'import/first': 0,
+      'node/prefer-global/process': 0,
+      'style/no-tabs': 0,
+      'unused-imports/no-unused-vars': 0,
+      'unicorn/no-new-array': 0,
+      'import-x/consistent-type-specifier-style': 0,
+    },
+  },
+)

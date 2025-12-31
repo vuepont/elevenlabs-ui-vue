@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="TData = unknown">
-import type { AudioPlayerApi, AudioPlayerItem } from './useAudioPlayer'
+import type { AudioPlayerApi, AudioPlayerItem } from './context'
 import { useRafFn } from '@vueuse/core'
 import { onBeforeUnmount, provide, ref, shallowRef } from 'vue'
-import { AudioPlayerKey } from './useAudioPlayer'
+import { AudioPlayerKey, AudioPlayerTimeKey } from './context'
 
 const ReadyState = {
   HAVE_NOTHING: 0,
@@ -166,7 +166,6 @@ const api: AudioPlayerApi<TData> = {
   audioRef,
   activeItem,
   duration,
-  currentTime,
   error,
   isPlaying,
   isBuffering,
@@ -180,6 +179,7 @@ const api: AudioPlayerApi<TData> = {
 }
 
 provide(AudioPlayerKey, api)
+provide(AudioPlayerTimeKey, currentTime)
 
 onBeforeUnmount(() => {
   pauseRaf()

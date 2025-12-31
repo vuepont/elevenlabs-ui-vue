@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed } from 'vue'
-import { useAudioPlayer } from './useAudioPlayer'
+import { useAudioPlayer } from './context'
 
 interface Props extends /* @vue-ignore */ HTMLAttributes {
   speeds?: readonly number[]
@@ -14,8 +14,8 @@ const props = withDefaults(defineProps<Props>(), {
   speeds: () => [0.5, 1, 1.5, 2],
 })
 
-const player = useAudioPlayer()
-const currentSpeed = computed(() => player.playbackRate.value)
+const { playbackRate, setPlaybackRate } = useAudioPlayer()
+const currentSpeed = computed(() => playbackRate.value)
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const currentSpeed = computed(() => player.playbackRate.value)
       :variant="currentSpeed === speed ? 'default' : 'outline'"
       size="sm"
       class="min-w-[50px] font-mono text-xs"
-      @click="player.setPlaybackRate(speed)"
+      @click="setPlaybackRate(speed)"
     >
       {{ speed }}x
     </Button>

@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<Props>(), {
   centerAlign: false,
 })
 
-// Audio Processing (Real)
 const mediaStreamRef = toRef(props, 'mediaStream')
 const realVolumeBands = useMultibandVolume(mediaStreamRef, {
   bands: props.barCount,
@@ -35,7 +34,6 @@ const realVolumeBands = useMultibandVolume(mediaStreamRef, {
   hiPass: 200,
 })
 
-// Audio Processing (Fake/Demo)
 const fakeVolumeBands = ref<number[]>(new Array(props.barCount).fill(0.2))
 
 let lastFakeUpdate = 0

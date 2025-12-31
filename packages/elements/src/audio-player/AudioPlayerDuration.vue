@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed } from 'vue'
-import { useAudioPlayer } from './useAudioPlayer'
+import { useAudioPlayer } from './context'
 
 interface Props extends /* @vue-ignore */ HTMLAttributes {
   class?: HTMLAttributes['class']
@@ -11,10 +11,10 @@ interface Props extends /* @vue-ignore */ HTMLAttributes {
 const props = defineProps<Props>()
 const { class: _, ...otherProps } = props
 
-const player = useAudioPlayer()
+const { duration } = useAudioPlayer()
 
 const formattedDuration = computed(() => {
-  const d = player.duration.value
+  const d = duration.value
   return (d !== null && d !== undefined && !Number.isNaN(d))
     ? formatTime(d)
     : '--:--'
