@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { ArrowDownIcon } from 'lucide-vue-next'
 import { useStickToBottomContext } from 'vue-stick-to-bottom'
 
 const props = defineProps<{
-  class?: string
+  class?: HTMLAttributes['class']
 }>()
 
 const { isAtBottom, scrollToBottom } = useStickToBottomContext()

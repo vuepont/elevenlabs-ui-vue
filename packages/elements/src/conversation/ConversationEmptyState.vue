@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Component } from 'vue'
+import type { Component, HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 
 const props = withDefaults(defineProps<{
-  class?: string
+  class?: HTMLAttributes['class']
   title?: string
   description?: string
   icon?: Component
