@@ -54,7 +54,6 @@ const selectedVoice = computed(() => props.voices.find(v => v.voiceId === props.
 
 function handleSelect(voiceId: string) {
   emit('update:modelValue', voiceId)
-  isOpen.value = false
 }
 </script>
 

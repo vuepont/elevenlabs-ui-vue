@@ -41,15 +41,20 @@ async function handlePreview(e: MouseEvent) {
   }
 }
 
-// CommandItem usually handles the filtering based on text content or value.
-// In the React version, `keywords` prop is passed to CommandItem.
-// Shadcn Vue's CommandItem might work differently regarding keywords.
-// We'll pass the voiceId as value.
+const keywords = computed(() => [
+  props.voice.name,
+  props.voice.labels?.accent,
+  props.voice.labels?.gender,
+  props.voice.labels?.age,
+  props.voice.labels?.description,
+  props.voice.labels?.['use case'],
+].filter(Boolean) as string[])
 </script>
 
 <template>
   <CommandItem
     :value="voice.voiceId!"
+    :keywords="keywords"
     class="flex items-center gap-3"
     @select="emit('select')"
   >
