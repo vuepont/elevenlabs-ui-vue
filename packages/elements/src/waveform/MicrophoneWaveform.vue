@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { onUnmounted, ref, watch } from 'vue'
 import Waveform from './Waveform.vue'
 
@@ -16,7 +17,7 @@ const props = withDefaults(defineProps<{
   fadeEdges?: boolean
   fadeWidth?: number
   height?: string | number
-  class?: string
+  class?: HTMLAttributes['class']
 }>(), {
   active: false,
   processing: false,

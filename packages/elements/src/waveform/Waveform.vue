@@ -67,7 +67,7 @@ function renderWaveform() {
       }
       else {
         // Fallback for browsers not supporting roundRect
-        ctx.fillRect(x, y, props.barWidth, barHeight)
+        (ctx as CanvasRenderingContext2D).fillRect(x, y, props.barWidth, barHeight)
       }
       ctx.fill()
     }

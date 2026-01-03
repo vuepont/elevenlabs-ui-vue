@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import Waveform from './Waveform.vue'
@@ -14,7 +15,7 @@ const props = withDefaults(defineProps<{
   barRadius?: number
   barColor?: string
   height?: string | number
-  class?: string
+  class?: HTMLAttributes['class']
 }>(), {
   data: () => [],
   currentTime: 0,

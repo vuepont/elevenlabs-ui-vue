@@ -114,7 +114,7 @@ function animate(currentTime: number) {
           ctx.roundRect(bar.x, y, props.barWidth, barHeight, props.barRadius)
         }
         else {
-          ctx.fillRect(bar.x, y, props.barWidth, barHeight)
+          (ctx as CanvasRenderingContext2D).fillRect(bar.x, y, props.barWidth, barHeight)
         }
         ctx.fill()
       }

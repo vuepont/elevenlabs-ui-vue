@@ -399,7 +399,7 @@ onMounted(() => {
             ;(ctx as CanvasRenderingContext2D & { roundRect: (x: number, y: number, w: number, h: number, r: number) => void }).roundRect(x, y, props.barWidth, barHeight, props.barRadius)
           }
           else {
-            ;(ctx as CanvasRenderingContext2D).fillRect(x, y, props.barWidth, barHeight)
+            (ctx as CanvasRenderingContext2D).fillRect(x, y, props.barWidth, barHeight)
           }
           ctx.fill()
         }
