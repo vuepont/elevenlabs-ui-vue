@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import type { WaveformProps } from './Waveform.vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import Waveform from './Waveform.vue'
 
-const props = withDefaults(defineProps<{
-  data?: number[]
+interface Props extends WaveformProps {
   currentTime?: number
   duration?: number
   showHandle?: boolean
-  barWidth?: number
-  barHeight?: number
-  barGap?: number
-  barRadius?: number
-  barColor?: string
-  height?: string | number
-  class?: HTMLAttributes['class']
-}>(), {
+}
+
+const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   currentTime: 0,
   duration: 100,

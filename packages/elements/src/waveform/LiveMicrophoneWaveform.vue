@@ -1,29 +1,23 @@
 <!-- eslint-disable style/max-statements-per-line -->
 <script setup lang="ts">
+import type { ScrollingWaveformProps } from './ScrollingWaveform.vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
-const props = withDefaults(defineProps<{
+interface Props extends Omit<ScrollingWaveformProps, 'barCount'> {
   active?: boolean
   fftSize?: number
   smoothingTimeConstant?: number
   sensitivity?: number
   historySize?: number
   updateRate?: number
-  barWidth?: number
-  barHeight?: number
-  barGap?: number
-  barRadius?: number
-  barColor?: string
-  fadeEdges?: boolean
-  fadeWidth?: number
-  height?: string | number
   savedHistory?: number[]
   dragOffset?: number
   enableAudioPlayback?: boolean
   playbackRate?: number
-  class?: string
-}>(), {
+}
+
+const props = withDefaults(defineProps<Props>(), {
   active: false,
   fftSize: 256,
   smoothingTimeConstant: 0.8,

@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
-const props = withDefaults(defineProps<{
+export interface WaveformProps extends /* @vue-ignore */ HTMLAttributes {
   data?: number[]
   barWidth?: number
   barHeight?: number
@@ -13,8 +14,10 @@ const props = withDefaults(defineProps<{
   fadeWidth?: number
   height?: string | number
   active?: boolean
-  class?: string
-}>(), {
+  class?: HTMLAttributes['class']
+}
+
+const props = withDefaults(defineProps<WaveformProps>(), {
   data: () => [],
   barWidth: 4,
   barHeight: 4,

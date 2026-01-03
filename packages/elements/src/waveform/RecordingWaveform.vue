@@ -1,22 +1,18 @@
 <script setup lang="ts">
+import type { WaveformProps } from './Waveform.vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
-const props = withDefaults(defineProps<{
+interface Props extends WaveformProps {
   recording?: boolean
   fftSize?: number
   smoothingTimeConstant?: number
   sensitivity?: number
   updateRate?: number
   showHandle?: boolean
-  barWidth?: number
-  barHeight?: number
-  barGap?: number
-  barRadius?: number
-  barColor?: string
-  height?: string | number
-  class?: string
-}>(), {
+}
+
+const props = withDefaults(defineProps<Props>(), {
   recording: false,
   fftSize: 256,
   smoothingTimeConstant: 0.8,

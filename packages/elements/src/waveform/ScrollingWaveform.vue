@@ -1,21 +1,15 @@
 <script setup lang="ts">
+import type { WaveformProps } from './Waveform.vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const props = withDefaults(defineProps<{
+export interface ScrollingWaveformProps extends Omit<WaveformProps, 'data'> {
+  data?: number[]
   speed?: number
   barCount?: number
-  barWidth?: number
-  barHeight?: number
-  barGap?: number
-  barRadius?: number
-  barColor?: string
-  fadeEdges?: boolean
-  fadeWidth?: number
-  height?: string | number
-  data?: number[]
-  class?: string
-}>(), {
+}
+
+const props = withDefaults(defineProps<ScrollingWaveformProps>(), {
   speed: 50,
   barCount: 60,
   barWidth: 4,

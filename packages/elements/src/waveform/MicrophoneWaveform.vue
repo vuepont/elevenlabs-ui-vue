@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import type { WaveformProps } from './Waveform.vue'
 import { onUnmounted, ref, watch } from 'vue'
 import Waveform from './Waveform.vue'
 
-const props = withDefaults(defineProps<{
+interface Props extends WaveformProps {
   active?: boolean
   processing?: boolean
   fftSize?: number
   smoothingTimeConstant?: number
   sensitivity?: number
-  barWidth?: number
-  barHeight?: number
-  barGap?: number
-  barRadius?: number
-  barColor?: string
-  fadeEdges?: boolean
-  fadeWidth?: number
-  height?: string | number
-  class?: HTMLAttributes['class']
-}>(), {
+}
+
+const props = withDefaults(defineProps<Props>(), {
   active: false,
   processing: false,
   fftSize: 256,
