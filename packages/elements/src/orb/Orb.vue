@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { TresCanvas } from '@tresjs/core'
 import OrbbScene from './OrbScene.vue'
 
@@ -17,7 +18,7 @@ interface OrbProps {
   outputVolumeRef?: { value: number }
   getInputVolume?: () => number
   getOutputVolume?: () => number
-  className?: string
+  class?: HTMLAttributes['class']
 }
 
 const props = withDefaults(defineProps<OrbProps>(), {
@@ -29,9 +30,11 @@ const props = withDefaults(defineProps<OrbProps>(), {
 </script>
 
 <template>
-  <div :class="className ?? 'relative h-full w-full'">
+  <div :class="props.class ?? 'relative h-full w-full'">
     <TresCanvas
       :resize="{ debounce: resizeDebounce }"
+      :clear-color="'#ffffff'"
+      :clear-alpha="0"
       :gl="{
         alpha: true,
         antialias: true,
