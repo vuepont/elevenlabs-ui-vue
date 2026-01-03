@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ElevenLabs } from '@elevenlabs/elevenlabs-js'
+import type { HTMLAttributes } from 'vue'
 import { AudioPlayerProvider } from '@repo/elements/audio-player'
 import { Orb } from '@repo/elements/orb'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
@@ -24,7 +25,7 @@ const props = withDefaults(defineProps<{
   voices: ElevenLabs.Voice[]
   modelValue?: string
   placeholder?: string
-  class?: string
+  class?: HTMLAttributes['class']
   open?: boolean
 }>(), {
   placeholder: 'Select a voice...',
