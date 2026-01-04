@@ -1,14 +1,25 @@
 import tailwindcss from '@tailwindcss/vite'
-// import { templateCompilerOptions } from '@tresjs/core'
-// import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  css: ['~/assets/css/main.css', 'vue-sonner/style.css'],
 
-  modules: ['@nuxtjs/color-mode', '@nuxt/fonts', '@nuxt/content', 'nuxt-shiki', 'nuxt-og-image', '@nuxt/image'],
+  css: [
+    '~/assets/css/main.css',
+    'vue-sonner/style.css',
+  ],
+
+  modules: [
+    '@nuxtjs/color-mode',
+    '@nuxt/fonts',
+    '@nuxt/content',
+    'nuxt-shiki',
+    'nuxt-og-image',
+    '@nuxt/image',
+    '@tresjs/nuxt',
+  ],
+
   components: [
     { path: '~/components' },
     { path: '~/components/content', global: true, pathPrefix: false },
@@ -42,7 +53,6 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [
-      // vue({ ...templateCompilerOptions }),
       tailwindcss(),
     ],
   },

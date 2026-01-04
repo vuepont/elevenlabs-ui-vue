@@ -4,9 +4,6 @@ import { useLoop } from '@tresjs/core'
 import * as THREE from 'three'
 import { onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 
-/**
- * Types & Props
- */
 export type AgentState = null | 'thinking' | 'listening' | 'talking'
 
 interface OrbProps {
@@ -30,9 +27,6 @@ const props = withDefaults(defineProps<OrbProps>(), {
   manualOutput: 0,
 })
 
-/**
- * Shader GLSL - EXACT COPY FROM REACT
- */
 const vertexShader = /* glsl */ `
 uniform float uTime;
 uniform sampler2D uPerlinTexture;
@@ -251,9 +245,6 @@ void main() {
 }
 `
 
-/**
- * Utils
- */
 function splitmix32(a: number) {
   return function () {
     a |= 0
@@ -265,14 +256,11 @@ function splitmix32(a: number) {
     return ((t = t ^ (t >>> 15)) >>> 0) / 4294967296
   }
 }
+
 function clamp01(n: number) {
   return Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : 0
 }
 
-/**
- * Main Logic
- */
-// const circleRef = shallowRef<THREE.Mesh | null>(null)
 const circleRef = shallowRef<THREE.Mesh<THREE.CircleGeometry, THREE.ShaderMaterial> | null>(null)
 
 const curIn = ref(0)
@@ -322,14 +310,14 @@ loader.load(
   },
 )
 
-// Immediate dark mode detection (matching React useMemo)
+// Immediate dark mode detection
 function getInitialInverted() {
   if (typeof document === 'undefined')
     return 0
   return document.documentElement.classList.contains('dark') ? 1 : 0
 }
 
-// Watch props for immediate color updates (matching React effects)
+// Watch props for immediate color updates
 watch(() => props.colors, (newCols) => {
   targetColor1.value.set(newCols[0])
   targetColor2.value.set(newCols[1])

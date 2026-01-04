@@ -9,10 +9,8 @@ component: true
 ---
 name: message
 description: A live scrolling message visualization.
-hideCode: true
 ---
 ::
-
 
 ## Installation
 
@@ -160,7 +158,6 @@ Container for message text and content with variant styling.
 | variant   | `"contained" \| "flat"` | Visual style variant (default: "contained")  |
 | class     | `string`                | Optional CSS classes                        |
 | ...props  | `HTMLAttributes`        | All standard div element props              |
-<!-- | children  | `ReactNode`             | Message content                             | -->
 
 ### MessageAvatar
 
