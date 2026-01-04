@@ -34,7 +34,7 @@ const md = computed(() => (slotContent.value ?? props.content ?? '') as string)
     :content="md"
     :class="
       cn(
-        'size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+        'size-full [&>*:first-child]:mt-0! [&>*:last-child]:mb-0!',
         props.class,
       )
     "
