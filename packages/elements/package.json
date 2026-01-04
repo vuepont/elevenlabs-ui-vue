@@ -10,14 +10,17 @@
     "@elevenlabs/client": "^0.12.2",
     "@elevenlabs/elevenlabs-js": "^2.28.0",
     "@repo/shadcn-vue": "workspace:*",
+    "@tresjs/core": "^5.2.1",
     "@vueuse/core": "^14.1.0",
     "lucide-vue-next": "^0.556.0",
     "motion-v": "^1.7.4",
     "reka-ui": "^2.6.1",
+    "three": "^0.182.0",
     "vue": "^3.5.25",
     "vue-stream-markdown": "^0.3.2"
   },
   "devDependencies": {
+    "@types/three": "^0.182.0",
     "@vitejs/plugin-vue": "^6.0.2"
   }
 }
