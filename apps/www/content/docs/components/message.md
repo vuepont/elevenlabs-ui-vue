@@ -9,10 +9,8 @@ component: true
 ---
 name: message
 description: A live scrolling message visualization.
-hideCode: true
 ---
 ::
-
 
 ## Installation
 
