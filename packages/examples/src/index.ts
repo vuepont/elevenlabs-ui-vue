@@ -1,6 +1,7 @@
 export { default as AudioPlayer } from './audio-player/audio-player.vue'
 export { default as BarVisualizer } from './bar-visualizer.vue'
 export { default as ConversationBar } from './conversation-bar.vue'
+export { default as Conversation } from './conversation.vue'
 export { default as LiveWaveform } from './live-waveform.vue'
 export { default as Matrix } from './matrix/matrix.vue'
 export { default as MicSelector } from './mic-selector.vue'

@@ -34,7 +34,7 @@ const md = computed(() => (slotContent.value ?? props.content ?? '') as string)
     :content="md"
     :class="
       cn(
-        'size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+        'response-markdown size-full [&>*:first-child]:mt-0! [&>*:last-child]:mb-0!',
         props.class,
       )
     "
@@ -43,3 +43,11 @@ const md = computed(() => (slotContent.value ?? props.content ?? '') as string)
     <slot />
   </Markdown>
 </template>
+
+<style scoped>
+/* Inherit color from parent to avoid vue-stream-markdown forcing global --foreground,
+   which causes color inversion in dark/light mode */
+:global(.response-markdown.stream-markdown) {
+  color: inherit;
+}
+</style>
