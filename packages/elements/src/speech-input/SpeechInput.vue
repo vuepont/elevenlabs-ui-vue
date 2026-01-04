@@ -83,6 +83,7 @@ watch(() => scribe.status.value, (newStatus) => {
 })
 
 async function start() {
+  console.log('Starting speech input...')
   const requestId = startRequestId.value + 1
   startRequestId.value = requestId
 
