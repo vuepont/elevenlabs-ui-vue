@@ -23,9 +23,16 @@ description: An animated orb with flowing visuals and volume reactivity.
       Manual
     ::
   ::
+
   ::tabs-content{value="cli"}
     ```bash
     npx @elevenlabs/cli@latest add orb
+    ```
+
+    If you're using TypeScript, install the Three.js type definitions:
+
+    ```bash
+    npm install @types/three -D
     ```
   ::
 
@@ -36,7 +43,13 @@ description: An animated orb with flowing visuals and volume reactivity.
       ::
 
       ```bash
-      npm install @tresjs/core three @types/three reka-ui lucide-vue-next
+      npm install @tresjs/core three reka-ui lucide-vue-next
+      ```
+
+      If you're using TypeScript, install the Three.js type definitions:
+
+      ```bash
+      npm install @types/three -D
       ```
 
       ::step
@@ -47,6 +60,56 @@ description: An animated orb with flowing visuals and volume reactivity.
         Update the import paths to match your project setup.
       ::
     ::
+
+
+The Orb component uses [TresJS](https://docs.tresjs.org/getting-started), a Vue 3 custom renderer for Three.js, to create declarative 3D scenes. To ensure the component renders correctly, please configure the template compiler options based on your project type (Vue or Nuxt).
+
+<Callout class="mt-5 mb-0" >
+
+  **Important:**  This configuration is required to make the template compiler work with the TresJS custom renderer and prevent console warnings.
+
+</Callout>
+
+### Vue project
+
+If you're using Vue, you should add the TresJS template compiler options to your vite.config.ts:
+
+```ts [vite.config.ts]
+import { templateCompilerOptions } from '@tresjs/core'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [
+    vue({
+      // Other config
+      ...templateCompilerOptions
+    }),
+  ],
+})
+```
+
+See the [Vue project section](https://docs.tresjs.org/getting-started/installation#vue-project) for more information.
+
+### Nuxt project
+
+If you're using Nuxt, you should use the official TresJS Nuxt module for a seamless integration experience.
+
+Install the TresJS Nuxt module and Three.js:
+
+```bash
+npm install @tresjs/nuxt
+```
+
+Add `@tresjs/nuxt` to the `modules` section of your `nuxt.config.ts`:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: ['@tresjs/nuxt'],
+})
+```
+
+See the [Nuxt project section](https://docs.tresjs.org/getting-started/installation#nuxt-project) for more information.
 
 ## Usage
 
