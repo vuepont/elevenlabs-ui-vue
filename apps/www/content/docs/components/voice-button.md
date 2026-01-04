@@ -200,10 +200,9 @@ A button component with multiple states for voice recording workflows, including
 
 #### Emits
 
-| Emit              | Type                                                             | Description                                     |
+| Event              | Type                                                            | Description                                     |
 | ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
 | press             | `() => void`                                                     | Callback when when button is clicked            |
-=
 
 #### VoiceButtonState Type
 
