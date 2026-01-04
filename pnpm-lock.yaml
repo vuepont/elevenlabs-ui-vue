@@ -10735,15 +10735,6 @@ snapshots:
       - yup
       - zod
 
-  '@tresjs/core@5.2.1(three@0.182.0)(vue@3.5.25(typescript@5.9.3))':
-    dependencies:
-      '@pmndrs/pointer-events': 6.6.28
-      '@vue/devtools-api': 7.7.9
-      '@vueuse/core': 13.9.0(vue@3.5.25(typescript@5.9.3))
-      radashi: 12.7.1
-      three: 0.182.0
-      vue: 3.5.25(typescript@5.9.3)
-
   '@ts-morph/common@0.28.1':
     dependencies:
       minimatch: 10.1.1
