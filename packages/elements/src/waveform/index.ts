@@ -1,0 +1,7 @@
+export { default as AudioScrubber } from './AudioScrubber.vue'
+export { default as LiveMicrophoneWaveform } from './LiveMicrophoneWaveform.vue'
+export { default as MicrophoneWaveform } from './MicrophoneWaveform.vue'
+export { default as RecordingWaveform } from './RecordingWaveform.vue'
+export { default as ScrollingWaveform } from './ScrollingWaveform.vue'
+export { default as StaticWaveform } from './StaticWaveform.vue'
+export { default as Waveform } from './Waveform.vue'
