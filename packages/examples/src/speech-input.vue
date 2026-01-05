@@ -16,14 +16,11 @@ async function getToken() {
       method: 'POST',
     })
 
-    // console.log('Response:', response.json())
-
     if (!response.ok) {
       throw new Error('Failed to get token')
     }
 
     const data = await response.json()
-    console.log('Data:', data)
     if (data.error) {
       throw new Error(data.error)
     }

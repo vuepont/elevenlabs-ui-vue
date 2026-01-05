@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { Motion } from 'motion-v'
 import { computed } from 'vue'
 import { useSpeechInput } from './context'
 
-const props = withDefaults(defineProps<{
+interface Props extends /* @vue-ignore */ HTMLDivElement {
   placeholder?: string
-  class?: string
-}>(), {
+  class?: HTMLAttributes['class']
+}
+
+const props = withDefaults(defineProps<Props>(), {
   placeholder: 'Listening...',
 })
 

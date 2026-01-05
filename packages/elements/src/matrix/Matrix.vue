@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import type { Frame, MatrixMode } from './types'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed, toRefs } from 'vue'
@@ -20,7 +21,7 @@ interface Props {
   ariaLabel?: string
   mode?: MatrixMode
   levels?: number[]
-  className?: string
+  class?: HTMLAttributes['class']
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -96,7 +97,7 @@ function getPixelAttributes(value: number, rowIndex: number, colIndex: number) {
     role="img"
     :aria-label="ariaLabel ?? 'matrix display'"
     :aria-live="isAnimating ? 'polite' : undefined"
-    :class="cn('relative inline-block', className)"
+    :class="cn('relative inline-block', props.class)"
     :style="{
       '--matrix-on': palette.on,
       '--matrix-off': palette.off,

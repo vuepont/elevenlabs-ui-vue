@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ButtonVariants } from '@repo/shadcn-vue/components/ui/button'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { Skeleton } from '@repo/shadcn-vue/components/ui/skeleton'
 import { cn } from '@repo/shadcn-vue/lib/utils'
@@ -6,11 +7,17 @@ import { cva } from 'class-variance-authority'
 import { MicIcon, SquareIcon } from 'lucide-vue-next'
 import { useSpeechInput } from './context'
 
-const props = defineProps<{
+type SpeechInputRecordButtonProps = InstanceType<typeof Button>['$props']
+
+interface Props extends /* @vue-ignore */ Omit<SpeechInputRecordButtonProps, 'size'> {
   class?: string
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  variant?: ButtonVariants['variant']
   disabled?: boolean
-}>()
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  variant: 'ghost',
+})
 
 const emit = defineEmits<{
   click: [e: MouseEvent]
@@ -45,7 +52,7 @@ function handleClick(e: MouseEvent) {
 <template>
   <Button
     type="button"
-    :variant="variant || 'ghost'"
+    :variant="variant"
     :disabled="disabled ?? speechInput.isConnecting"
     :class="cn(
       buttonVariants({ size: speechInput.size }),

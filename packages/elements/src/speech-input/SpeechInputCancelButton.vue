@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import type { ButtonVariants } from '@repo/shadcn-vue/components/ui/button'
+import type { HTMLAttributes } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { cva } from 'class-variance-authority'
 import { XIcon } from 'lucide-vue-next'
 import { useSpeechInput } from './context'
 
-const props = defineProps<{
-  class?: string
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
-}>()
+interface Props extends /* @vue-ignore */ HTMLButtonElement {
+  class?: HTMLAttributes['class']
+  variant?: ButtonVariants['variant']
+}
+
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   click: [e: MouseEvent]

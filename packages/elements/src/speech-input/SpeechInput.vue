@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AudioFormat, CommitStrategy } from '@elevenlabs/client'
+import type { HTMLAttributes } from 'vue'
 import type { ButtonSize, SpeechInputData } from './context'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { provide, reactive, ref, toRef, watch } from 'vue'
@@ -8,11 +9,7 @@ import { useScribe } from './useScribe'
 
 const props = withDefaults(defineProps<{
   getToken: () => Promise<string>
-  onChange?: (data: SpeechInputData) => void
-  onCancel?: (data: SpeechInputData) => void
-  onStart?: (data: SpeechInputData) => void
-  onStop?: (data: SpeechInputData) => void
-  class?: string
+  class?: HTMLAttributes['class']
   size?: ButtonSize
   modelId?: string
   baseUri?: string
@@ -31,9 +28,6 @@ const props = withDefaults(defineProps<{
   }
   audioFormat?: AudioFormat
   sampleRate?: number
-  onError?: (error: Error | Event) => void
-  onAuthError?: (data: { error: string }) => void
-  onQuotaExceededError?: (data: { error: string }) => void
 }>(), {
   size: 'default',
   modelId: 'scribe_v2_realtime',
@@ -42,6 +36,16 @@ const props = withDefaults(defineProps<{
     noiseSuppression: true,
   }),
 })
+
+const emit = defineEmits<{
+  change: [data: SpeechInputData]
+  cancel: [data: SpeechInputData]
+  start: [data: SpeechInputData]
+  stop: [data: SpeechInputData]
+  error: [error: Error | Event]
+  authError: [data: { error: string }]
+  quotaExceededError: [data: { error: string }]
+}>()
 
 const startRequestId = ref(0)
 const transcripts = reactive({
@@ -63,16 +67,16 @@ const scribe = useScribe({
   sampleRate: props.sampleRate,
   onPartialTranscript: (data) => {
     transcripts.partialTranscript = data.text
-    props.onChange?.(buildData(transcripts))
+    emit('change', buildData(transcripts))
   },
   onCommittedTranscript: (data) => {
     transcripts.committedTranscripts.push(data.text)
     transcripts.partialTranscript = ''
-    props.onChange?.(buildData(transcripts))
+    emit('change', buildData(transcripts))
   },
-  onError: props.onError,
-  onAuthError: props.onAuthError,
-  onQuotaExceededError: props.onQuotaExceededError,
+  onError: error => emit('error', error),
+  onAuthError: data => emit('authError', data),
+  onQuotaExceededError: data => emit('quotaExceededError', data),
 })
 
 const isConnecting = ref(false)
@@ -83,7 +87,6 @@ watch(() => scribe.status.value, (newStatus) => {
 })
 
 async function start() {
-  console.log('Starting speech input...')
   const requestId = startRequestId.value + 1
   startRequestId.value = requestId
 
@@ -106,17 +109,17 @@ async function start() {
       return
     }
 
-    props.onStart?.(buildData(transcripts))
+    emit('start', buildData(transcripts))
   }
   catch (error) {
-    props.onError?.(error instanceof Error ? error : new Error(String(error)))
+    emit('error', error instanceof Error ? error : new Error(String(error)))
   }
 }
 
 function stop() {
   startRequestId.value += 1
   scribe.disconnect()
-  props.onStop?.(buildData(transcripts))
+  emit('stop', buildData(transcripts))
 }
 
 function cancel() {
@@ -126,7 +129,7 @@ function cancel() {
   scribe.clearTranscripts()
   transcripts.partialTranscript = ''
   transcripts.committedTranscripts = []
-  props.onCancel?.(data)
+  emit('cancel', data)
 }
 
 // Provide context
@@ -142,12 +145,6 @@ provide(SpeechInputContextKey, {
   cancel,
   size: props.size,
 })
-
-// Correct reactivity for provided values
-// The above provide uses `.value` which passes the current value, NOT the ref.
-// We need to pass a reactive object or refs.
-// However, `useSpeechInput` returns the injected object.
-// We should provide a reactive object that updates when source refs update.
 
 const contextValue = reactive({
   isConnected: toRef(scribe.isConnected),
