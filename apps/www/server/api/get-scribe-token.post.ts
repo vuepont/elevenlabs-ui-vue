@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
   try {
-    // const apiKey = process.env.ELEVENLABS_API_KEY
-    const apiKey = 'sk_4292aa2798a44dbaabf97e0ccb4ccf7661a23c748f4aff31'
+    const config = useRuntimeConfig(event)
+    const apiKey = config.elevenlabsApiKey || process.env.ELEVENLABS_API_KEY
 
     if (!apiKey) {
       console.warn('ELEVENLABS_API_KEY is not set in environment variables.')
@@ -29,7 +29,6 @@ export default defineEventHandler(async (event) => {
     if (!data.token) {
       return { error: 'Invalid token response' }
     }
-    console.log('Scribe token:', data.token)
 
     return { token: data.token }
   }

@@ -54,7 +54,7 @@ description: A compact speech input component with real-time transcription previ
 
 ## Usage
 
-```tsx showLineNumbers
+```ts showLineNumbers
 import {
   SpeechInput,
   SpeechInputCancelButton,
@@ -196,7 +196,7 @@ const { transcript, isConnected, isConnecting } = useSpeechInput()
 
 Create a server action to securely fetch the Scribe token:
 
-```tsx title="server/api/get-scribe-token.post.ts" showLineNumbers
+```ts title="server/api/get-scribe-token.post.ts" showLineNumbers
 export default defineEventHandler(async () => {
   const response = await fetch(
     "https://api.elevenlabs.io/v1/speech-to-text/get-realtime-token",
@@ -240,7 +240,7 @@ The root component that manages speech-to-text state and provides context to chi
 | microphone              | `MicrophoneOptions`                 | See below              | Microphone configuration                               |
 | audioFormat             | `AudioFormat`                       | -                      | Audio format for manual streaming                     |
 | sampleRate              | `number`                            | -                      | Sample rate for manual streaming                      |
-| className               | `string`                            | -                      | Optional CSS classes                                  |
+| class                   | `string`                            | -                      | Optional CSS classes                                  |
 
 #### Emits
 
@@ -256,7 +256,7 @@ The root component that manages speech-to-text state and provides context to chi
 
 #### Default Microphone Options
 
-```tsx
+```ts
 {
   echoCancellation: true,
   noiseSuppression: true
@@ -314,7 +314,7 @@ Button to cancel the current recording and clear the transcript.
 
 ### useSpeechInput
 
-Hook to access speech input context from child components.
+Composable to access speech input context from child components.
 
 #### Returns
 
@@ -334,7 +334,7 @@ Hook to access speech input context from child components.
 
 Data object passed to callbacks.
 
-```tsx
+```ts
 interface SpeechInputData {
   partialTranscript: string
   committedTranscripts: string[]
@@ -344,7 +344,7 @@ interface SpeechInputData {
 
 ### CommitStrategy
 
-```tsx
+```ts
 enum CommitStrategy {
   MANUAL = "manual",
   VAD = "vad",
@@ -353,7 +353,7 @@ enum CommitStrategy {
 
 ### AudioFormat
 
-```tsx
+```ts
 enum AudioFormat {
   PCM_8000 = "pcm_8000",
   PCM_16000 = "pcm_16000",

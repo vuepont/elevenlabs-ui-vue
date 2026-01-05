@@ -3,7 +3,7 @@ import type { AudioFormat, CommitStrategy } from '@elevenlabs/client'
 import type { HTMLAttributes } from 'vue'
 import type { ButtonSize, SpeechInputData } from './context'
 import { cn } from '@repo/shadcn-vue/lib/utils'
-import { provide, reactive, ref, toRef, watch } from 'vue'
+import { provide, reactive, ref, watch } from 'vue'
 import { buildData, SpeechInputContextKey } from './context'
 import { useScribe } from './useScribe'
 
@@ -132,37 +132,38 @@ function cancel() {
   emit('cancel', data)
 }
 
-// Provide context
-provide(SpeechInputContextKey, {
-  isConnected: scribe.isConnected.value,
-  isConnecting: isConnecting.value,
-  transcript: buildData(transcripts).transcript, // This needs to be reactive
-  partialTranscript: scribe.partialTranscript.value,
-  committedTranscripts: scribe.committedTranscripts.value.map(t => t.text),
-  error: scribe.error.value,
-  start,
-  stop,
-  cancel,
-  size: props.size,
-})
-
+// Provide context (use getters so consumers read plain values, but remain reactive)
 const contextValue = reactive({
-  isConnected: toRef(scribe.isConnected),
-  isConnecting,
-  transcript: toRef(() => buildData({
-    partialTranscript: scribe.partialTranscript.value,
-    committedTranscripts: scribe.committedTranscripts.value.map(t => t.text),
-  }).transcript),
-  partialTranscript: toRef(scribe.partialTranscript),
-  committedTranscripts: toRef(() => scribe.committedTranscripts.value.map(t => t.text)),
-  error: toRef(scribe.error),
+  get isConnected() {
+    return scribe.isConnected.value
+  },
+  get isConnecting() {
+    return isConnecting.value
+  },
+  get transcript() {
+    return buildData({
+      partialTranscript: scribe.partialTranscript.value,
+      committedTranscripts: scribe.committedTranscripts.value.map(t => t.text),
+    }).transcript
+  },
+  get partialTranscript() {
+    return scribe.partialTranscript.value
+  },
+  get committedTranscripts() {
+    return scribe.committedTranscripts.value.map(t => t.text)
+  },
+  get error() {
+    return scribe.error.value
+  },
   start,
   stop,
   cancel,
-  size: toRef(() => props.size),
+  get size() {
+    return props.size
+  },
 })
 
-provide(SpeechInputContextKey, contextValue as any)
+provide(SpeechInputContextKey, contextValue)
 </script>
 
 <template>

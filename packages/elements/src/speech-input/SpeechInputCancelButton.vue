@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { ButtonVariants } from '@repo/shadcn-vue/components/ui/button'
-import type { HTMLAttributes } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { cva } from 'class-variance-authority'
 import { XIcon } from 'lucide-vue-next'
 import { useSpeechInput } from './context'
 
-interface Props extends /* @vue-ignore */ HTMLButtonElement {
-  class?: HTMLAttributes['class']
+type SpeechInputCancelButtonBaseProps = InstanceType<typeof Button>['$props']
+
+interface Props extends /* @vue-ignore */ Omit<SpeechInputCancelButtonBaseProps, 'variant' | 'size'> {
+  class?: SpeechInputCancelButtonBaseProps['class']
   variant?: ButtonVariants['variant']
 }
 

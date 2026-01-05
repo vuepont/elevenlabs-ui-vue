@@ -5,7 +5,7 @@ import { Motion } from 'motion-v'
 import { computed } from 'vue'
 import { useSpeechInput } from './context'
 
-interface Props extends /* @vue-ignore */ HTMLDivElement {
+interface Props {
   placeholder?: string
   class?: HTMLAttributes['class']
 }
