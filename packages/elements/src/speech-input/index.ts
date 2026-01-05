@@ -1,0 +1,6 @@
+export * from './context'
+export { default as SpeechInput } from './SpeechInput.vue'
+export { default as SpeechInputCancelButton } from './SpeechInputCancelButton.vue'
+export { default as SpeechInputPreview } from './SpeechInputPreview.vue'
+export { default as SpeechInputRecordButton } from './SpeechInputRecordButton.vue'
+export { useScribe } from './useScribe'

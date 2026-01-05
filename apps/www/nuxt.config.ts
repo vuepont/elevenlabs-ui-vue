@@ -96,4 +96,8 @@ export default defineNuxtConfig({
       'Geist:600',
     ],
   },
+
+  runtimeConfig: {
+    elevenlabsApiKey: process.env.ELEVENLABS_API_KEY,
+  },
 })
