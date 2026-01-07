@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ConversationBar } from '@repo/elements/conversation-bar'
 
-const agentId = 'agent_8501kct0ej3heyx9gvmhbdc9e9a6'
+const agentId = import.meta.env.VITE_ELEVENLABS_AGENT_ID
 
 const handleConnect = () => console.log('Connected')
 const handleDisconnect = () => console.log('Disconnected')

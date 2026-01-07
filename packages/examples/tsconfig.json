@@ -8,7 +8,8 @@
       "@repo/*": ["../*"],
       "@/components/*": ["../shadcn-vue/components/*"],
       "@/lib/*": ["../shadcn-vue/lib/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": ["**/*.ts", "**/*.vue"],
   "exclude": ["node_modules"]
