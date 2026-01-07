@@ -42,6 +42,13 @@ const EXCLUDED_PAGES = ['/docs/introduction']
 const { path } = toRefs(useRoute())
 
 function isActive(href: string) {
+  // For Getting Started section links, use exact match only
+  // This prevents /docs/components from being active when on /docs/components/audio-player
+  const isTopLevelSection = TOP_LEVEL_SECTIONS.some(section => section.href === href)
+  if (isTopLevelSection) {
+    return path.value === href
+  }
+  // For other links, use prefix matching
   return href === '/docs'
     ? path.value === href
     : path.value.startsWith(href)
