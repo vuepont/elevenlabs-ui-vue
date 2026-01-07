@@ -23,6 +23,10 @@ const TOP_LEVEL_SECTIONS = [
     name: 'Components',
     href: '/docs/components',
   },
+  {
+    name: 'Setup',
+    href: '/docs/setup',
+  },
 ]
 const EXCLUDED_SECTIONS = ['installation']
 const EXCLUDED_PAGES = ['/docs/introduction']
