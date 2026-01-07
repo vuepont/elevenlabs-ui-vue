@@ -30,6 +30,10 @@ const TOP_LEVEL_SECTIONS = [
     name: 'Setup',
     href: '/docs/setup',
   },
+  {
+    name: 'Usage',
+    href: '/docs/usage',
+  },
 ]
 
 function handleNavigate(path: string) {
