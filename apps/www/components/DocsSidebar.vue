@@ -16,7 +16,7 @@ const props = defineProps<{
 }>()
 const TOP_LEVEL_SECTIONS = [
   {
-    name: 'Get Started',
+    name: 'Introduction',
     href: '/docs/introduction',
   },
   {
@@ -45,7 +45,7 @@ function isActive(href: string) {
       <div class="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-linear-to-b blur-xs" />
       <SidebarGroup>
         <SidebarGroupLabel class="text-muted-foreground font-medium">
-          Sections
+          Getting Started
         </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -67,7 +67,7 @@ function isActive(href: string) {
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
-      <SidebarGroup v-for="item in tree.children?.filter(section => !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))" :key="item.title">
+      <SidebarGroup v-for="item in tree.children?.filter(section => section.children?.length && !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))" :key="item.title">
         <SidebarGroupLabel class="text-muted-foreground font-medium">
           {{ item.title }}
         </SidebarGroupLabel>
