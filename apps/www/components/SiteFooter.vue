@@ -17,7 +17,7 @@ import { siteConfig } from '@/lib/config'
             vuepont</a>
           . The source code is available on
           <a
-            :href="siteConfig.links.github"
+            :href="`${siteConfig.links.github}/elevenlabs-ui-vue`"
             target="_blank"
             rel="noreferrer"
             class="font-medium underline underline-offset-4"
