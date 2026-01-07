@@ -31,6 +31,10 @@ const TOP_LEVEL_SECTIONS = [
     name: 'Usage',
     href: '/docs/usage',
   },
+  {
+    name: 'Troubleshooting',
+    href: '/docs/troubleshooting',
+  },
 ]
 const EXCLUDED_SECTIONS = ['installation']
 const EXCLUDED_PAGES = ['/docs/introduction']

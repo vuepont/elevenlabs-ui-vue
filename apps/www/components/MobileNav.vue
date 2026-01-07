@@ -34,6 +34,10 @@ const TOP_LEVEL_SECTIONS = [
     name: 'Usage',
     href: '/docs/usage',
   },
+  {
+    name: 'Troubleshooting',
+    href: '/docs/troubleshooting',
+  },
 ]
 
 function handleNavigate(path: string) {
