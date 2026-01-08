@@ -10,7 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "vue-tsc -b",
-    "deploy": "pnpm build && npx wrangler --cwd .output/ deploy"
+    "deploy": "npx wrangler --cwd .output/ deploy"
   },
   "dependencies": {
     "@nuxt/content": "^3.9.0",
