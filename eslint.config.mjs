@@ -7,6 +7,7 @@ export default antfu(
     pnpm: false,
     ignores: [
       '**/*.md',
+      '**/.nitro/**',
     ],
   },
   {

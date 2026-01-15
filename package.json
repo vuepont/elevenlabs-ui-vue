@@ -18,7 +18,9 @@
     "prepare": "pnpm simple-git-hooks",
     "lint": "eslint . && turbo run lint",
     "lint:fix": "eslint . --fix",
-    "bumpp": "bumpp package.json packages/*/package.json apps/*/package.json"
+    "bumpp": "bumpp package.json packages/*/package.json apps/*/package.json",
+    "registry:build": "pnpm --filter registry build",
+    "postinstall": "pnpm --filter registry build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.5.1",
