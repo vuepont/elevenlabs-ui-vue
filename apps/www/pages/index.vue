@@ -2,7 +2,7 @@
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import ExamplesRoot from '@/components/ExamplesRoot.vue'
 
-const title = 'ElevenLabs UI'
+const title = 'ElevenLabs UI Vue'
 const description = 'A collection of Open Source agent and audio components that you can customize and extend.'
 
 useSeoMeta({
@@ -23,7 +23,7 @@ useSeoMeta({
       <PageHeaderDescription>{{ description }}</PageHeaderDescription>
       <PageActions>
         <Button as-child size="sm">
-          <NuxtLink to="/docs/installation">
+          <NuxtLink to="/docs/introduction">
             Get Started
           </NuxtLink>
         </Button>
