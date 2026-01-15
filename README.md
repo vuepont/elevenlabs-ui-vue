@@ -9,18 +9,18 @@ ElevenLabs UI Vue provides pre-built, customizable Vue components specifically d
 The CLI makes it easy to add these components to your Vue and Nuxt project.
 
 ## Installation
-You can use the ElevenLabs Agents CLI directly with npx, or install it globally:
+You can use the ElevenLabs UI Vue CLI directly with npx, or install it globally:
 
 ```bash
 # Use directly (recommended)
-npx elevenlabs-ui-vue@latest components add <component-name>
+npx elevenlabs-ui-vue@latest add <component-name>
 
 # Or using shadcn-vue cli
 npx shadcn-vue@latest add https://registry.elevenlabs-ui-vue.com/all.json
 ```
 
 ## Prerequisites
-Before using ElevenLabs UI vue, ensure your project meets these requirements:
+Before using ElevenLabs UI Vue, ensure your project meets these requirements:
 - **Node.js 18** or later
 - **shadcn-vue** initialized in your project (npx shadcn-vue@latest init)
 - **Tailwind CSS** configured
@@ -30,7 +30,7 @@ Before using ElevenLabs UI vue, ensure your project meets these requirements:
 ### Install All Components
 Install all available ElevenLabs UI Vue components at once:
 ```bash
-npx elevenlabs-ui-vue@latest components add all
+npx elevenlabs-ui-vue@latest
 ```
 This command will:
 - Set up shadcn-vue if not already configured
@@ -38,14 +38,14 @@ This command will:
 - Add necessary dependencies to your project
 
 ### Install Specific Components
-Install individual components using the `components add` command:
+Install individual components using the `add` command:
 ```bash
-npx elevenlabs-ui-vue@latest components add <component-name>
+npx elevenlabs-ui-vue@latest add <component-name>
 ```
 Examples:
 ```bash
 # Install the orb component
-npx elevenlabs-ui-vue@latest components add orb
+npx elevenlabs-ui-vue@latest add orb
 ```
 
 ### Alternative: Use with shadcn-vue CLI
@@ -59,8 +59,7 @@ npx shadcn-vue@latest add https://registry.elevenlabs-ui-vue.com/all.json
 npx shadcn-vue@latest add https://registry.elevenlabs-ui-vue.com/orb.json
 ```
 
-All available components can be found [here](https://elevenlabs-ui-vue.com/docs/components) 
-<!-- or explore a list of example components [here](https://elevenlabs-ui-vue.com/blocks). -->
+All available components can be found [here](https://elevenlabs-ui-vue.com/docs/components), or explore the list of blocks [here](https://elevenlabs-ui-vue.com/blocks).
 
 ## Contributing
 
@@ -70,8 +69,6 @@ If you'd like to contribute to ElevenLabs UI Vue, please follow these steps:
 2. Create a new branch
 3. Make your changes to the components in `packages/elements/`.
 4. Open a PR to the `main` branch.
-
-<!-- Please read the [contributing guide](/CONTRIBUTING.md). -->
 
 ## License
 
