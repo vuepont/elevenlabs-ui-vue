@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import type { Component, HTMLAttributes, VNode } from 'vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { CheckIcon, XIcon } from 'lucide-vue-next'
@@ -14,15 +14,52 @@ export type VoiceButtonState
     | 'error'
 
 interface Props {
+  /**
+   * Current state of the voice button
+   * @default "idle"
+   */
   state?: VoiceButtonState
-  label?: any
-  trailing?: any
-  icon?: any
+  /**
+   * Content to display on the left side (label)
+   * Can be a string or ReactNode for custom components
+   */
+  label?: VNode
+  /**
+   * Content to display on the right side (e.g., keyboard shortcut)
+   * Can be a string or ReactNode for custom components
+   * @example "⌥Space" or <kbd>⌘K</kbd>
+   */
+  trailing?: VNode
+  /**
+   * Icon to display in the center when idle (for icon size buttons)
+   */
+  icon?: Component
+  /**
+   * Custom variant for the button
+   * @default "outline"
+   */
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  /**
+   * Size of the button
+   * @default "default"
+   */
   size?: 'default' | 'sm' | 'lg' | 'icon'
+  /**
+   * Custom className for the button
+   */
   class?: HTMLAttributes['class']
+  /**
+   * Custom className for the waveform container
+   */
   waveformClass?: string
+  /**
+   * Duration in ms to show success/error states
+   * @default 1500
+   */
   feedbackDuration?: number
+  /**
+   * Disable the button
+   */
   disabled?: boolean
 }
 
@@ -35,6 +72,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void
+  /**
+   * Callback when button is clicked
+   */
   (e: 'press'): void
 }>()
 

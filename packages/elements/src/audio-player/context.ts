@@ -28,7 +28,7 @@ export const AudioPlayerKey = Symbol('AudioPlayer')
 export function useAudioPlayer<TData = unknown>(): AudioPlayerApi<TData> {
   const api = inject<AudioPlayerApi<TData> | null>(AudioPlayerKey)
   if (!api) {
-    throw new Error('useAudioPlayer must be used within an AudioPlayerProvider')
+    throw new Error('useAudioPlayer must be used within an AudioPlayer')
   }
   return api!
 }
@@ -39,8 +39,21 @@ export function useAudioPlayerTime(): Ref<number> {
   const time = inject<Ref<number> | null>(AudioPlayerTimeKey)
   if (!time) {
     throw new Error(
-      'useAudioPlayerTime cannot be called outside of AudioPlayerProvider',
+      'useAudioPlayerTime cannot be called outside of AudioPlayer',
     )
   }
   return time
+}
+
+export function formatTime(seconds: number) {
+  const hrs = Math.floor(seconds / 3600)
+  const mins = Math.floor((seconds % 3600) / 60)
+  const secs = Math.floor(seconds % 60)
+
+  const formattedMins = mins < 10 ? `0${mins}` : mins
+  const formattedSecs = secs < 10 ? `0${secs}` : secs
+
+  return hrs > 0
+    ? `${hrs}:${formattedMins}:${formattedSecs}`
+    : `${mins}:${formattedSecs}`
 }

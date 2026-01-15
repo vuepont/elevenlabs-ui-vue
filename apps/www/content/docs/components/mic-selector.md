@@ -25,7 +25,7 @@ description: A microphone selector with live audio preview
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add mic-selector
+    npx elevenlabs-ui-vue@latest add mic-selector
     ```
   ::
 
@@ -36,7 +36,7 @@ description: A microphone selector with live audio preview
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install lucide-vue-next @vueuse/core
       ```
 
       ::step
@@ -95,7 +95,7 @@ import { MicSelector } from "@/components/elevenlabs-ui/mic-selector"
 <MicSelector class="w-full max-w-md" />
 ```
 
-### Using the Hook
+### Using the Composable
 
 ```tsx showLineNumbers
 import { useAudioDevices } from "@/components/ui/mic-selector"
@@ -121,6 +121,13 @@ A dropdown selector for choosing audio input devices with live waveform preview.
 | muted         | `boolean`                    | Mute state (v-model:muted)             |
 | disabled      | `boolean`                    | Disables the selector dropdown         |
 | class         | `string`                     | Optional CSS classes for the container |
+
+#### Emits
+
+| Event             | Type                                                             | Description                                     |
+| ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| update:modelValue | `(deviceId: string) => void`                                     | Callback when device selection changes          |
+| update:muted      | `(mute: boolean) => void`                                        | Callback when nute state changes disconnects    |
 
 ### useAudioDevices
 

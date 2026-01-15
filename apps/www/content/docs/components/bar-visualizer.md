@@ -25,7 +25,7 @@ description: A bar visualizer showing audio frequency bands with various states.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add bar-visualizer
+    npx elevenlabs-ui-vue@latest add bar-visualizer
     ```
   ::
 
@@ -36,7 +36,7 @@ description: A bar visualizer showing audio frequency bands with various states.
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install @vueuse/core
       ```
 
       ::step
@@ -58,6 +58,7 @@ import {
   useMultibandVolume,
   type AgentState,
   type AudioAnalyserOptions,
+  type BarVisualizerProps,
   type MultiBandVolumeOptions,
 } from "@/components/elevenlabs-ui/bar-visualizer"
 ```

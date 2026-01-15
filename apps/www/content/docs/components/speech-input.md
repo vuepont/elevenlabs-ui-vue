@@ -28,7 +28,7 @@ description: A compact speech input component with real-time transcription previ
 
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add speech-input
+    npx elevenlabs-ui-vue@latest add speech-input
     ```
   ::
 
@@ -39,7 +39,7 @@ description: A compact speech input component with real-time transcription previ
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next @elevenlabs/client class-variance-authority motion-v
+      npm install @elevenlabs/client motion-v
       ```
 
       ::step
@@ -84,15 +84,15 @@ function handleStop(data: any) {
 </script>
 
 <template>
-  <SpeechInput
-    :getToken="getToken"
-    @change="handleChange"
-    @stop="handleStop"
-  >
-    <SpeechInputRecordButton />
-    <SpeechInputPreview placeholder="Start speaking..." />
-    <SpeechInputCancelButton />
-  </SpeechInput>
+    <SpeechInput
+      :getToken="getToken"
+      @change="handleChange"
+      @stop="handleStop"
+    >
+      <SpeechInputRecordButton />
+      <SpeechInputPreview placeholder="Start speaking..." />
+      <SpeechInputCancelButton />
+    </SpeechInput>
 </template>
 ```
 
@@ -110,20 +110,20 @@ function handleStop(data: any) {
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
-    <input
-      v-model="value"
-      class="flex-1 rounded border px-3 py-2"
-    />
-    <SpeechInput
-      :getToken="getToken"
-      @stop="handleStop"
-    >
-      <SpeechInputRecordButton />
-      <SpeechInputPreview />
-      <SpeechInputCancelButton />
-    </SpeechInput>
-  </div>
+    <div class="flex items-center gap-2">
+      <input
+        v-model="value"
+        class="flex-1 rounded border px-3 py-2"
+      />
+      <SpeechInput
+        :getToken="getToken"
+        @stop="handleStop"
+      >
+        <SpeechInputRecordButton />
+        <SpeechInputPreview />
+        <SpeechInputCancelButton />
+      </SpeechInput>
+    </div>
 </template>
 
 ```

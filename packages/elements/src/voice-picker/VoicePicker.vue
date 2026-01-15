@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ElevenLabs } from '@elevenlabs/elevenlabs-js'
 import type { HTMLAttributes } from 'vue'
-import { AudioPlayerProvider } from '@repo/elements/audio-player'
+import { AudioPlayer } from '@repo/elements/audio-player'
 import { Orb } from '@repo/elements/orb'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
@@ -59,7 +59,7 @@ function handleSelect(voiceId: string) {
 </script>
 
 <template>
-  <AudioPlayerProvider>
+  <AudioPlayer>
     <Popover v-model:open="isOpen">
       <PopoverTrigger as-child>
         <Button
@@ -96,5 +96,5 @@ function handleSelect(voiceId: string) {
         </Command>
       </PopoverContent>
     </Popover>
-  </AudioPlayerProvider>
+  </AudioPlayer>
 </template>

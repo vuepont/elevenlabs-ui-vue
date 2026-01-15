@@ -25,19 +25,19 @@ description: A live scrolling message visualization.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add message
+    npx elevenlabs-ui-vue@latest add message
     ```
   ::
 
   ::tabs-content{value="manual"}
     ::steps
-      ::step
+      <!-- ::step
         Install the following dependencies:
       ::
 
       ```bash
       npm install reka-ui lucide-vue-next
-      ```
+      ``` -->
 
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/message) into your project.
@@ -58,19 +58,19 @@ import { Message, MessageAvatar, MessageContent } from "@/components/elevenlabs-
 
 ````vue showLineNumbers
 <template>
-  <Message from="user">
-    <MessageAvatar src="/user-avatar.jpg" name="John" />
-    <MessageContent>
-      Hello, how can I help you?
-    </MessageContent>
-  </Message>
+    <Message from="user">
+      <MessageAvatar src="/user-avatar.jpg" name="John" />
+      <MessageContent>
+        Hello, how can I help you?
+      </MessageContent>
+    </Message>
 
-  <Message from="assistant">
-    <MessageAvatar src="/assistant-avatar.jpg" name="AI" />
-    <MessageContent>
-      I'm here to assist you with any questions!
-    </MessageContent>
-  </Message>
+    <Message from="assistant">
+      <MessageAvatar src="/assistant-avatar.jpg" name="AI" />
+      <MessageContent>
+        I'm here to assist you with any questions!
+      </MessageContent>
+    </Message>
 </template>
 ````
 
@@ -85,20 +85,20 @@ import { Message, MessageAvatar, MessageContent } from "@/components/elevenlabs-
 
 <template>
   <!-- Contained variant - default, has background and padding -->
-  <Message from="user">
-    <MessageAvatar src="/user-avatar.jpg" />
-    <MessageContent variant="contained">
-      This is a contained message with background
-    </MessageContent>
-  </Message>
+    <Message from="user">
+      <MessageAvatar src="/user-avatar.jpg" />
+      <MessageContent variant="contained">
+        This is a contained message with background
+      </MessageContent>
+    </Message>
 
-  <!-- Flat variant - no background for assistant, minimal styling -->
-  <Message from="assistant">
-    <MessageAvatar src="/assistant-avatar.jpg" />
-    <MessageContent variant="flat">
-      This is a flat message with minimal styling
-    </MessageContent>
-  </Message>
+    <!-- Flat variant - no background for assistant, minimal styling -->
+    <Message from="assistant">
+      <MessageAvatar src="/assistant-avatar.jpg" />
+      <MessageContent variant="flat">
+        This is a flat message with minimal styling
+      </MessageContent>
+    </Message>
 </template>
 
 ```
@@ -145,7 +145,7 @@ The main container component that handles layout and alignment based on message 
 | --------- | ----------------------- | ---------------------------------------------- |
 | from      | `"user" \| "assistant"` | **Required.** Determines alignment and styling |
 | class     | `string`                | Optional CSS classes                           |
-| ...props  | `HTMLDivElement`        | All standard div element props                 |
+| ...props  | `HTMLAttributes`        | All standard div element props                 |
 
 ### MessageContent
 

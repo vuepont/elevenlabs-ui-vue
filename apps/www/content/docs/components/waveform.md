@@ -25,19 +25,19 @@ description: A live scrolling waveform visualization with smooth animations.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add waveform
+    npx elevenlabsui-vue@latest add waveform
     ```
   ::
 
   ::tabs-content{value="manual"}
     ::steps
-      ::step
+      <!-- ::step
         Install the following dependencies:
       ::
 
       ```bash
       npm install reka-ui lucide-vue-next
-      ```
+      ``` -->
 
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/waveform) into your project.
@@ -71,12 +71,12 @@ const data = Array.from({ length: 50 }, () => Math.random())
 </script>
 
 <template>
-  <Waveform
-    :data="data"
-    :height="100"
-    :bar-width="4"
-    :bar-gap="2"
-  />
+    <Waveform
+      :data="data"
+      :height="100"
+      :bar-width="4"
+      :bar-gap="2"
+    />
 </template>
 ```
 
@@ -84,13 +84,13 @@ const data = Array.from({ length: 50 }, () => Math.random())
 
 ```vue showLineNumbers
 <template>
-  <ScrollingWaveform
-    :height="80"
-    :speed="50"
-    :bar-count="60"
-    bar-color="hsl(var(--primary))"
-    :fade-edges="true"
-  />
+    <ScrollingWaveform
+      :height="80"
+      :speed="50"
+      :bar-count="60"
+      bar-color="hsl(var(--primary))"
+      :fade-edges="true"
+    />
 </template>
 ```
 
@@ -102,12 +102,12 @@ const isRecording = ref(false)
 </script>
 
 <template>
-  <MicrophoneWaveform
-    :active="isRecording"
-    :height="100"
-    :sensitivity="1.5"
-    @error="(error) => console.error('Microphone error:', error)"
-  />
+    <MicrophoneWaveform
+      :active="isRecording"
+      :height="100"
+      :sensitivity="1.5"
+      @error="(error) => console.error('Microphone error:', error)"
+    />
 </template>
 ```
 
@@ -121,7 +121,7 @@ The base waveform component that displays audio data as bars.
 
 ```vue
 <template>
-  <Waveform :data="audioData" />
+    <Waveform :data="audioData" />
 </template>
 ```
 
@@ -152,7 +152,7 @@ Continuously scrolling waveform with auto-generated bars.
 
 ```vue
 <template>
-  <ScrollingWaveform :speed="50" />
+    <ScrollingWaveform :speed="50" />
 </template>
 ```
 
@@ -170,12 +170,12 @@ Interactive waveform for audio playback with seek functionality.
 
 ```vue
 <template>
-  <AudioScrubber
-    :data="waveformData"
-    :currentTime="playbackTime"
-    :duration="totalDuration"
-    @seek="handleSeek"
-  />
+    <AudioScrubber
+      :data="waveformData"
+      :currentTime="playbackTime"
+      :duration="totalDuration"
+      @seek="handleSeek"
+    />
 </template>
 ```
 
@@ -200,7 +200,7 @@ Real-time microphone input visualization.
 
 ```vue
 <template>
-  <MicrophoneWaveform :active="isListening" :sensitivity="1.5" />
+    <MicrophoneWaveform :active="isListening" :sensitivity="1.5" />
 </template>
 ```
 
@@ -226,7 +226,7 @@ Waveform with deterministic random data based on seed.
 
 ```vue
 <template>
-  <StaticWaveform :bars="40" :seed="42" />
+    <StaticWaveform :bars="40" :seed="42" />
 </template>
 ```
 
@@ -244,11 +244,11 @@ Advanced microphone visualization with recording history and playback scrubbing.
 
 ```vue
 <template>
-  <LiveMicrophoneWaveform
-    :active="isRecording"
-    :enableAudioPlayback="true"
-    :playbackRate="1"
-  />
+    <LiveMicrophoneWaveform
+      :active="isRecording"
+      :enableAudioPlayback="true"
+      :playbackRate="1"
+    />
 </template>
 ```
 
@@ -277,10 +277,10 @@ Recording interface with scrubbing through recorded audio.
 
 ```vue
 <template>
-  <RecordingWaveform
-    :recording="isRecording"
-    @recording-complete="(data) => console.log('Recording data:', data)"
-  />
+    <RecordingWaveform
+      :recording="isRecording"
+      @recording-complete="(data) => console.log('Recording data:', data)"
+    />
 </template>
 ```
 
@@ -311,16 +311,16 @@ const audioData = computed(() =>
 </script>
 
 <template>
-  <AudioScrubber
-    :data="audioData"
-    :current-time="currentTime"
-    :duration="duration"
-    @seek="handleSeek"
-    :height="60"
-    :bar-width="3"
-    :bar-gap="1"
-    bar-color="hsl(var(--primary))"
-  />
+    <AudioScrubber
+      :data="audioData"
+      :current-time="currentTime"
+      :duration="duration"
+      @seek="handleSeek"
+      :height="60"
+      :bar-width="3"
+      :bar-gap="1"
+      bar-color="hsl(var(--primary))"
+    />
 </template>
 ```
 
@@ -334,19 +334,19 @@ const recording = ref(false)
 </script>
 
 <template>
-  <div class="space-y-4">
-    <RecordingWaveform
-      :recording="recording"
-      :height="100"
-      @recording-complete="(data) => {
-        console.log('Recording complete', data)
-      }"
-    />
+    <div class="space-y-4">
+      <RecordingWaveform
+        :recording="recording"
+        :height="100"
+        @recording-complete="(data) => {
+          console.log('Recording complete', data)
+        }"
+      />
 
-    <Button @click="recording = !recording">
-      {{ recording ? 'Stop' : 'Start' }} Recording
-    </Button>
-  </div>
+      <Button @click="recording = !recording">
+        {{ recording ? 'Stop' : 'Start' }} Recording
+      </Button>
+    </div>
 </template>
 ```
 
@@ -360,17 +360,17 @@ const active = ref(false)
 </script>
 
 <template>
-  <MicrophoneWaveform
-    :active="active"
-    :height="80"
-    :sensitivity="2"
-    :bar-width="2"
-    :bar-gap="1"
-    @error="(error) => {
-      console.error('Microphone error:', error)
-      active = false
-    }"
-  />
+    <MicrophoneWaveform
+      :active="active"
+      :height="80"
+      :sensitivity="2"
+      :bar-width="2"
+      :bar-gap="1"
+      @error="(error) => {
+        console.error('Microphone error:', error)
+        active = false
+      }"
+    />
 </template>
 ```
 

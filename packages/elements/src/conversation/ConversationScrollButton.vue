@@ -5,9 +5,13 @@ import { cn } from '@repo/shadcn-vue/lib/utils'
 import { ArrowDownIcon } from 'lucide-vue-next'
 import { useStickToBottomContext } from 'vue-stick-to-bottom'
 
-const props = defineProps<{
+type ConversationScrollButtonProps = InstanceType<typeof Button>['$props']
+
+interface Props extends /* @vue-ignore */ ConversationScrollButtonProps {
   class?: HTMLAttributes['class']
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { isAtBottom, scrollToBottom } = useStickToBottomContext()
 </script>

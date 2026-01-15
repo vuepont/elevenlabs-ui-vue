@@ -50,6 +50,6 @@ function handleToggle(shouldPlay: boolean) {
     :class="props.class"
     :playing="isPlaying"
     :loading="isBuffering"
-    @toggle="handleToggle"
+    @playing-change="handleToggle"
   />
 </template>

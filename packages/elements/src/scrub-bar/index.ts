@@ -1,4 +1,4 @@
-export { default as ScrubBarContainer } from './ScrubBarContainer.vue'
+export { default as ScrubBar } from './ScrubBar.vue'
 export { default as ScrubBarProgress } from './ScrubBarProgress.vue'
 export { default as ScrubBarThumb } from './ScrubBarThumb.vue'
 export { default as ScrubBarTimeLabel } from './ScrubBarTimeLabel.vue'

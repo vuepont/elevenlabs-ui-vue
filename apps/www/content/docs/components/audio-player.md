@@ -26,7 +26,7 @@ hideCode: true
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add audio-player
+    npx elevenlabs-ui-vue@latest add audio-player
     ```
   ::
 
@@ -37,7 +37,7 @@ hideCode: true
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install reka-ui lucide-vue-next vue-stick-to-bottom
       ```
 
       ::step
@@ -57,11 +57,12 @@ import {
   AudioPlayerButton,
   AudioPlayerDuration,
   AudioPlayerProgress,
-  AudioPlayerProvider,
+  AudioPlayer,
   AudioPlayerSpeed,
   AudioPlayerSpeedButtonGroup,
   AudioPlayerTime,
   useAudioPlayer,
+  useAudioPlayerTime
 } from "@/components/elevenlabs-ui/audio-player"
 </script>
 ```
@@ -70,7 +71,7 @@ import {
 
 ```vue showLineNumbers
 <template>
-    <AudioPlayerProvider>
+    <AudioPlayer>
       <div class="flex items-center gap-4">
         <AudioPlayerButton />
         <AudioPlayerProgress class="flex-1" />
@@ -78,7 +79,7 @@ import {
         <span>/</span>
         <AudioPlayerDuration />
       </div>
-    </AudioPlayerProvider>
+    </AudioPlayer>
 </template>
 ```
 
@@ -86,20 +87,18 @@ import {
 
 ```vue showLineNumbers
 <script setup lang="ts">
-// import audio-player components
-
 const track = {
-  id: "track-1",
-  src: "/audio/song.mp3",
-  data: { title: "My Song", artist: "Artist Name" }
+    id: "track-1",
+    src: "/audio/song.mp3",
+    data: { title: "My Song", artist: "Artist Name" }
 }
 </script>
 
 <template>
-    <AudioPlayerProvider>
+    <AudioPlayer>
      <AudioPlayerButton :item="track" />
      <AudioPlayerProgress />
-   </AudioPlayerProvider>
+   </AudioPlayer>
 </template>
 ```
 
@@ -107,17 +106,15 @@ const track = {
 
 ```vue showLineNumbers
 <script setup lang="ts">
-// import audio-player components
-
 const tracks = [
-   { id: "1", src: "/audio/track1.mp3", data: { title: "Track 1" } },
-   { id: "2", src: "/audio/track2.mp3", data: { title: "Track 2" } },
-   { id: "3", src: "/audio/track3.mp3", data: { title: "Track 3" } },
+    { id: "1", src: "/audio/track1.mp3", data: { title: "Track 1" } },
+    { id: "2", src: "/audio/track2.mp3", data: { title: "Track 2" } },
+    { id: "3", src: "/audio/track3.mp3", data: { title: "Track 3" } },
 ]
 </script>
 
 <template>
-    <AudioPlayerProvider>
+    <AudioPlayer>
       <div class="space-y-4">
         <div v-for="track in tracks"
           :key="track.id"
@@ -135,20 +132,20 @@ const tracks = [
           <AudioPlayerDuration />
         </div>
       </div>
-    </AudioPlayerProvider>
+    </AudioPlayer>
 </template>
 ```
 
 ## API Reference
 
-### AudioPlayerProvider
+### AudioPlayer
 
 The provider component that manages audio state and playback. Must wrap all audio player components.
 
 ```tsx
-<AudioPlayerProvider>
+<AudioPlayer>
     <slot />
-</AudioPlayerProvider>
+</AudioPlayer>
 ```
 
 ### AudioPlayerButton
@@ -267,14 +264,13 @@ const {
 
 ```vue
 <script setup lang="ts">
-import { useAudioPlayer } from './context'
 const { play, activeItem } = useAudioPlayer()
 
 function handlePlayNext() {
-    const nextTrack = getNextTrack(activeItem.value?.id)
+  const nextTrack = getNextTrack(activeItem.value?.id)
     if (nextTrack) {
       play(nextTrack)
-    }
+  }
 }
 </script>
 
@@ -322,7 +318,7 @@ const progressPercentage = computed(() => {
 
 ```vue showLineNumbers
 <template>
-    <AudioPlayerProvider>
+    <AudioPlayer>
       <div class="flex items-center gap-4">
         <AudioPlayerButton />
         <AudioPlayerTime />
@@ -330,7 +326,7 @@ const progressPercentage = computed(() => {
         <AudioPlayerDuration />
         <AudioPlayerSpeed />
       </div>
-    </AudioPlayerProvider>
+    </AudioPlayer>
 </template>
 ```
 

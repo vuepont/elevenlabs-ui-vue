@@ -26,7 +26,7 @@ description: A voice picker component for selecting a voice from a list of voice
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add voice-picker
+    npx elevenlabs-ui-vue@latest add voice-picker
     ```
   ::
 
@@ -63,17 +63,19 @@ import { VoicePicker } from "@/components/elevenlabs-ui/voice-picker"
 import { ElevenLabs } from "@elevenlabs/elevenlabs-js"
 
 const voices = [
-  {
-    voice_id: "21m00Tcm4TlvDq8ikWAM",
-    name: "Rachel",
-    preview_url: "https://example.com/rachel-preview.mp3",
-  },
+    {
+      voice_id: "21m00Tcm4TlvDq8ikWAM",
+      name: "Rachel",
+      preview_url: "https://example.com/rachel-preview.mp3",
+      // ... other voice properties
+    },
+      // ... more voices
 ]
 
 const selectedVoice = ref("")
 
 function handleValueChange(value: string) {
-  selectedVoice.value = value
+    selectedVoice.value = value
 }
 </script>
 
@@ -97,7 +99,6 @@ const selectedVoice = ref('')
 </script>
 
 <template>
-  <>
     <!-- Controlled -->
     <VoicePicker
       :voices="voices"
@@ -109,7 +110,6 @@ const selectedVoice = ref('')
       :voices="voices"
       @update:model-value="(voiceId) => console.log('Selected:', voiceId)"
     />
-  </>
 </template>
 ```
 
@@ -122,18 +122,18 @@ const selectedVoice = ref('')
 const open = ref(false)
 
 function handleValueChange(value: string) {
-  selectedVoice.value = value
+    selectedVoice.value = value
 }
 </script>
 
 <template>
-  <VoicePicker
-    :voices="voices"
-    v-model="selectedVoice"
-    :open="open"
-    @update:model-value="handleValueChange"
-    @update:open="open = $event"
-  />
+    <VoicePicker
+      :voices="voices"
+      v-model="selectedVoice"
+      :open="open"
+      @update:model-value="handleValueChange"
+      @update:open="open = $event"
+    />
 </template>
 ```
 
@@ -142,11 +142,11 @@ function handleValueChange(value: string) {
 
 ```vue showLineNumbers
 <template>
-  <VoicePicker
-    :voices="voices"
-    v-model="selectedVoice"
-    placeholder="Choose a voice..."
-  />
+    <VoicePicker
+      :voices="voices"
+      v-model="selectedVoice"
+      placeholder="Choose a voice..."
+    />
 </template>
 ```
 
@@ -160,20 +160,20 @@ const voices = ref<Voice[]>([])
 const selectedVoice = ref('')
 
 onMounted(async () => {
-  const client = new ElevenLabsClient({
-    apiKey: import.meta.env.ELEVENLABS_API_KEY,
-  })
+    const client = new ElevenLabsClient({
+      apiKey: import.meta.env.ELEVENLABS_API_KEY,
+    })
 
-  const response = await client.voices.getAll()
-  voices.value = response.voices
+    const response = await client.voices.getAll()
+    voices.value = response.voices
 })
 </script>
 
 <template>
-  <VoicePicker
-    :voices="voices"
-    v-model="selectedVoice"
-  />
+    <VoicePicker
+      :voices="voices"
+      v-model="selectedVoice"
+    />
 </template>
 ```
 
@@ -215,7 +215,7 @@ A searchable dropdown for selecting ElevenLabs voices with audio preview and orb
 - Built on top of Command, Popover, and AudioPlayer components
 - Requires `@elevenlabs/elevenlabs-js` for ElevenLabs Voice types
 - Each voice displays with an Orb visualization and preview audio
-- Audio playback is managed by AudioPlayerProvider for consistent state
+- Audio playback is managed by AudioPlayer for consistent state
 - Search is case-insensitive and filters by voice name
 - Supports both controlled (`modelValue`/`onUpdate:modelValue`) and uncontrolled modes
 - Open state can be controlled externally via `open`/`onUpdate:open` prop and event

@@ -26,7 +26,7 @@ description: A live scrolling conversation visualization.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add conversation
+    npx elevenlabs-ui-vue@latest add conversation
     ```
   ::
 
@@ -37,7 +37,7 @@ description: A live scrolling conversation visualization.
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install lucide-vue-next vue-stick-to-bottom
       ```
 
       ::step
@@ -64,18 +64,18 @@ import {
 
 ```vue showLineNumbers
 <template>
-  <Conversation>
-    <ConversationContent>
-      <div
-        v-for="message in messages"
-        :key="message.id"
-      >
-        {{ message.content }}
-      </div>
-    </ConversationContent>
+    <Conversation>
+      <ConversationContent>
+        <div
+          v-for="message in messages"
+          :key="message.id"
+        >
+          {{ message.content }}
+        </div>
+      </ConversationContent>
 
-    <ConversationScrollButton />
-  </Conversation>
+      <ConversationScrollButton />
+    </Conversation>
 </template>
 ```
 
@@ -83,24 +83,24 @@ import {
 
 ```vue showLineNumbers
 <template>
-  <Conversation>
-    <ConversationContent>
-      <ConversationEmptyState
-        v-if="messages.length === 0"
-        title="No messages yet"
-        description="Start a conversation to see messages here"
-      />
-      <div
-        v-else
-        v-for="message in messages"
-        :key="message.id"
-      >
-        {{ message.content }}
-      </div>
-    </ConversationContent>
+    <Conversation>
+      <ConversationContent>
+        <ConversationEmptyState
+          v-if="messages.length === 0"
+          title="No messages yet"
+          description="Start a conversation to see messages here"
+        />
+        <div
+          v-else
+          v-for="message in messages"
+          :key="message.id"
+        >
+          {{ message.content }}
+        </div>
+      </ConversationContent>
 
-    <ConversationScrollButton />
-  </Conversation>
+      <ConversationScrollButton />
+    </Conversation>
 </template>
 ```
 
@@ -131,7 +131,6 @@ Container for conversation messages.
 | Prop      | Type                    | Description                     |
 | --------- | ----------------------- | ------------------------------- |
 | class     | `string`                | Optional CSS classes            |
-<!-- | ...props  | `StickToBottom.Content` | All StickToBottom.Content props | -->
 
 ### ConversationEmptyState
 
@@ -145,8 +144,7 @@ Displays when there are no messages in the conversation.
 | description | `string`         | Description text                             |
 | icon        | `Component`      | Optional icon to display                     |
 | class       | `string`         | Optional CSS classes                         |
-| ...props    | `class` | All standard div element props               |
-<!-- | children    | `ReactNode`      | Custom content (overrides default rendering) | -->
+| ...props    | `HTMLAttributes` | All standard div element props               |
 
 ### ConversationScrollButton
 

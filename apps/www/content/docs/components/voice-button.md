@@ -26,19 +26,19 @@ description: A beautiful button for voice and audio interactions
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add voice-button
+    npx elevenlabs-ui-vue@latest add voice-button
     ```
   ::
 
   ::tabs-content{value="manual"}
     ::steps
-      ::step
+      <!-- ::step
         Install the following dependencies:
       ::
 
       ```bash
       npm install reka-ui lucide-vue-next
-      ```
+      ``` -->
 
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/voice-button) into your project.

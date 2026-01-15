@@ -32,7 +32,7 @@ const messageContentVariants = cva(
 
 type MessageContentVariants = VariantProps<typeof messageContentVariants>
 
-interface Props {
+interface Props extends /* @vue-ignore */ HTMLAttributes {
   variant?: MessageContentVariants['variant']
   class?: HTMLAttributes['class']
 }

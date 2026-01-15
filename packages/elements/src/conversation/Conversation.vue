@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { StickToBottom } from 'vue-stick-to-bottom'
 
 const props = withDefaults(defineProps<{
-  class?: string
+  class?: HTMLAttributes['class']
 }>(), {})
 </script>
 

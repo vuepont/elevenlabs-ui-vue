@@ -26,7 +26,7 @@ description: A beautiful bar for voice and audio interactions
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add conversation-bar
+    npx elevenlabs-ui-vue@latest add conversation-bar
     ```
   ::
 
@@ -37,7 +37,7 @@ description: A beautiful bar for voice and audio interactions
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install lucide-vue-next
       ```
 
       ::step
@@ -66,11 +66,11 @@ import { ConversationBar } from "@/components/elevenlabs-ui/conversation-bar"
 
 ```vue showLineNumbers
 <ConversationBar
-  :agent-id="your-agent-id"
-  @connect="console.log('Connected')"
-  @disconnect="console.log('Disconnected')"
-  @message="(message) => console.log('Message:', message)"
-  @error="(error) => console.error('Error:', error)"
+    :agent-id="your-agent-id"
+    @connect="console.log('Connected')"
+    @disconnect="console.log('Disconnected')"
+    @message="(message) => console.log('Message:', message)"
+    @error="(error) => console.error('Error:', error)"
 />
 ```
 
@@ -78,10 +78,10 @@ import { ConversationBar } from "@/components/elevenlabs-ui/conversation-bar"
 
 ```vue showLineNumbers
 <ConversationBar
-  :agent-id="your-agent-id"
-  class="max-w-2xl"
-  waveformClass="bg-gradient-to-r from-blue-500 to-purple-500"
-  @connect="console.log("Connected")"
+    :agent-id="your-agent-id"
+    class="max-w-2xl"
+    waveformClass="bg-gradient-to-r from-blue-500 to-purple-500"
+    @connect="console.log("Connected")"
 />
 ```
 
@@ -101,7 +101,7 @@ A complete voice conversation interface with WebRTC support, microphone controls
 
 #### Emits
 
-| Emit              | Type                                                             | Description                                     |
+| Event             | Type                                                             | Description                                     |
 | ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
 | connect           | `() => void`                                                     | Callback when conversation connects             |
 | disconnect        | `() => void`                                                     | Callback when conversation disconnects          |
@@ -120,7 +120,7 @@ A complete voice conversation interface with WebRTC support, microphone controls
 
 ## Notes
 
-- Requires the `@elevenlabs/vue` package for conversation management
+<!-- - Requires the `@elevenlabs/vue` package for conversation management -->
 - Uses WebRTC for real-time audio streaming
 - Automatically requests microphone permissions when starting a conversation
 - Cleans up media streams on component unmount

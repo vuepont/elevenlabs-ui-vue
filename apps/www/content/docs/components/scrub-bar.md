@@ -26,19 +26,19 @@ description: An interactive timeline scrubber.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add scrub-bar
+    npx elevenlabs-ui-vue@latest add scrub-bar
     ```
   ::
 
   ::tabs-content{value="manual"}
     ::steps
-      ::step
+      <!-- ::step
         Install the following dependencies:
       ::
 
       ```bash
       npm install reka-ui lucide-vue-next
-      ```
+      ``` -->
 
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/scrub-bar) into your project.
@@ -56,7 +56,7 @@ description: An interactive timeline scrubber.
 <script setup lang="ts">
   import { ref } from 'vue'
   import {
-   ScrubBarContainer,
+   ScrubBar,
    ScrubBarProgress,
    ScrubBarThumb,
    ScrubBarTimeLabel,
@@ -68,7 +68,7 @@ description: An interactive timeline scrubber.
 </script>
 
 <template>
-    <ScrubBarContainer 
+    <ScrubBar 
       :duration="duration" 
       :value="value" 
       @scrub="(val: number) => value = val"
@@ -79,13 +79,13 @@ description: An interactive timeline scrubber.
         <ScrubBarThumb />
      </ScrubBarTrack>
      <ScrubBarTimeLabel :time="duration" />
-   </ScrubBarContainer>
+   </ScrubBar>
 </template>
 ```
 
 ## API Reference
 
-### ScrubBarContainer
+### ScrubBar
 
 The main container for the scrub bar components. It provides the context for its children.
 
@@ -96,11 +96,11 @@ The main container for the scrub bar components. It provides the context for its
 
 #### Emits
 
-| Emit              | Type                                                             | Description                                     |
-| ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| Event             | Type                                                             | Description                                             |
+| ----------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
 | scrub             | `(time: number) => void`                                         | Optional. Callback when the user scrubs the timeline.  |
-| scrub-start       | `(stream: MediaStream) => void`                                  | Optional. Callback when the user starts scrubbing. |
-| scrub-end         | `() => void`                                                     | Optional. Callback when the user ends scrubbing.|
+| scrub-start       | `() => void`                                                     | Optional. Callback when the user starts scrubbing.     |
+| scrub-end         | `() => void`                                                     | Optional. Callback when the user ends scrubbing.       |
 
 
 ### ScrubBarTrack

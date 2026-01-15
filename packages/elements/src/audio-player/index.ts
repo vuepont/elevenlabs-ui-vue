@@ -1,7 +1,7 @@
+export { default as AudioPlayer } from './AudioPlayer.vue'
 export { default as AudioPlayerButton } from './AudioPlayerButton.vue'
 export { default as AudioPlayerDuration } from './AudioPlayerDuration.vue'
 export { default as AudioPlayerProgress } from './AudioPlayerProgress.vue'
-export { default as AudioPlayerProvider } from './AudioPlayerProvider.vue'
 export { default as AudioPlayerSpeed } from './AudioPlayerSpeed.vue'
 export { default as AudioPlayerSpeedButtonGroup } from './AudioPlayerSpeedButtonGroup.vue'
 export { default as AudioPlayerTime } from './AudioPlayerTime.vue'
