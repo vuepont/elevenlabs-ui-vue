@@ -38,7 +38,7 @@ description: An interactive transcript viewer.
       ::
 
       ```bash
-      npm install eka-ui @vueuse/core @elevenlabs/elevenlabs-js
+      npm install reka-ui @vueuse/core @elevenlabs/elevenlabs-js
       ```
 
       ::step
