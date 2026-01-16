@@ -37,7 +37,7 @@ hideCode: true
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next vue-stick-to-bottom
+      npm install reka-ui lucide-vue-next @vueuse/core
       ```
 
       ::step
