@@ -16,12 +16,24 @@ const props = defineProps<{
 }>()
 const TOP_LEVEL_SECTIONS = [
   {
-    name: 'Get Started',
+    name: 'Introduction',
     href: '/docs/introduction',
   },
   {
     name: 'Components',
     href: '/docs/components',
+  },
+  {
+    name: 'Setup',
+    href: '/docs/setup',
+  },
+  {
+    name: 'Usage',
+    href: '/docs/usage',
+  },
+  {
+    name: 'Troubleshooting',
+    href: '/docs/troubleshooting',
   },
 ]
 const EXCLUDED_SECTIONS = ['installation']
@@ -30,6 +42,13 @@ const EXCLUDED_PAGES = ['/docs/introduction']
 const { path } = toRefs(useRoute())
 
 function isActive(href: string) {
+  // For Getting Started section links, use exact match only
+  // This prevents /docs/components from being active when on /docs/components/audio-player
+  const isTopLevelSection = TOP_LEVEL_SECTIONS.some(section => section.href === href)
+  if (isTopLevelSection) {
+    return path.value === href
+  }
+  // For other links, use prefix matching
   return href === '/docs'
     ? path.value === href
     : path.value.startsWith(href)
@@ -45,7 +64,7 @@ function isActive(href: string) {
       <div class="from-background via-background/80 to-background/50 sticky -top-1 z-10 h-8 shrink-0 bg-linear-to-b blur-xs" />
       <SidebarGroup>
         <SidebarGroupLabel class="text-muted-foreground font-medium">
-          Sections
+          Getting Started
         </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
@@ -67,7 +86,7 @@ function isActive(href: string) {
           </SidebarMenu>
         </SidebarGroupContent>
       </SidebarGroup>
-      <SidebarGroup v-for="item in tree.children?.filter(section => !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))" :key="item.title">
+      <SidebarGroup v-for="item in tree.children?.filter(section => section.children?.length && !EXCLUDED_SECTIONS.includes(section.title.toLocaleLowerCase()))" :key="item.title">
         <SidebarGroupLabel class="text-muted-foreground font-medium">
           {{ item.title }}
         </SidebarGroupLabel>

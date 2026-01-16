@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {
-  ScrubBarContainer,
+  ScrubBar,
   ScrubBarProgress,
   ScrubBarThumb,
   ScrubBarTimeLabel,
@@ -19,7 +19,7 @@ function handleScrub(val: number) {
 
 <template>
   <div class="flex w-full max-w-sm flex-col items-center gap-4 p-4">
-    <ScrubBarContainer
+    <ScrubBar
       :duration="duration"
       :value="value"
       class="w-full"
@@ -38,6 +38,6 @@ function handleScrub(val: number) {
       </ScrubBarTrack>
 
       <ScrubBarTimeLabel :time="duration" class="w-10 text-center" />
-    </ScrubBarContainer>
+    </ScrubBar>
   </div>
 </template>

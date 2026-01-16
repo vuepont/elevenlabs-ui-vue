@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import {
-  ScrubBarContainer,
+  ScrubBar,
   ScrubBarProgress,
   ScrubBarThumb,
   ScrubBarTimeLabel,
@@ -45,7 +45,7 @@ function handleScrubEnd() {
 </script>
 
 <template>
-  <ScrubBarContainer
+  <ScrubBar
     data-slot="transcript-scrub-bar"
     :duration="duration"
     :value="currentTime"
@@ -70,5 +70,5 @@ function handleScrubEnd() {
         <ScrubBarTimeLabel :time="Math.max(0, duration - currentTime)" />
       </div>
     </div>
-  </ScrubBarContainer>
+  </ScrubBar>
 </template>

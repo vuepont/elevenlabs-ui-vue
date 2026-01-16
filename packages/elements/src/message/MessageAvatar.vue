@@ -3,7 +3,9 @@ import type { HTMLAttributes } from 'vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@repo/shadcn-vue/components/ui/avatar'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 
-interface Props {
+type MessageAvatarProps = InstanceType<typeof Avatar>['$props']
+
+interface Props extends /* @vue-ignore */ MessageAvatarProps {
   src: string
   name?: string
   class?: HTMLAttributes['class']

@@ -26,18 +26,42 @@ export type AgentConnectionState
     | 'disconnecting'
 
 interface Props {
+  /**
+   * ElevenLabs Agent ID to connect to
+   */
   agentId: string
+  /**
+   * Custom className for the container
+   */
   class?: HTMLAttributes['class']
+  /**
+   * Custom className for the waveform
+   */
   waveformClass?: string
 }
 
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
+  /**
+   * Callback when conversation connects
+   */
   (e: 'connect'): void
+  /**
+   * Callback when conversation disconnects
+   */
   (e: 'disconnect'): void
+  /**
+   * Callback when an error occurs
+   */
   (e: 'error', error: Error): void
+  /**
+   * Callback when a message is received
+   */
   (e: 'message', payload: { source: 'user' | 'ai', message: string }): void
+  /**
+   * Callback when user sends a message
+   */
   (e: 'send-message', message: string): void
 }>()
 

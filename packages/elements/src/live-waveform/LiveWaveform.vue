@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
-export interface LiveWaveformProps {
+interface LiveWaveformProps extends /* @vue-ignore */ HTMLAttributes {
   active?: boolean
   processing?: boolean
   deviceId?: string
@@ -23,6 +23,7 @@ export interface LiveWaveformProps {
   updateRate?: number
   mode?: 'scrolling' | 'static'
   class?: HTMLAttributes['class']
+
 }
 
 const props = withDefaults(defineProps<LiveWaveformProps>(), {
@@ -410,13 +411,21 @@ onMounted(() => {
 
       // Edge Fading
       if (props.fadeEdges && props.fadeWidth > 0 && rect.width > 0) {
+        // Cache gradient if width hasn't changed
         if (!audioState.gradientCache || audioState.lastWidth !== rect.width) {
           const gradient = ctx.createLinearGradient(0, 0, rect.width, 0)
           const fadePercent = Math.min(0.3, props.fadeWidth / rect.width)
+
+          // destination-out: removes destination where source alpha is high
+          // We want: fade edges out, keep center solid
+          // Left edge: start opaque (1) = remove, fade to transparent (0) = keep
           gradient.addColorStop(0, 'rgba(255,255,255,1)')
           gradient.addColorStop(fadePercent, 'rgba(255,255,255,0)')
+          // Center stays transparent = keep everything
           gradient.addColorStop(1 - fadePercent, 'rgba(255,255,255,0)')
+          // Right edge: fade from transparent (0) = keep to opaque (1) = remove
           gradient.addColorStop(1, 'rgba(255,255,255,1)')
+
           audioState.gradientCache = gradient
           audioState.lastWidth = rect.width
         }
@@ -435,6 +444,8 @@ onMounted(() => {
 
   audioState.animationId = requestAnimationFrame(animate)
 })
+
+const { role: _, 'aria-label': ____, class: __, ...otherProps } = props
 </script>
 
 <template>
@@ -444,6 +455,7 @@ onMounted(() => {
     :style="{ height: heightStyle }"
     :aria-label="active ? 'Live audio waveform' : processing ? 'Processing audio' : 'Audio waveform idle'"
     role="img"
+    v-bind="otherProps"
   >
     <div
       v-if="!active && !processing"

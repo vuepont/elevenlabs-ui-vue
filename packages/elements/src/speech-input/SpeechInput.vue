@@ -8,17 +8,57 @@ import { buildData, SpeechInputContextKey } from './context'
 import { useScribe } from './useScribe'
 
 const props = withDefaults(defineProps<{
+  /**
+   * Function that returns a token for authenticating with the speech service.
+   * This should be an async function that fetches a token from your backend.
+   */
   getToken: () => Promise<string>
+  /**
+   * Additional CSS classes for the root container
+   */
   class?: HTMLAttributes['class']
+  /**
+   * Size variant for the component buttons
+   * @default "default"
+   */
   size?: ButtonSize
+  /**
+   * Model ID for the speech recognition service
+   * @default "scribe_v2_realtime"
+   */
   modelId?: string
+
+  /**
+   * Base URI for the speech recognition service
+   */
   baseUri?: string
+  /**
+   * Strategy for committing transcripts
+   */
   commitStrategy?: CommitStrategy
+  /**
+   * Silence threshold in seconds for VAD
+   */
   vadSilenceThresholdSecs?: number
+  /**
+   * VAD threshold value
+   */
   vadThreshold?: number
+  /**
+   * Minimum speech duration in milliseconds
+   */
   minSpeechDurationMs?: number
+  /**
+   * Minimum silence duration in milliseconds
+   */
   minSilenceDurationMs?: number
+  /**
+   * Language code for transcription (e.g., "en", "es", "fr")
+   */
   languageCode?: string
+  /**
+   * Microphone configuration options
+   */
   microphone?: {
     deviceId?: string
     echoCancellation?: boolean
@@ -26,7 +66,13 @@ const props = withDefaults(defineProps<{
     autoGainControl?: boolean
     channelCount?: number
   }
+  /**
+   * Audio format for manual audio mode
+   */
   audioFormat?: AudioFormat
+  /**
+   * Sample rate for manual audio mode
+   */
   sampleRate?: number
 }>(), {
   size: 'default',
@@ -38,12 +84,33 @@ const props = withDefaults(defineProps<{
 })
 
 const emit = defineEmits<{
+  /**
+   * Called whenever the transcript changes (partial or committed)
+   */
   change: [data: SpeechInputData]
+  /**
+   * Called when recording is cancelled
+   */
   cancel: [data: SpeechInputData]
+  /**
+   * Called when recording starts
+   */
   start: [data: SpeechInputData]
+  /**
+   * Called when recording stops
+   */
   stop: [data: SpeechInputData]
+  /**
+   * Called when an error occurs
+   */
   error: [error: Error | Event]
+  /**
+   * Called when an authentication error occurs
+   */
   authError: [data: { error: string }]
+  /**
+   * Called when a quota exceeded error occurs
+   */
   quotaExceededError: [data: { error: string }]
 }>()
 

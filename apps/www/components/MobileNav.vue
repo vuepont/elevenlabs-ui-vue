@@ -19,12 +19,24 @@ const open = ref(false)
 
 const TOP_LEVEL_SECTIONS = [
   {
-    name: 'Get Started',
+    name: 'Introduction',
     href: '/docs/introduction',
   },
   {
     name: 'Components',
     href: '/docs/components',
+  },
+  {
+    name: 'Setup',
+    href: '/docs/setup',
+  },
+  {
+    name: 'Usage',
+    href: '/docs/usage',
+  },
+  {
+    name: 'Troubleshooting',
+    href: '/docs/troubleshooting',
   },
 ]
 
@@ -90,7 +102,7 @@ function handleNavigate(path: string) {
         </div>
         <div class="flex flex-col gap-4">
           <div class="text-muted-foreground text-sm font-medium">
-            Sections
+            Getting Started
           </div>
           <div class="flex flex-col gap-3">
             <NuxtLink
@@ -105,7 +117,7 @@ function handleNavigate(path: string) {
           </div>
         </div>
         <div class="flex flex-col gap-8">
-          <template v-for="(group, index) in tree[0]?.children" :key="index">
+          <template v-for="(group, index) in tree[0]?.children?.filter(section => section.children?.length)" :key="index">
             <div class="flex flex-col gap-4">
               <div class="text-muted-foreground text-sm font-medium">
                 {{ group.title }}

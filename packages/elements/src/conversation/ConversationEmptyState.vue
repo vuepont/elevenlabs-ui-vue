@@ -2,12 +2,14 @@
 import type { Component, HTMLAttributes } from 'vue'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 
-const props = withDefaults(defineProps<{
+interface Props extends /* @vue-ignore */ HTMLAttributes {
   class?: HTMLAttributes['class']
   title?: string
   description?: string
   icon?: Component
-}>(), {
+}
+
+const props = withDefaults(defineProps<Props>(), {
   title: 'No messages yet',
   description: 'Start a conversation to see messages here',
 })

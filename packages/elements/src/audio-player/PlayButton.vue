@@ -5,9 +5,9 @@ import { cn } from '@repo/shadcn-vue/lib/utils'
 import { PauseIcon, PlayIcon } from 'lucide-vue-next'
 import Spinner from './Spinner.vue'
 
-type PlayerButtonProps = InstanceType<typeof Button>['$props']
+type PlayButtonProps = InstanceType<typeof Button>['$props']
 
-interface Props extends /* @vue-ignore */ PlayerButtonProps {
+interface Props extends /* @vue-ignore */ PlayButtonProps {
   class?: HTMLAttributes['class']
   playing: boolean
   loading?: boolean
@@ -16,13 +16,13 @@ interface Props extends /* @vue-ignore */ PlayerButtonProps {
 const props = defineProps<Props>()
 const emit = defineEmits<{
   (e: 'click', payload: MouseEvent): void
-  (e: 'toggle', playing: boolean): void
+  (e: 'playingChange', playing: boolean): void
 }>()
 
 const { class: _, ...otherProps } = props
 
 function handleClick(e: MouseEvent) {
-  emit('toggle', !props.playing)
+  emit('playingChange', !props.playing)
   emit('click', e)
 }
 </script>

@@ -17,9 +17,8 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
-const { data: neighbours } = await useAsyncData(`surround-${route.path}`, () => {
-  return queryCollectionItemSurroundings('content', route.path)
-})
+// Use custom navigation that properly crosses section boundaries
+const { neighbours } = await useDocsNeighbours(route.path)
 
 useSeoMeta({
   title: page.value.title,

@@ -1,15 +1,15 @@
 export const siteConfig = {
-  name: 'elevenlabs/ui',
-  url: 'https://ui.elevenlabs.io',
+  name: 'elevenlabs-ui-vue',
+  url: 'https://elevenlabs-ui-vue.com',
   ogImage: 'https://shadcn-vue.com/og.jpg',
   description:
     'A collection of Open Source agent and audio components that you can customize and extend.',
   links: {
-    github: 'https://github.com/vuepont',
+    github: 'https://github.com/vuepont/elevenlabs-ui-vue',
   },
   navItems: [
     {
-      href: '/docs/installation',
+      href: '/docs/introduction',
       label: 'Docs',
     },
     {

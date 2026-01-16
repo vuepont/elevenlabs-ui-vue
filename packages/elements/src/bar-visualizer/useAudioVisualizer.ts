@@ -11,13 +11,20 @@ export interface AudioAnalyserOptions {
 
 export interface MultiBandVolumeOptions {
   bands?: number
-  loPass?: number
-  hiPass?: number
-  updateInterval?: number
+  loPass?: number // Low frequency cutoff
+  hiPass?: number // High frequency cutoff
+  updateInterval?: number // Update interval in ms
   analyserOptions?: AudioAnalyserOptions
 }
 
 export type AgentState
+  = | 'connecting'
+    | 'initializing'
+    | 'listening'
+    | 'speaking'
+    | 'thinking'
+
+type AnimationState
   = | 'connecting'
     | 'initializing'
     | 'listening'
@@ -70,6 +77,9 @@ function normalizeDb(value: number) {
 
 /**
  * Composable for tracking volume across multiple frequency bands
+ *  @param mediaStream - The MediaStream to analyze
+ * @param options - Multiband options
+ * @returns Array of volume levels for each frequency band
  */
 export function useMultibandVolume(
   mediaStream: Ref<MediaStream | null | undefined>,
@@ -173,7 +183,7 @@ export function useMultibandVolume(
  * Composable for orchestrating the visual animations
  */
 export function useBarAnimator(
-  state: Ref<AgentState>,
+  state: Ref<AnimationState>,
   columns: number,
   interval: MaybeRef<number>,
 ) {
@@ -236,7 +246,10 @@ export function useBarAnimator(
 }
 
 /**
- * Composable for tracking the volume of an audio stream.
+ * Composable for tracking the volume of an audio stream using the Web Audio API.
+ * @param mediaStream - The MediaStream to analyze
+ * @param options - Audio analyser options
+ * @returns The current volume level (0-1)
  */
 export function useAudioVolume(
   mediaStream: Ref<MediaStream | null | undefined>,

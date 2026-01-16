@@ -27,7 +27,7 @@ description: An interactive transcript viewer.
 
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add transcript-viewer
+    npx elevenlabs-ui-vue@latest add transcript-viewer
     ```
   ::
 
@@ -38,7 +38,7 @@ description: An interactive transcript viewer.
       ::
 
       ```bash
-      npm install @vueuse/core lucide-vue-next
+      npm install reka-ui @vueuse/core @elevenlabs/elevenlabs-js
       ```
 
       ::step
@@ -56,7 +56,7 @@ description: An interactive transcript viewer.
 ```vue showLineNumbers
 <script setup lang="ts">
 import {
-  TranscriptViewerContainer,
+  TranscriptViewer,
   TranscriptViewerAudio,
   TranscriptViewerPlayPauseButton,
   TranscriptViewerScrubBar,
@@ -73,20 +73,20 @@ const alignment: CharacterAlignmentResponseModel = {
 </script>
 
 <template>
-  <TranscriptViewerContainer :audio-src="audioSrc" :alignment="alignment">
-    <TranscriptViewerAudio />
-    <TranscriptViewerWords />
-    <div class="flex items-center gap-3">
-      <TranscriptViewerPlayPauseButton />
-      <TranscriptViewerScrubBar />
-    </div>
-  </TranscriptViewerContainer>
+    <TranscriptViewer :audio-src="audioSrc" :alignment="alignment">
+      <TranscriptViewerAudio />
+      <TranscriptViewerWords />
+      <div class="flex items-center gap-3">
+        <TranscriptViewerPlayPauseButton />
+        <TranscriptViewerScrubBar />
+      </div>
+    </TranscriptViewer>
 </template>
 ```
 
 ## API Reference
 
-### TranscriptViewerContainer
+### TranscriptViewer
 
 The main container for the transcript viewer components. It manages the state and provides context to its children.
 
@@ -103,7 +103,7 @@ The main container for the transcript viewer components. It manages the state an
 
 #### Emits
 
-| Emit            | Type                               | Description                                    |
+| Event            | Type                               | Description                                    |
 | --------------- | ---------------------------------- | ---------------------------------------------- |
 | `play`          | `() => void`                       | Optional. Callback when audio playback starts. |
 | `pause`         | `() => void`                       | Optional. Callback when audio playback is paused. |
@@ -113,7 +113,7 @@ The main container for the transcript viewer components. It manages the state an
 
 ### TranscriptViewerWords
 
-Displays the transcript words. It uses the context from `TranscriptViewerContainer` to highlight words as the audio plays.
+Displays the transcript words. It uses the context from `TranscriptViewer` to highlight words as the audio plays.
 
 #### Props
 
@@ -127,13 +127,13 @@ Displays the transcript words. It uses the context from `TranscriptViewerContain
 
 ### TranscriptViewerAudio
 
-The underlying HTML `<audio>` element. It's controlled by the `TranscriptViewerContainer`. You can pass standard `<audio>` element props. By default it is hidden.
+The underlying HTML `<audio>` element. It's controlled by the `TranscriptViewer`. You can pass standard `<audio>` element props. By default it is hidden.
 
 _This component accepts standard `HTMLAttributes` attributes._
 
 ### TranscriptViewerPlayPauseButton
 
-A button to play or pause the audio. It uses the context from `TranscriptViewerContainer`. It accepts props for the `Button` component.
+A button to play or pause the audio. It uses the context from `TranscriptViewer`. It accepts props for the `Button` component.
 
 ### TranscriptViewerScrubBar
 
@@ -152,7 +152,7 @@ A scrub bar for seeking through the audio timeline. It's a context-aware impleme
 
 ### useTranscriptViewerContext
 
-A composable to access the transcript viewer's state and controls. Must be used within a `TranscriptViewerContainer`.
+A composable to access the transcript viewer's state and controls. Must be used within a `TranscriptViewer`.
 
 Returns an object with the following properties:
 
@@ -178,7 +178,7 @@ Returns an object with the following properties:
 
 ### useTranscriptViewer
 
-A headless composable to manage a transcript viewer's state, controls, and playback. This is used internally by the `TranscriptViewerContainer` components.
+A headless composable to manage a transcript viewer's state, controls, and playback. This is used internally by the `TranscriptViewer` components.
 
 Accepts an object with the following properties:
 

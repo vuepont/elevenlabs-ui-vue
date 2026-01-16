@@ -15,7 +15,7 @@ export const ScrubBarKey: InjectionKey<ScrubBarContextValue> = Symbol('ScrubBar'
 export function useScrubBar() {
   const context = inject(ScrubBarKey)
   if (!context) {
-    throw new Error('useScrubBar must be used within a ScrubBarContainer')
+    throw new Error('useScrubBar must be used within a ScrubBar')
   }
   return context
 }

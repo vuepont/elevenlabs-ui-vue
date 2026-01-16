@@ -26,7 +26,7 @@ description: An animated orb with flowing visuals and volume reactivity.
 
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add orb
+    npx elevenlabs-ui-vue@latest add orb
     ```
 
     If you're using TypeScript, install the Three.js type definitions:
@@ -119,7 +119,7 @@ import { Orb } from "@/components/elevenlabs-ui/orb"
 </script>
 
 <template>
-  <Orb />
+    <Orb />
 </template>
 ```
 
@@ -130,7 +130,7 @@ import { Orb } from "@/components/elevenlabs-ui/orb"
 
 ```vue showLineNumbers
 <template>
-  <Orb :colors="['#FF6B6B', '#4ECDC4']" />
+     <Orb :colors="['#FF6B6B', '#4ECDC4']" />
 </template>
 ```
 
@@ -150,10 +150,10 @@ function getOutputVolume() {
 </script>
 
 <template>
-  <Orb
-    :getInputVolume="getInputVolume"
-    :getOutputVolume="getOutputVolume"
-  />
+    <Orb
+      :getInputVolume="getInputVolume"
+      :getOutputVolume="getOutputVolume"
+    />
 </template>
 ```
 
@@ -161,7 +161,7 @@ function getOutputVolume() {
 
 ```vue showLineNumbers
 <template>
-  <Orb seed="12345" />
+    <Orb :seed="12345" />
 </template>
 ```
 
@@ -175,7 +175,7 @@ const agentState = ref<"thinking" | "listening" | "talking" | null>(null)
 </script>
 
 <template>
-  <Orb :agentState="agentState" />
+    <Orb :agentState="agentState" />
 </template>
 ```
 
@@ -190,11 +190,11 @@ const outputVolume = ref(0.7)
 </script>
 
 <template>
-  <Orb
-    volume-mode="manual"
-    :manual-input="inputVolume"
-    :manual-output="outputVolume"
-  />
+    <Orb
+      :volume-mode="manual"
+      :manual-input="inputVolume"
+      :manual-output="outputVolume"
+    />
 </template>
 
 ```

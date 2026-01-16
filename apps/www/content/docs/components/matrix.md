@@ -26,7 +26,7 @@ hideCode: true
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add matrix
+    npx elevenlabs-ui-vue@latest add matrix
     ```
   ::
 
@@ -37,7 +37,7 @@ hideCode: true
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install @vueuse/core
       ```
 
       ::step
@@ -119,8 +119,8 @@ The main matrix display component.
 
 #### Emits
 
-| Emit              | Type                                                             | Description                                     |
-| ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
+| Event             | Type                                                             | Description                                    |
+| ----------------- | ---------------------------------------------------------------- | ---------------------------------------------- |
 | frame             | `(index: number) => void`                                        | Callback when conversation connects            |
 
 
@@ -168,7 +168,7 @@ Rotating spinner animation (7×7, 12 frames).
 
 ```vue
 <script setup lang="ts">
-    import { loader, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { loader, Matrix } from "@/components/elevenlabs-ui/matrix"
 </script>
 
 <template>
@@ -182,7 +182,7 @@ Expanding pulse effect (7×7, 16 frames).
 
 ```vue
 <script setup lang="ts">
-    import { pulse, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { pulse, Matrix } from "@/components/elevenlabs-ui/matrix"
 </script>
 
 <template>
@@ -196,7 +196,7 @@ Smooth sine wave animation (7×7, 24 frames).
 
 ```vue
 <script setup lang="ts">
-    import { wave, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { wave, Matrix } from "@/components/elevenlabs-ui/matrix"
 </script>
 
 <template>
@@ -210,7 +210,7 @@ Snake traversal pattern (7×7, ~40 frames).
 
 ```vue
 <script setup lang="ts">
-    import { snake, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { snake, Matrix } from "@/components/elevenlabs-ui/matrix"
 </script>
 
 <template>
@@ -224,7 +224,7 @@ Simple directional arrows (5×5).
 
 ```vue
 <script setup lang="ts">
-    import { chevronLeft, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { chevronLeft, Matrix } from "@/components/elevenlabs-ui/matrix"
 </script>
 
 <template>
@@ -238,9 +238,9 @@ Helper function to create VU meter frames.
 
 ```vue
 <script setup lang="ts">
-    import { vu, Matrix } from "@/components/elevenlabs-ui/matrix"
+import { vu, Matrix } from "@/components/elevenlabs-ui/matrix"
 
-    const levels = [0.3, 0.6, 0.9, 0.7, 0.5]
+const levels = [0.3, 0.6, 0.9, 0.7, 0.5]
 </script>
 
 <template>

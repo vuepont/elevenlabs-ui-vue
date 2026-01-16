@@ -6,7 +6,7 @@ import { computed, toRefs } from 'vue'
 import { clamp, ensureFrameSize, vu } from './types'
 import { useAnimation } from './useAnimation'
 
-interface Props {
+interface Props extends /* @vue-ignore */ HTMLAttributes {
   rows: number
   cols: number
   pattern?: Frame
@@ -90,6 +90,8 @@ function getPixelAttributes(value: number, rowIndex: number, colIndex: number) {
     },
   }
 }
+
+const { role: _, 'aria-label': ____, 'aria-live': ___, class: __, ...otherProps } = props
 </script>
 
 <template>
@@ -102,6 +104,7 @@ function getPixelAttributes(value: number, rowIndex: number, colIndex: number) {
       '--matrix-on': palette.on,
       '--matrix-off': palette.off,
     }"
+    v-bind="otherProps"
   >
     <svg
       :width="svgDimensions.width"

@@ -25,7 +25,7 @@ description: A live scrolling response visualization with smooth animations.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add response
+    npx elevenlabs-ui-vue@latest add response
     ```
   ::
 
@@ -36,7 +36,7 @@ description: A live scrolling response visualization with smooth animations.
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install vue-stream-markdown
       ```
 
       ::step

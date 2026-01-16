@@ -4,17 +4,29 @@ import { Motion, useInView } from 'motion-v'
 import { computed, ref } from 'vue'
 
 interface Props {
+  /** Text to display with shimmer effect */
   text: string
+  /** Animation duration in seconds */
   duration?: number
+  /** Delay before starting animation */
   delay?: number
+  /** Whether to repeat the animation */
   repeat?: boolean
+  /** Pause duration between repeats in seconds */
   repeatDelay?: number
+  /** Custom className */
   class?: string
+  /** Whether to start animation when component enters viewport */
   startOnView?: boolean
+  /** Whether to animate only once */
   once?: boolean
+  /** Margin for in-view detection (rootMargin) */
   inViewMargin?: string
+  /** Shimmer spread multiplier */
   spread?: number
+  /** Base text color */
   color?: string
+  /** Shimmer gradient color */
   shimmerColor?: string
 }
 

@@ -26,7 +26,7 @@ description: A text shimmer effect with customizable speed, intensity, and color
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add shimmering-text
+    npx elevenlabs-ui-vue@latest add shimmering-text
     ```
   ::
 
@@ -37,7 +37,7 @@ description: A text shimmer effect with customizable speed, intensity, and color
       ::
 
       ```bash
-      npm install reka-ui lucide-vue-next
+      npm install motion-v
       ```
 
       ::step

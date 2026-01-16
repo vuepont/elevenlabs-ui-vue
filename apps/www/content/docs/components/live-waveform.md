@@ -25,19 +25,19 @@ description: Real-time microphone input visualization with audio reactivity.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx @elevenlabs/cli@latest add live-waveform
+    npx elevenlabs-ui-vue@latest add live-waveform
     ```
   ::
 
   ::tabs-content{value="manual"}
     ::steps
-      ::step
+      <!-- ::step
         Install the following dependencies:
       ::
 
       ```bash
       npm install reka-ui lucide-vue-next
-      ```
+      ``` -->
 
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/live-waveform) into your project.
@@ -70,7 +70,7 @@ import { LiveWaveform } from "@/components/elevenlabs-ui/live-waveform"
 ### Scrolling Mode
 
 ```vue showLineNumbers
-<LiveWaveform active="true" mode="scrolling" />
+<LiveWaveform :active="true" :mode="scrolling" />
 ```
 
 ### Processing State
@@ -78,20 +78,20 @@ import { LiveWaveform } from "@/components/elevenlabs-ui/live-waveform"
 Shows an animated wave pattern while waiting for input.
 
 ```vue showLineNumbers
-<LiveWaveform processing="true" mode="static" />
+<LiveWaveform :processing="true" :mode="static" />
 ```
 
 ### Custom Styling
 
 ```vue showLineNumbers
 <LiveWaveform
-  active="true"
-  barWidth="4"
-  barHeight="6"
-  barGap="2"
-  barColor="#3b82f6"
-  height="100"
-  fadeEdges="true"
+    :active="true"
+    :barWidth="4"
+    :barHeight="6"
+    :barGap="2"
+    :barColor="#3b82f6"
+    :height="100"
+    :fadeEdges="true"
 />
 ```
 
@@ -122,15 +122,15 @@ A canvas-based real-time audio visualizer with microphone input support.
 | updateRate            | `number`                        | `30`       | Update rate in milliseconds                    |
 | mode                  | `"scrolling" \| "static"`       | `"static"` | Visualization mode                             |
 | class                 | `string`                        | -          | Custom CSS class                               |
-| ...props              | `HTMLDivElement`                | -          | All standard div element props                 |
+| ...props              | `HTMLAttributes`                | -          | All standard div element props                 |
 
 #### Emits
 
-| Emit              | Type                                                             | Description                                     |
-| ----------------- | ---------------------------------------------------------------- | ----------------------------------------------- |
-| error             | `(error: Error) => void`                                         | Callback when conversation connects             |
-| stream-ready      | `(stream: MediaStream) => void`                                  | Callback when conversation disconnects          |
-| stream-end        | `() => void`                                                     | Callback when an error occurs                   |
+| Event             | Type                                                             | Description                            |
+| ----------------- | ---------------------------------------------------------------- | ---------------------------------------|
+| error             | `(error: Error) => void`                                         | Callback when  an error occurs         |
+| stream-ready      | `(stream: MediaStream) => void`                                  | Callback when stream is ready          |
+| stream-end        | `() => void`                                                     | Callback when  when stream ends        |
 
 
 ## Notes

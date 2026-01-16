@@ -8,18 +8,24 @@ import { computed, ref, toRef, watch } from 'vue'
 import Bar from './Bar.vue'
 import { useBarAnimator, useMultibandVolume } from './useAudioVisualizer'
 
-interface Props extends /* @vue-ignore */ HTMLAttributes {
+export interface BarVisualizerProps extends /* @vue-ignore */ HTMLAttributes {
+  /** Voice assistant state */
   state?: AgentState
+  /** Number of bars to display */
   barCount?: number
+  /** Audio source */
   mediaStream?: MediaStream | null
+  /** Min/max height as percentage */
   minHeight?: number
   maxHeight?: number
+  /** Enable demo mode with fake audio data */
   demo?: boolean
   centerAlign?: boolean
+  /** Align bars from center instead of bottom */
   class?: HTMLAttributes['class']
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<BarVisualizerProps>(), {
   barCount: 15,
   minHeight: 20,
   maxHeight: 100,
