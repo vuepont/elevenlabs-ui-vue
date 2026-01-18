@@ -108,7 +108,7 @@ const { copy, copied } = useClipboard()
       >
         <Check v-if="copied" />
         <Terminal v-else />
-        <span>npx elevenlabs-ui-vue add {{ item.name }}</span>
+        <span>npx elevenlabs-ui-vue@latest add {{ item.name }}</span>
       </Button>
     </div>
   </div>
