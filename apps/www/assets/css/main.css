@@ -12,6 +12,7 @@
 @source "../../../../packages/elements/src";
 @source "../../../../packages/shadcn-vue/components";
 @source "../../../../packages/examples/src";
+@source "../../../../packages/blocks/src";
 
 @theme inline {
   --breakpoint-3xl: 1600px;
