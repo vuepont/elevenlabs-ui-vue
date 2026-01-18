@@ -27,4 +27,8 @@ export const blockMeta = {
     description: 'Voice chat 2',
     categories: ['agents'],
   },
+  'voice-chat-03': {
+    description: 'Voice chat 3',
+    categories: ['agents'],
+  },
 } as Record<string, BlockMeta>
