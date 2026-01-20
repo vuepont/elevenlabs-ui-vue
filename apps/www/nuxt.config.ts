@@ -1,4 +1,8 @@
+import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
+
+const blocksDir = fileURLToPath(new URL('../../packages/blocks/src', import.meta.url))
+const blocksAssetsDir = fileURLToPath(new URL('../registry/server/assets/registry', import.meta.url))
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -52,6 +56,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    resolve: {
+      alias: {
+        '@blocks': blocksDir,
+      },
+    },
     plugins: [
       tailwindcss(),
     ],
@@ -103,6 +112,10 @@ export default defineNuxtConfig({
         },
       },
     },
+
+    serverAssets: [
+      { baseName: 'blocks', dir: blocksAssetsDir },
+    ],
   },
 
   ogImage: {

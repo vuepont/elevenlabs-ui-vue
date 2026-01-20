@@ -92,6 +92,17 @@ export default eventHandler(async (event) => {
     console.warn(`Failed to load examples/${parsedComponent}.json:`, error)
   }
 
+  // Try to load block
+  try {
+    const blockJson = await storage.getItem(`blocks/${parsedComponent}.json`) as RegistryItem | null
+    if (blockJson) {
+      return transformRegistryDependencies(blockJson, registryUrl)
+    }
+  }
+  catch (error) {
+    console.warn(`Failed to load blocks/${parsedComponent}.json:`, error)
+  }
+
   // Enhanced error message with suggestions
   console.error(`Component "${parsedComponent}" not found in registry`)
   const errorResponse: RegistryErrorResponse = {

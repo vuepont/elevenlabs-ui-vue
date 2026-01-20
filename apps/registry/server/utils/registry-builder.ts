@@ -2,6 +2,7 @@ import type { Dirent } from 'node:fs'
 import type { Registry, RegistryItem } from 'shadcn-vue/schema'
 import { promises as fs } from 'node:fs'
 import { basename, join, relative } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { parse as parseSFC } from '@vue/compiler-sfc'
 import { registryItemSchema } from 'shadcn-vue/schema'
 import { Project } from 'ts-morph'
@@ -18,6 +19,13 @@ interface ExampleAssetFile {
   path: string
   content: string
   target?: string
+}
+
+interface BlockAssetFile {
+  type: 'registry:page' | 'registry:component'
+  path: string
+  content: string
+  target: string
 }
 
 interface PackageJson {
@@ -47,6 +55,13 @@ function validateRegistryItem(item: unknown, label: string): item is RegistryIte
   }
 
   return true
+}
+
+function sanitizeString(input: string): string {
+  return input
+    .replace(/[-_]\d+/g, '')
+    .replace(/\d+/g, '')
+    .toLowerCase()
 }
 
 interface DependencyAnalysisResult {
@@ -183,6 +198,12 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
   const elementsDir = join(rootDir, '..', '..', 'packages', 'elements')
   const srcDir = join(elementsDir, 'src')
   const examplesDir = join(rootDir, '..', '..', 'packages', 'examples', 'src')
+  const blocksDir = join(rootDir, '..', '..', 'packages', 'blocks', 'src')
+  const shadcnDir = join(rootDir, '..', '..', 'packages', 'shadcn-vue')
+  const outBase = join(rootDir, 'server', 'assets', 'registry')
+
+  // Clean old generated assets first so removed items don't linger.
+  await fs.rm(outBase, { recursive: true, force: true })
 
   // read package.json for dependency sets
   let pkg: PackageJson = {}
@@ -200,11 +221,19 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
   }
   catch {}
 
+  // read shadcn-vue package.json so blocks can pick up deps like lucide-vue-next, reka-ui, etc.
+  let shadcnPkg: PackageJson = {}
+  try {
+    const raw = await fs.readFile(join(shadcnDir, 'package.json'), 'utf-8')
+    shadcnPkg = JSON.parse(raw) as PackageJson
+  }
+  catch {}
+
   const internalDeps = new Set(Object.keys(pkg.dependencies || {}).filter((d: string) => d.startsWith('@repo') && d !== '@repo/shadcn-vue'))
 
   // Merge dependencies from both elements and examples packages
-  const allDeps = { ...pkg.dependencies, ...examplesPkg.dependencies }
-  const allDevDeps = { ...pkg.devDependencies, ...examplesPkg.devDependencies }
+  const allDeps = { ...pkg.dependencies, ...examplesPkg.dependencies, ...shadcnPkg.dependencies }
+  const allDevDeps = { ...pkg.devDependencies, ...examplesPkg.devDependencies, ...shadcnPkg.devDependencies }
 
   const allowedDeps = new Set(Object.keys(allDeps || {}).filter((d: string) => !['vue', '@repo/shadcn-vue', ...Array.from(internalDeps)].includes(d)))
   const allowedDevDeps = new Set(Object.keys(allDevDeps || {}).filter((d: string) => !['typescript'].includes(d)))
@@ -235,6 +264,47 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
           .replace(/@repo\/elements\//g, '@/components/elevenlabs-ui/')
         const name = basename(abs)
         exampleFiles.push({ type: 'registry:block', path: `components/elevenlabs-ui/examples/${name}`, content: parsed })
+      }
+    }
+  }
+  catch {}
+
+  // Blocks (from packages/blocks)
+  let blockMeta: Record<string, any> = {}
+  try {
+    const metaMod = await import(pathToFileURL(join(blocksDir, 'block-meta.ts')).href)
+    blockMeta = (metaMod as any).blockMeta || {}
+  }
+  catch {}
+
+  const blockFilesMap = new Map<string, BlockAssetFile[]>()
+  try {
+    const entries = await fs.readdir(blocksDir, { withFileTypes: true })
+    const blockDirs = entries.filter(e => e.isDirectory()).map(e => e.name).sort()
+    for (const blockName of blockDirs) {
+      const absBlockDir = join(blocksDir, blockName)
+      const absFiles = await walkComponentFiles(absBlockDir, absBlockDir)
+      const out: BlockAssetFile[] = []
+      for (const abs of absFiles) {
+        const raw = await fs.readFile(abs, 'utf-8')
+        const parsed = raw
+          .replace(/@repo\/shadcn-vue\//g, '@/')
+          .replace(/@repo\/elements\//g, '@/components/elevenlabs-ui/')
+        const rel = relative(blocksDir, abs).split('\\').join('/') // <blockName>/...
+        const isPage = basename(abs) === 'page.vue'
+        const relWithinBlock = relative(absBlockDir, abs).split('\\').join('/') // e.g. components/Foo.vue
+        const target = isPage
+          ? `pages/${sanitizeString(blockName)}/index.vue`
+          : `components/${relWithinBlock.startsWith('components/') ? relWithinBlock.slice('components/'.length) : basename(abs)}`
+        out.push({
+          type: isPage ? 'registry:page' : 'registry:component',
+          path: `blocks/${rel}`,
+          content: parsed,
+          target,
+        })
+      }
+      if (out.length) {
+        blockFilesMap.set(blockName, out)
       }
     }
   }
@@ -275,15 +345,32 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     }
   })
 
+  const blockItems: RegistryItem[] = Array.from(blockFilesMap.keys()).map((name) => {
+    const meta = blockMeta[name] || {}
+    return {
+      name,
+      type: 'registry:block',
+      title: toTitle(name),
+      description: meta.description || '',
+      categories: meta.categories,
+      // Always include target so file-tree + code view can rely on it (page requires it by schema).
+      files: blockFilesMap.get(name)!.map(f => ({
+        path: f.path,
+        type: f.type,
+        target: f.target,
+      })),
+    }
+  })
+
   const indexJson: Registry = {
     name: 'elevenlabs-ui-vue',
     homepage: 'https://www.elevenlabs-ui-vue.com',
-    items: [...componentItems, ...exampleItems],
+    items: [...componentItems, ...exampleItems, ...blockItems],
   }
 
-  const outBase = join(rootDir, 'server', 'assets', 'registry')
   await fs.mkdir(join(outBase, 'components'), { recursive: true })
   await fs.mkdir(join(outBase, 'examples'), { recursive: true })
+  await fs.mkdir(join(outBase, 'blocks'), { recursive: true })
   await fs.writeFile(join(outBase, 'index.json'), JSON.stringify(indexJson, null, 2), 'utf-8')
 
   for (const [group, groupFiles] of groupMap) {
@@ -363,6 +450,52 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     }
     else {
       console.error(`Skipping invalid example: ${name}`)
+    }
+  }
+
+  for (const [blockName, blockFiles] of blockFilesMap) {
+    const blockDeps = new Set<string>()
+    const blockDevDeps = new Set<string>()
+    const blockRegistryDeps = new Set<string>()
+
+    for (const f of blockFiles) {
+      let code = ''
+      if (f.path.endsWith('.vue')) {
+        const { descriptor } = parseSFC(f.content)
+        code = [descriptor.script?.content || '', descriptor.scriptSetup?.content || ''].join('\n')
+      }
+      else if (f.path.endsWith('.ts')) {
+        code = f.content
+      }
+
+      if (code) {
+        const imports = parseImportsFromCode(code)
+        const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps)
+        analysis.dependencies.forEach(dep => blockDeps.add(dep))
+        analysis.devDependencies.forEach(dep => blockDevDeps.add(dep))
+        analysis.registryDependencies.forEach(dep => blockRegistryDeps.add(dep))
+      }
+    }
+
+    const meta = blockMeta[blockName] || {}
+    const itemJson = {
+      $schema: 'https://shadcn-vue.com/schema/registry-item.json',
+      name: blockName,
+      type: 'registry:block',
+      title: toTitle(blockName),
+      description: meta.description || '',
+      categories: meta.categories,
+      files: blockFiles,
+      dependencies: Array.from(blockDeps),
+      devDependencies: Array.from(blockDevDeps),
+      registryDependencies: Array.from(blockRegistryDeps),
+    }
+
+    if (validateRegistryItem(itemJson, `block-${blockName}`)) {
+      await fs.writeFile(join(outBase, 'blocks', `${blockName}.json`), JSON.stringify(itemJson, null, 2), 'utf-8')
+    }
+    else {
+      console.error(`Skipping invalid block: ${blockName}`)
     }
   }
 
