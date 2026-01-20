@@ -15,4 +15,8 @@ export const blockMeta = {
     description: 'Music player with playlist',
     categories: ['audio'],
   },
+  'music-player-02': {
+    description: 'Simple music player',
+    categories: ['audio'],
+  },
 } as Record<string, BlockMeta>
