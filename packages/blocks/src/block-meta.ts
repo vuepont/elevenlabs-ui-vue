@@ -7,9 +7,9 @@ interface BlockMeta {
 }
 
 export const blockMeta = {
-  'button-01': {
-    description: 'A simple button.',
-    categories: ['agents'],
+  'speaker-01': {
+    description: 'EL-01 Speaker',
+    categories: ['audio'],
   },
   'music-player-01': {
     description: 'Music player with playlist',
@@ -30,9 +30,5 @@ export const blockMeta = {
   'voice-chat-03': {
     description: 'Voice chat 3',
     categories: ['agents'],
-  },
-  'speaker-01': {
-    description: 'EL-01 Speaker',
-    categories: ['audio'],
   },
 } as Record<string, BlockMeta>

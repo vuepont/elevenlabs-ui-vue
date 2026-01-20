@@ -2,7 +2,12 @@
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 
 const FEATURED_BLOCKS: string[] = [
-  'button-01',
+  'speaker-01',
+  'music-player-01',
+  'music-player-02',
+  'voice-chat-01',
+  'voice-chat-02',
+  'voice-chat-03',
 ]
 </script>
 
