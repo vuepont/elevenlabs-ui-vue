@@ -118,6 +118,10 @@ function extractRegistrySlug(modulePath: string, basePath: string): string {
   return rest[0] || ''
 }
 
+const TYPE_DEFINITION_MAP: Record<string, string> = {
+  three: '@types/three',
+  // If there are other libraries that need type support, you can add it here
+}
 function analyzeDependencies(
   imports: string[],
   allowedDeps: Set<string>,
@@ -136,6 +140,10 @@ function analyzeDependencies(
     // Handle regular dependencies
     if (allowedDeps.has(mod)) {
       dependencies.add(mod)
+      const types = TYPE_DEFINITION_MAP[mod]
+      if (types && allowedDevDeps.has(types)) {
+        devDependencies.add(types)
+      }
     }
 
     // Handle dev dependencies
