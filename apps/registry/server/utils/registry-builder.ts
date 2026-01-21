@@ -347,12 +347,14 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
 
   const blockItems: RegistryItem[] = Array.from(blockFilesMap.keys()).map((name) => {
     const meta = blockMeta[name] || {}
+    const { description, categories, ...restMeta } = meta
     return {
       name,
       type: 'registry:block',
       title: toTitle(name),
-      description: meta.description || '',
-      categories: meta.categories,
+      description: description || '',
+      categories,
+      meta: restMeta,
       // Always include target so file-tree + code view can rely on it (page requires it by schema).
       files: blockFilesMap.get(name)!.map(f => ({
         path: f.path,
@@ -478,13 +480,15 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     }
 
     const meta = blockMeta[blockName] || {}
+    const { description, categories, ...restMeta } = meta as Record<string, unknown>
     const itemJson = {
       $schema: 'https://shadcn-vue.com/schema/registry-item.json',
       name: blockName,
       type: 'registry:block',
       title: toTitle(blockName),
-      description: meta.description || '',
-      categories: meta.categories,
+      description: (description as string) || '',
+      categories: categories as string[] | undefined,
+      meta: Object.keys(restMeta).length > 0 ? restMeta : undefined,
       files: blockFiles,
       dependencies: Array.from(blockDeps),
       devDependencies: Array.from(blockDevDeps),

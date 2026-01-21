@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Speaker01 from '@repo/blocks/speaker-01/page.vue'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import ExamplesRoot from '@/components/ExamplesRoot.vue'
 
@@ -39,6 +40,9 @@ useSeoMeta({
     </PageNav>
     <div class="container-wrapper section-soft flex-1 pb-6">
       <div class="container overflow-hidden">
+        <section class="pt-8 md:hidden">
+          <Speaker01 />
+        </section>
         <section class="theme-container hidden md:block">
           <ExamplesRoot />
         </section>

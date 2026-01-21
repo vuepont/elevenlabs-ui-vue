@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { Button } from '@repo/shadcn-vue/components/ui/button'
+import { Skeleton } from '@repo/shadcn-vue/components/ui/skeleton'
 import { siteConfig } from '@/lib/config'
 import { Icons } from './Icons'
-// import { Skeleton } from '@repo/shadcn-vue/components/ui/skeleton'
 
-// const { data, pending } = useLazyFetch('https://ungh.cc/repos/xxx/xxx')
+const { data, pending } = useLazyFetch('https://ungh.cc/repos/vuepont/elevenlabs-ui-vue')
 
-// const stars = computed(() => {
-//   const count = (data.value as any)?.repo?.stars
-//   if (!count)
-//     return null
-//   return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toLocaleString()
-// })
+const stars = computed(() => {
+  const count = (data.value as any)?.repo?.stars
+  if (!count)
+    return null
+  return count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toLocaleString()
+})
 </script>
 
 <template>
@@ -19,10 +19,10 @@ import { Icons } from './Icons'
     <NuxtLink :to="siteConfig.links.github" target="_blank" rel="noreferrer">
       <Icons.gitHub />
 
-      <!-- <Skeleton v-if="pending" class="h-4 w-8" />
+      <Skeleton v-if="pending" class="h-4 w-8" />
       <span v-else class="text-muted-foreground w-8 text-xs tabular-nums">
         {{ stars }}
-      </span> -->
+      </span>
     </NuxtLink>
   </Button>
 </template>
