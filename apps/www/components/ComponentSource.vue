@@ -17,32 +17,25 @@ const props = withDefaults(defineProps<{
 })
 
 function fixImport(content: string) {
-  // eslint-disable-next-line regexp/no-super-linear-backtracking
-  const regex = /@\/(.+?)\/((?:.*?\/)?(?:components|ui|composables|lib))\/([\w-]+)/g
+  content = content.replace(/@repo\/elements\/(?:.*\/)?([\w-]+)/g, '@/components/elevenlabs-ui/$1')
 
-  const replacement = (
-    match: string,
-    path: string,
-    type: string,
-    component: string,
-  ) => {
-    if (type.endsWith('components')) {
-      return `@/components/${component}`
-    }
-    else if (type.endsWith('ui')) {
-      return `@/components/ui/${component}`
-    }
-    else if (type.endsWith('composables')) {
-      return `@/composables/${component}`
-    }
-    else if (type.endsWith('lib')) {
-      return `@/lib/${component}`
+  content = content.replace(/@repo\/shadcn-vue\/(?:.*\/)?(lib|composables|ui|components)\/([\w-]+)/g, (match, type, name) => {
+    if (type === 'lib')
+      return `@/lib/${name}`
+
+    if (type === 'composables')
+      return `@/composables/${name}`
+
+    if (type === 'ui' || type === 'components') {
+      const parts = match.split('/')
+      const componentName = parts[parts.length - 1]
+      return `@/components/ui/${componentName}`
     }
 
     return match
-  }
+  })
 
-  return content.replace(regex, replacement)
+  return content
 }
 
 const modules = import.meta.glob(
