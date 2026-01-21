@@ -27,34 +27,19 @@ export const Icons = {
   logo: createIcon((props: IconProps) =>
     h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
-      viewBox: '0 0 256 256',
+      viewBox: '0 0 500 500',
       style: {
         color: '#41B883',
       },
       ...props,
     }, [
-      h('rect', { width: '256', height: '256', fill: 'none' }),
-      h('line', {
-        'x1': '208',
-        'y1': '128',
-        'x2': '128',
-        'y2': '208',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-        'stroke-width': '32',
+      h('path', {
+        d: 'M348 418H282V82H348V418Z',
+        fill: 'currentColor',
       }),
-      h('line', {
-        'x1': '192',
-        'y1': '40',
-        'x2': '40',
-        'y2': '192',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-        'stroke-width': '32',
+      h('path', {
+        d: 'M218 418H152V82H218V418Z',
+        fill: 'currentColor',
       }),
     ]),
   ),
