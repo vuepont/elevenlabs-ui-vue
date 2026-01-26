@@ -136,6 +136,12 @@ function analyzeDependencies(
     // Handle regular dependencies
     if (allowedDeps.has(mod)) {
       dependencies.add(mod)
+
+      const typePkg = `@types/${mod}`
+
+      if (allowedDevDeps.has(typePkg)) {
+        devDependencies.add(typePkg)
+      }
     }
 
     // Handle dev dependencies
