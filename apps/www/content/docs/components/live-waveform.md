@@ -89,7 +89,7 @@ Shows an animated wave pattern while waiting for input.
     :barWidth="4"
     :barHeight="6"
     :barGap="2"
-    :barColor="#3b82f6"
+    :barColor="'#3b82f6'"
     :height="100"
     :fadeEdges="true"
 />
