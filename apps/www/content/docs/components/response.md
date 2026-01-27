@@ -1,6 +1,6 @@
 ---
 title: Response
-description: Streaming markdown renderer with smooth character-by-character animations for AI responses using Streamdown.
+description: Streaming markdown renderer with smooth character-by-character animations for AI responses using vue-stream-markdown.
 featured: true
 component: true
 ---
@@ -132,7 +132,7 @@ Perfect for streaming AI responses character-by-character:
 
 ### Response
 
-A memoized wrapper around Streamdown that renders streaming markdown with smooth animations.
+A memoized wrapper around `vue-stream-markdown` that renders streaming markdown with smooth animations.
 
 #### Props
 
@@ -142,7 +142,7 @@ Extends all props from the [`vue-stream-markdown`](https://github.com/jinghaihan
 | --------- | ------------ | ------------------------------ |
 | content   | `string`     | Content to render (markdown)   |
 | class     | `string`     | Optional CSS classes           |
-| ...props  | `Streamdown` | All vue-stream-markdown component props |
+| ...props  | `vue-stream-markdown` | All vue-stream-markdown component props |
 
 ## Notes
 
