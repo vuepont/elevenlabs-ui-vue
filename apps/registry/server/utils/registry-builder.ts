@@ -70,6 +70,41 @@ interface DependencyAnalysisResult {
   registryDependencies: Set<string>
 }
 
+// Normalize to package root (supports scoped and deep subpath imports)
+function getBasePackageName(specifier: string): string {
+  if (specifier.startsWith('@')) {
+    const parts = specifier.split('/')
+    return parts.slice(0, 2).join('/')
+  }
+  return specifier.split('/')[0]
+}
+
+// Build a mapping from import package -> its @types devDependency package(s)
+function buildTypesDevDepsMap(devDependencies: string[]): Map<string, string[]> {
+  const TYPES_PREFIX = '@types/'
+  const typesDevDepsMap = new Map<string, string[]>()
+  for (const devDep of devDependencies) {
+    if (devDep.startsWith(TYPES_PREFIX)) {
+      const name = devDep.slice(TYPES_PREFIX.length)
+      // Scoped packages in DefinitelyTyped use __ separator, e.g. @types/babel__core for @babel/core
+      const runtime = name.includes('__') ? `@${name.replace('__', '/')}` : name
+      const list = typesDevDepsMap.get(runtime) ?? []
+      list.push(devDep)
+      typesDevDepsMap.set(runtime, list)
+    }
+  }
+  return typesDevDepsMap
+}
+
+interface AnalyzeDependenciesOptions {
+  filePath?: string
+  currentGroup?: string
+  /** If true, skip adding ElevenLabs UI component dependencies (for all.json bundling) */
+  skipElevenLabsComponentDeps?: boolean
+  /** Mapping from import package to @types/ packages */
+  typesDevDepsMap?: Map<string, string[]>
+}
+
 function parseImportsFromCode(code: string): string[] {
   try {
     // Use ts-morph to parse TypeScript code and extract imports
@@ -125,7 +160,7 @@ function analyzeDependencies(
   imports: string[],
   allowedDeps: Set<string>,
   allowedDevDeps: Set<string>,
-  options?: { filePath: string, currentGroup: string },
+  options?: AnalyzeDependenciesOptions,
 ): DependencyAnalysisResult {
   const dependencies = new Set<string>()
   const devDependencies = new Set<string>()
@@ -133,53 +168,62 @@ function analyzeDependencies(
   const basePath = 'components/elevenlabs-ui/'
 
   for (const mod of imports) {
-    // Ignore relative imports
     if (mod.startsWith('./')) {
       continue
     }
 
-    if (mod.startsWith('../') && options) {
+    if (mod.startsWith('../') && options?.filePath && options?.currentGroup) {
       const currentDir = dirname(options.filePath)
       const resolved = join(currentDir, mod).split('\\').join('/')
       if (resolved.startsWith(basePath)) {
         const targetGroup = resolved.slice(basePath.length).split('/').filter(Boolean)[0]
         if (targetGroup && targetGroup !== options.currentGroup) {
-          registryDependencies.add(`${REGISTRY_BASE_URL}/${targetGroup}.json`)
+          // Skip ElevenLabs component deps for all.json bundling if requested
+          if (!options.skipElevenLabsComponentDeps) {
+            registryDependencies.add(`${REGISTRY_BASE_URL}/${targetGroup}.json`)
+          }
         }
       }
       continue
     }
 
-    // Handle regular dependencies
-    if (allowedDeps.has(mod)) {
-      dependencies.add(mod)
+    // Normalize to base package name for dependency lookup
+    const pkg = getBasePackageName(mod)
 
-      const typePkg = `@types/${mod}`
+    if (allowedDeps.has(pkg)) {
+      dependencies.add(pkg)
 
-      if (allowedDevDeps.has(typePkg)) {
-        devDependencies.add(typePkg)
+      // Check if it has a corresponding @types/ package
+      if (options?.typesDevDepsMap) {
+        const typePkgs = options.typesDevDepsMap.get(pkg)
+        if (typePkgs) {
+          for (const t of typePkgs) {
+            devDependencies.add(t)
+          }
+        }
       }
     }
 
-    // Handle dev dependencies
     if (allowedDevDeps.has(mod)) {
       devDependencies.add(mod)
     }
 
-    // Handle shadcn-vue components
     if (mod.startsWith('@/components/ui/')) {
       const slug = extractRegistrySlug(mod, '@/components/ui/')
       if (slug)
         registryDependencies.add(slug)
     }
 
-    // Handle ElevenLabs UI components
     if (mod.startsWith('@/components/elevenlabs-ui/')) {
       const slug = extractRegistrySlug(mod, '@/components/elevenlabs-ui/')
       if (slug) {
-        if (options && slug === options.currentGroup)
+        // When analyzing dependencies for a specific group, avoid self-dependency
+        if (options?.currentGroup && slug === options.currentGroup)
           continue
-        registryDependencies.add(`${REGISTRY_BASE_URL}/${slug}.json`)
+        // Skip ElevenLabs component deps for all.json bundling if requested
+        if (!options?.skipElevenLabsComponentDeps) {
+          registryDependencies.add(`${REGISTRY_BASE_URL}/${slug}.json`)
+        }
       }
     }
   }
@@ -217,6 +261,19 @@ async function walkComponentFiles(dir: string, rootDir: string): Promise<string[
     }
   }
   return out
+}
+
+function extractSourceCode(file: ComponentAssetFile): string {
+  // Handle Vue SFC files
+  if (file.path.endsWith('.vue')) {
+    const { descriptor } = parseSFC(file.content)
+    return [descriptor.script?.content || '', descriptor.scriptSetup?.content || ''].join('\n')
+  }
+  // Handle TypeScript files
+  if (file.path.endsWith('.ts')) {
+    return file.content
+  }
+  return ''
 }
 
 export async function generateRegistryAssets(ctx: { rootDir: string }) {
@@ -257,12 +314,19 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
 
   const internalDeps = new Set(Object.keys(pkg.dependencies || {}).filter((d: string) => d.startsWith('@repo') && d !== '@repo/shadcn-vue'))
 
-  // Merge dependencies from both elements and examples packages
+  // Merge dependencies from elements, examples and shadcn-vue packages
   const allDeps = { ...pkg.dependencies, ...examplesPkg.dependencies, ...shadcnPkg.dependencies }
   const allDevDeps = { ...pkg.devDependencies, ...examplesPkg.devDependencies, ...shadcnPkg.devDependencies }
 
-  const allowedDeps = new Set(Object.keys(allDeps || {}).filter((d: string) => !['vue', '@repo/shadcn-vue', ...Array.from(internalDeps)].includes(d)))
-  const allowedDevDeps = new Set(Object.keys(allDevDeps || {}).filter((d: string) => !['typescript'].includes(d)))
+  // Packages to exclude from dependencies
+  const excludedDeps = ['vue', '@repo/shadcn-vue', ...Array.from(internalDeps)]
+  const excludedDevDeps = ['typescript']
+
+  const allowedDeps = new Set(Object.keys(allDeps || {}).filter((d: string) => !excludedDeps.includes(d)))
+  const allowedDevDeps = new Set(Object.keys(allDevDeps || {}).filter((d: string) => !excludedDevDeps.includes(d)))
+
+  // Build the @types/ mapping for devDependencies
+  const typesDevDepsMap = buildTypesDevDepsMap(Array.from(allowedDevDeps))
 
   const componentFiles = await walkComponentFiles(srcDir, srcDir)
   const files: ComponentAssetFile[] = []
@@ -390,7 +454,7 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     }
   })
 
-  const indexJson: Registry = {
+  const registryJson: Registry = {
     name: 'elevenlabs-ui-vue',
     homepage: 'https://www.elevenlabs-ui-vue.com',
     items: [...componentItems, ...exampleItems, ...blockItems],
@@ -399,7 +463,18 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
   await fs.mkdir(join(outBase, 'components'), { recursive: true })
   await fs.mkdir(join(outBase, 'examples'), { recursive: true })
   await fs.mkdir(join(outBase, 'blocks'), { recursive: true })
-  await fs.writeFile(join(outBase, 'index.json'), JSON.stringify(indexJson, null, 2), 'utf-8')
+  await fs.writeFile(join(outBase, 'registry.json'), JSON.stringify(registryJson, null, 2), 'utf-8')
+
+  // Collect dependencies for all.json (bundle of all ElevenLabs UI components)
+  const allDependencies = new Set<string>()
+  const allDevDependencies = new Set<string>()
+  const allRegistryDependencies = new Set<string>()
+  const allFilesWithContent: Array<{
+    path: string
+    type: string
+    content: string
+    target?: string
+  }> = []
 
   for (const [group, groupFiles] of groupMap) {
     const groupDeps = new Set<string>()
@@ -407,28 +482,41 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     const groupRegistryDeps = new Set<string>()
 
     for (const f of groupFiles) {
-      let code = ''
-      // Handle Vue SFC files
-      if (f.path.endsWith('.vue')) {
-        const { descriptor } = parseSFC(f.content)
-        code = [descriptor.script?.content || '', descriptor.scriptSetup?.content || ''].join('\n')
-      }
-      // Handle TypeScript files
-      else if (f.path.endsWith('.ts')) {
-        code = f.content
-      }
-
+      const code = extractSourceCode(f)
       if (code) {
         const imports = parseImportsFromCode(code)
+        // For individual component: include ElevenLabs component deps
         const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps, {
           filePath: f.path,
           currentGroup: group,
+          skipElevenLabsComponentDeps: false,
+          typesDevDepsMap,
         })
 
+        // Merge results
         analysis.dependencies.forEach(dep => groupDeps.add(dep))
         analysis.devDependencies.forEach(dep => groupDevDeps.add(dep))
         analysis.registryDependencies.forEach(dep => groupRegistryDeps.add(dep))
+
+        // For all.json: skip ElevenLabs component deps, only include shadcn-vue deps
+        const allAnalysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps, {
+          filePath: f.path,
+          currentGroup: group,
+          skipElevenLabsComponentDeps: true,
+          typesDevDepsMap,
+        })
+        allAnalysis.dependencies.forEach(dep => allDependencies.add(dep))
+        allAnalysis.devDependencies.forEach(dep => allDevDependencies.add(dep))
+        allAnalysis.registryDependencies.forEach(dep => allRegistryDependencies.add(dep))
       }
+
+      // Collect files for all.json
+      allFilesWithContent.push({
+        path: f.path,
+        type: f.type,
+        content: f.content,
+        ...(f.target ? { target: f.target } : {}),
+      })
     }
 
     const itemJson = {
@@ -460,7 +548,9 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     const { descriptor } = parseSFC(ef.content)
     const code = [descriptor.script?.content || '', descriptor.scriptSetup?.content || ''].join('\n')
     const imports = parseImportsFromCode(code)
-    const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps)
+    const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps, {
+      typesDevDepsMap,
+    })
 
     const itemJson = {
       $schema: 'https://shadcn-vue.com/schema/registry-item.json',
@@ -500,7 +590,9 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
 
       if (code) {
         const imports = parseImportsFromCode(code)
-        const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps)
+        const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps, {
+          typesDevDepsMap,
+        })
         analysis.dependencies.forEach(dep => blockDeps.add(dep))
         analysis.devDependencies.forEach(dep => blockDevDeps.add(dep))
         analysis.registryDependencies.forEach(dep => blockRegistryDeps.add(dep))
@@ -529,6 +621,28 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
     else {
       console.error(`Skipping invalid block: ${blockName}`)
     }
+  }
+
+  // Generate all.json - a single RegistryItem containing all ElevenLabs UI component files
+  // This is for bundled installation via: npx shadcn-vue@latest add <registry-url>/all.json
+  const allJson = {
+    $schema: 'https://shadcn-vue.com/schema/registry-item.json',
+    name: 'all',
+    type: 'registry:component',
+    title: 'All ElevenLabs UI',
+    description: 'All UI components from ElevenLabs UI.',
+    files: allFilesWithContent,
+    dependencies: Array.from(allDependencies),
+    devDependencies: Array.from(allDevDependencies),
+    // Only include shadcn-vue component dependencies and other libraries, not ElevenLabs component dependencies
+    registryDependencies: Array.from(allRegistryDependencies),
+  }
+
+  if (validateRegistryItem(allJson, 'all')) {
+    await fs.writeFile(join(outBase, 'all.json'), JSON.stringify(allJson, null, 2), 'utf-8')
+  }
+  else {
+    console.error('Skipping invalid all.json')
   }
 
   // eslint-disable-next-line no-console
