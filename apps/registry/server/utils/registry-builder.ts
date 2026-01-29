@@ -156,6 +156,9 @@ function extractRegistrySlug(modulePath: string, basePath: string): string {
   return rest[0] || ''
 }
 
+// Registry base URL
+const REGISTRY_BASE_URL = 'https://registry.elevenlabs-ui-vue.com'
+
 function analyzeDependencies(
   imports: string[],
   allowedDeps: Set<string>,

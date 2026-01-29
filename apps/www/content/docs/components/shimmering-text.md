@@ -68,8 +68,8 @@ import { ShimmeringText } from "@/components/elevenlabs-ui/shimmering-text"
     <ShimmeringText
       text="Custom Shimmer"
       :duration="3"
-      :color="#6B7280"
-      :shimmerColor="#3B82F6"
+      :color="'#6B7280'"
+      :shimmerColor="'#3B82F6'"
     />
 </template>
 ```

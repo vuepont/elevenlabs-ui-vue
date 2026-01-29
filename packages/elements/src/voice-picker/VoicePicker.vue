@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { ElevenLabs } from '@elevenlabs/elevenlabs-js'
 import type { HTMLAttributes } from 'vue'
-import { AudioPlayer } from '@repo/elements/audio-player'
-import { Orb } from '@repo/elements/orb'
 import { Button } from '@repo/shadcn-vue/components/ui/button'
 import {
   Command,
@@ -19,6 +17,8 @@ import {
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { ChevronsUpDown } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
+import { AudioPlayer } from '../audio-player'
+import { Orb } from '../orb'
 import VoicePickerItem from './VoicePickerItem.vue'
 
 const props = withDefaults(defineProps<{

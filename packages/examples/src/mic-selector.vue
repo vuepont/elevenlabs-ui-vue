@@ -114,15 +114,15 @@ const showRecorded = computed(() => state.value === 'recorded')
 <template>
   <div class="flex min-h-[200px] w-full items-center justify-center p-4">
     <Card class="m-0 w-full max-w-2xl border p-0 shadow-lg">
-      <div class="flex items-center justify-between gap-2 p-2">
-        <div class="h-8 w-[120px] md:h-10 md:w-[200px]">
+      <div class="flex w-full flex-wrap items-center justify-between gap-2 p-2">
+        <div class="h-8 w-full min-w-0 flex-1 md:w-[200px] md:flex-none">
           <div
             :class="cn(
               'flex h-full items-center gap-2 rounded-md py-1',
               'bg-foreground/5 text-foreground/70',
             )"
           >
-            <div class="h-full flex-1">
+            <div class="h-full min-w-0 flex-1">
               <div class="relative flex h-full w-full shrink-0 items-center justify-center overflow-hidden rounded-sm">
                 <LiveWaveform
                   :key="state"
@@ -145,18 +145,18 @@ const showRecorded = computed(() => state.value === 'recorded')
                 />
 
                 <div v-if="state === 'idle'" class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-foreground/50 text-[10px] font-medium">Start Recording</span>
+                  <span class="text-foreground/50 text-xs font-medium">Start Recording</span>
                 </div>
 
                 <div v-if="showRecorded" class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-foreground/50 text-[10px] font-medium">Ready to Play</span>
+                  <span class="text-foreground/50 text-xs font-medium">Ready to Play</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flex items-center">
+        <div class="flex w-full flex-wrap items-center justify-center gap-1 md:w-auto">
           <MicSelector
             v-model="selectedDevice"
             v-model:muted="isMuted"
@@ -165,59 +165,61 @@ const showRecorded = computed(() => state.value === 'recorded')
 
           <Separator orientation="vertical" class="mx-1 -my-2.5" />
 
-          <Button
-            v-if="state === 'idle'"
-            variant="ghost"
-            size="icon"
-            :disabled="isMuted"
-            aria-label="Start recording"
-            @click="startRecording"
-          >
-            <Disc class="h-5 w-5" />
-          </Button>
+          <div class="flex">
+            <Button
+              v-if="state === 'idle'"
+              variant="ghost"
+              size="icon"
+              :disabled="isMuted"
+              aria-label="Start recording"
+              @click="startRecording"
+            >
+              <Disc class="size-5" />
+            </Button>
 
-          <Button
-            v-if="state === 'loading' || state === 'recording'"
-            variant="ghost"
-            size="icon"
-            :disabled="state === 'loading'"
-            aria-label="Stop recording"
-            @click="stopRecording"
-          >
-            <Pause class="h-5 w-5" />
-          </Button>
+            <Button
+              v-if="state === 'loading' || state === 'recording'"
+              variant="ghost"
+              size="icon"
+              :disabled="state === 'loading'"
+              aria-label="Stop recording"
+              @click="stopRecording"
+            >
+              <Pause class="size-5" />
+            </Button>
 
-          <Button
-            v-if="showRecorded"
-            variant="ghost"
-            size="icon"
-            aria-label="Play recording"
-            @click="playRecording"
-          >
-            <Play class="h-5 w-5" />
-          </Button>
+            <Button
+              v-if="showRecorded"
+              variant="ghost"
+              size="icon"
+              aria-label="Play recording"
+              @click="playRecording"
+            >
+              <Play class="size-5" />
+            </Button>
 
-          <Button
-            v-if="state === 'playing'"
-            variant="ghost"
-            size="icon"
-            aria-label="Pause playback"
-            @click="pausePlayback"
-          >
-            <Pause class="h-5 w-5" />
-          </Button>
+            <Button
+              v-if="state === 'playing'"
+              variant="ghost"
+              size="icon"
+              aria-label="Pause playback"
+              @click="pausePlayback"
+            >
+              <Pause class="size-5" />
+            </Button>
 
-          <Separator orientation="vertical" class="mx-1 -my-2.5" />
+            <Separator orientation="vertical" class="mx-1 -my-2.5" />
 
-          <Button
-            variant="ghost"
-            size="icon"
-            :disabled="['idle', 'loading', 'recording'].includes(state)"
-            aria-label="Delete recording"
-            @click="restart"
-          >
-            <Trash2 class="h-5 w-5" />
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              :disabled="['idle', 'loading', 'recording'].includes(state)"
+              aria-label="Delete recording"
+              @click="restart"
+            >
+              <Trash2 class="size-5" />
+            </Button>
+          </div>
         </div>
       </div>
     </Card>

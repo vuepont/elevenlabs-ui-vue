@@ -88,7 +88,7 @@ const isPreviewActive = computed(() => isDropdownOpen.value && !isMuted.value)
         variant="ghost"
         size="sm"
         :class="cn(
-          'hover:bg-accent flex w-48 cursor-pointer items-center gap-1.5',
+          'hover:bg-accent flex w-40 min-w-0 shrink cursor-pointer items-center gap-1.5 sm:w-48',
           props.class,
         )"
         :disabled="loading || disabled"
@@ -96,7 +96,7 @@ const isPreviewActive = computed(() => isDropdownOpen.value && !isMuted.value)
         <MicOff v-if="isMuted" class="h-4 w-4 shrink-0" />
         <Mic v-else class="h-4 w-4 shrink-0" />
 
-        <span class="flex-1 truncate text-left">
+        <span class="min-w-0 flex-1 truncate text-left text-xs sm:text-sm">
           {{ currentDevice.label }}
         </span>
         <ChevronsUpDown class="h-3 w-3 shrink-0" />

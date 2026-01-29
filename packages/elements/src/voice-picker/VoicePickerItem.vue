@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ElevenLabs } from '@elevenlabs/elevenlabs-js'
-import { useAudioPlayer } from '@repo/elements/audio-player'
-import { Orb } from '@repo/elements/orb'
 import { CommandItem } from '@repo/shadcn-vue/components/ui/command'
 import { cn } from '@repo/shadcn-vue/lib/utils'
 import { Check, Pause, Play } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
+import { useAudioPlayer } from '../audio-player'
+import { Orb } from '../orb'
 
 const props = defineProps<{
   voice: ElevenLabs.Voice
