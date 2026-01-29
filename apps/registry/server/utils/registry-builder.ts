@@ -1,7 +1,7 @@
 import type { Dirent } from 'node:fs'
 import type { Registry, RegistryItem } from 'shadcn-vue/schema'
 import { promises as fs } from 'node:fs'
-import { basename, join, relative } from 'node:path'
+import { basename, dirname, join, relative } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { parse as parseSFC } from '@vue/compiler-sfc'
 import { registryItemSchema } from 'shadcn-vue/schema'
@@ -118,18 +118,35 @@ function extractRegistrySlug(modulePath: string, basePath: string): string {
   return rest[0] || ''
 }
 
+// Registry base URL
+const REGISTRY_BASE_URL = 'https://registry.elevenlabs-ui-vue.com'
+
 function analyzeDependencies(
   imports: string[],
   allowedDeps: Set<string>,
   allowedDevDeps: Set<string>,
+  options?: { filePath: string, currentGroup: string },
 ): DependencyAnalysisResult {
   const dependencies = new Set<string>()
   const devDependencies = new Set<string>()
   const registryDependencies = new Set<string>()
+  const basePath = 'components/elevenlabs-ui/'
 
   for (const mod of imports) {
     // Ignore relative imports
     if (mod.startsWith('./')) {
+      continue
+    }
+
+    if (mod.startsWith('../') && options) {
+      const currentDir = dirname(options.filePath)
+      const resolved = join(currentDir, mod).split('\\').join('/')
+      if (resolved.startsWith(basePath)) {
+        const targetGroup = resolved.slice(basePath.length).split('/').filter(Boolean)[0]
+        if (targetGroup && targetGroup !== options.currentGroup) {
+          registryDependencies.add(`${REGISTRY_BASE_URL}/${targetGroup}.json`)
+        }
+      }
       continue
     }
 
@@ -159,8 +176,11 @@ function analyzeDependencies(
     // Handle ElevenLabs UI components
     if (mod.startsWith('@/components/elevenlabs-ui/')) {
       const slug = extractRegistrySlug(mod, '@/components/elevenlabs-ui/')
-      if (slug)
-        registryDependencies.add(slug)
+      if (slug) {
+        if (options && slug === options.currentGroup)
+          continue
+        registryDependencies.add(`${REGISTRY_BASE_URL}/${slug}.json`)
+      }
     }
   }
 
@@ -400,9 +420,11 @@ export async function generateRegistryAssets(ctx: { rootDir: string }) {
 
       if (code) {
         const imports = parseImportsFromCode(code)
-        const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps)
+        const analysis = analyzeDependencies(imports, allowedDeps, allowedDevDeps, {
+          filePath: f.path,
+          currentGroup: group,
+        })
 
-        // Merge results
         analysis.dependencies.forEach(dep => groupDeps.add(dep))
         analysis.devDependencies.forEach(dep => groupDevDeps.add(dep))
         analysis.registryDependencies.forEach(dep => groupRegistryDeps.add(dep))
