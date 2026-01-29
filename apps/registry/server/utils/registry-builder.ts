@@ -79,9 +79,6 @@ function getBasePackageName(specifier: string): string {
   return specifier.split('/')[0]
 }
 
-// Registry base URL
-const REGISTRY_BASE_URL = 'https://registry.elevenlabs-ui-vue.com'
-
 // Build a mapping from import package -> its @types devDependency package(s)
 function buildTypesDevDepsMap(devDependencies: string[]): Map<string, string[]> {
   const TYPES_PREFIX = '@types/'
