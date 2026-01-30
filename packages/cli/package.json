@@ -4,15 +4,21 @@
   "private": false,
   "description": "A collection of Open Source agent and audio components that you can customize and extend.",
   "license": "MIT",
+  "homepage": "https://elevenlabs-ui-vue.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuepont/elevenlabs-ui-vue.git",
+    "directory": "packages/cli"
+  },
   "keywords": [
     "nuxt",
     "vue",
     "shadcn-vue",
     "elevenlabs",
+    "ui",
     "voice",
     "audio",
-    "registry",
-    "cli"
+    "agent"
   ],
   "bin": {
     "elements": "index.js"
@@ -26,6 +32,6 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19.0"
   }
 }
