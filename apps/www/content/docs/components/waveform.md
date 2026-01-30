@@ -25,7 +25,7 @@ description: A live scrolling waveform visualization with smooth animations.
   ::
   ::tabs-content{value="cli"}
     ```bash
-    npx elevenlabsui-vue@latest add waveform
+    npx elevenlabs-ui-vue@latest add waveform
     ```
   ::
 
