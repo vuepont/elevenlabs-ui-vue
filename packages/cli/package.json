@@ -1,6 +1,6 @@
 {
   "name": "elevenlabs-ui-vue",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "description": "A collection of Open Source agent and audio components that you can customize and extend.",
   "license": "MIT",
