@@ -1,11 +1,24 @@
-# Elevenlabs UI Vue
+<div align="center">
+  <img src="./apps/www/public/cover.png" >
+</div>
 
+<br />
 
-[ElevenLabs UI Vue](https://elevenlabs-ui-vue.com) is a component library built on top of [shadcn-vue](https://shadcn-vue.com/) to help you build audio & agentic applications faster.
+<div align="center">
+  <a href="https://www.npmjs.com/package/elevenlabs-ui-vue" target="\_parent">
+    <img alt="" src="https://img.shields.io/npm/dm/elevenlabs-ui-vue.svg" />
+  </a>
+  <a href="#badge">
+    <img src="https://img.shields.io/github/v/release/vuepont/elevenlabs-ui-vue" alt="Release"/>
+  </a>
+  <a href="https://github.com/vuepont/elevenlabs-ui-vue" target="\_parent">
+    <img alt="" src="https://img.shields.io/github/stars/vuepont/elevenlabs-ui-vue.svg?style=social&label=Star" alt="GitHub stars" />
+  </a>
+</div>
 
 ## Overview
 
-ElevenLabs UI Vue provides pre-built, customizable Vue components specifically designed for agent & audio applications, including orbs, waveforms, voice agents, audio players, and more. 
+[ElevenLabs UI Vue](https://elevenlabs-ui-vue.com) provides pre-built, customizable Vue components specifically designed for agent & audio applications, including orbs, waveforms, voice agents, audio players, and more.
 The CLI makes it easy to add these components to your Vue and Nuxt project.
 
 ## Installation
@@ -77,7 +90,7 @@ Licensed under the [MIT license](/LICENSE.md).
 
 ## Acknowledgments
 
-This project is a direct port of [Elevenlabs UI](https://ui.elevenlabs.io/). 
+This project is a direct port of [Elevenlabs UI](https://ui.elevenlabs.io/).
 
 It is not affiliated with, endorsed by, or associated with the ElevenLabs team in any way.
 
