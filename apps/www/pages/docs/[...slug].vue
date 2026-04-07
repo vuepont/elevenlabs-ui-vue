@@ -121,8 +121,14 @@ useSeoMeta({
 
       <div class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
         <div class="h-(--top-spacing) shrink-0" />
-        <div v-if="page.body.toc?.links.length" class="no-scrollbar overflow-y-auto px-8">
-          <DocsTableOfContents :toc="page.body.toc" />
+        <div class="no-scrollbar overflow-y-auto px-8">
+          <DocsTableOfContents
+            v-if="page.body.toc?.links.length"
+            :toc="page.body.toc"
+          />
+          <SponsorsSidebar
+            :separated="Boolean(page.body.toc?.links.length)"
+          />
           <div class="h-12" />
         </div>
       </div>

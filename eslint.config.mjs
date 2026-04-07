@@ -8,6 +8,7 @@ export default antfu(
     ignores: [
       '**/*.md',
       '**/.nitro/**',
+      'apps/registry/server/assets/**',
     ],
   },
   {

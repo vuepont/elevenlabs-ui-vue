@@ -56,6 +56,16 @@ npx shadcn-vue@latest add https://registry.elevenlabs-ui-vue.com/orb.json
 
 All available components can be found [here](https://elevenlabs-ui-vue.com/docs/components), or explore the list of blocks [here](https://elevenlabs-ui-vue.com/blocks).
 
+## Sponsors
+
+ElevenLabs UI Vue is an open-source project supported by our sponsors. If you'd like to support its development, please consider [becoming a sponsor](https://opencollective.com/vuepont).
+
+<p>
+  <a href="https://immitranslate.com/" target="_blank" rel="noopener noreferrer">
+    <img src="https://elevenlabs-ui-vue.com/sponsors/immitranslate.svg" alt="ImmiTranslate" width="180" />
+  </a>
+</p>
+
 ## Contributing
 
 If you'd like to contribute to ElevenLabs UI Vue, please follow these steps:
