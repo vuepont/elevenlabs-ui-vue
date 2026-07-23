@@ -2,11 +2,14 @@ packages:
   - apps/*
   - packages/*
 
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-  - maplibre-gl
-  - sharp
-  - simple-git-hooks
-  - vue-demi
-  - workerd
+shamefullyHoist: true
+strictPeerDependencies: false
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  maplibre-gl: true
+  sharp: true
+  simple-git-hooks: true
+  vue-demi: true
+  workerd: true
