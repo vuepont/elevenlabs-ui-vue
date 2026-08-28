@@ -29,6 +29,12 @@ export const siteConfig = {
         logo: '/sponsors/immitranslate.svg',
         alt: 'ImmiTranslate',
       },
+      {
+        name: 'APIMart',
+        href: 'https://go.apimart.ai/gh-ai-elements-vue',
+        logo: '/sponsors/apimart.svg',
+        alt: 'APIMart',
+      },
     ],
     cta: {
       name: 'Become a Sponsor',
