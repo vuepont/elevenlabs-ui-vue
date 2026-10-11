@@ -36,7 +36,7 @@ description: A live scrolling response visualization with smooth animations.
       ::
 
       ```bash
-      npm install vue-stream-markdown
+      npm install vue-stream-markdown @stream-markdown/code @stream-markdown/math @stream-markdown/mermaid katex
       ```
 
       ::step
@@ -83,7 +83,7 @@ console.log(greeting)
 </script>
 
 <template>
-    <Response> :content="content" />
+    <Response :content="content" />
 </template>
 ```
 
@@ -132,7 +132,7 @@ Perfect for streaming AI responses character-by-character:
 
 ### Response
 
-A memoized wrapper around `vue-stream-markdown` that renders streaming markdown with smooth animations.
+A wrapper around `vue-stream-markdown` that renders streaming Markdown.
 
 #### Props
 
@@ -148,7 +148,6 @@ Extends all props from the [`vue-stream-markdown`](https://github.com/jinghaihan
 
 - Built on top of [`vue-stream-markdown`](https://github.com/jinghaihan/vue-stream-markdown) for smooth markdown streaming animations
 - Automatically removes top margin from first child and bottom margin from last child for clean integration
-- Memoized to prevent unnecessary re-renders - only updates when children change
 - Supports full markdown syntax including code blocks, lists, tables, and more
 - Optimized for streaming AI responses with character-by-character rendering
 - Works seamlessly with the Message component

@@ -40,6 +40,8 @@ description: A live scrolling conversation visualization.
       npm install lucide-vue-next vue-stick-to-bottom
       ```
 
+      Install the Markdown dependencies listed under [Response](/docs/components/response#installation), and copy its `useMarkdownExtensions.ts` helper into the `response` folder.
+
       ::step
         Copy and paste the [GitHub source code](https://github.com/vuepont/elevenlabs-ui-vue/tree/main/packages/elements/src/conversation) into your project.
       ::

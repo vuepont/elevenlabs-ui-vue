@@ -131,7 +131,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="h-full min-h-0 w-full overflow-hidden">
-    <Response :content="content" class="h-full overflow-auto p-10" />
+  <div class="h-full min-h-0 w-full overflow-hidden py-10">
+    <Response :content="content" class="h-full overflow-auto px-10" />
   </div>
 </template>
